@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-15" view-index="0" gantt-divider-location="509" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-15" view-index="0" gantt-divider-location="384" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="49" order="0"/>
+        <field id="tpd3" name="Nome" width="48" order="0"/>
         <field id="tpd4" name="Data d'inizio" width="25" order="1"/>
         <field id="tpd5" name="Data di fine" width="25" order="2"/>
         <timeline><![CDATA[104]]></timeline>
@@ -106,9 +106,9 @@
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd12" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="241" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="125" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="124" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="177" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="94" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="94" visible="true"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
