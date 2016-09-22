@@ -1,37 +1,62 @@
 <?php
 	class DB {
 		private $host;
-		private $user;
-		private $pass;
+		private $usr;
+		private $pwd;
 		private $db;
-		private $connetion;
+		private $conn;
 		private $result;
 		
-		public function __construct($host, $user, $pass, $db=''){
+		public function __construct($host, $usr, $pwd, $db=''){
 			$this->host = $host;
-			$this->user = $user;
-			$this->pass = $pass;
+			$this->usr = $usr;
+			$this->pwd = $pwd;
 			$this->db = $db;
-			$this->connection = null;
+			$this->conn = null;
 			$this->result = null;
+			$this->start();
 		}
 
-		public function connection(){
-			if(!self::$_connection){
-					self::$_connection = new mysqli(self::$hostname,self::$username,self::$pass);
-				if(self::$_connection->connect_error){
-					die('connection failed:' . self::$_connection->connect_error);
+		public function conn(){
+			if(!self::$_conn){
+					self::$_conn = new mysqli(self::$hostname,self::$usrname,self::$pwd);
+				if(self::$_conn->connect_error){
+					die('conn failed:' . self::$_conn->connect_error);
 				}
-				return self::$_connection;
+				return self::$_conn;
 			}
-			if($connection==null){
-			mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+			if($conn==null){
+			mysqli_connect($this->host, $this->usr, $this->pwd, $this->db);
 			return $this->conn;			
 			}
 
 			//return 0;	
 		}
+		public function error() {
+			return "(" . mysqli_errno($this->conn) . ") " . mysqli_error($this->conn);
+		}
+		public function start() {
+			if($this->conn != null){
+				$this->stop();
+			}
+			$this->conn = mysqli_connect($this->host, $this->usr, $this->pwd, $this->db);
+			return $this->conn;
+		}
+		public function stop(){
+			if($this->conn != null){
+				mysqli_close($this->conn);
+				$this->conn = null;
+			}
+		}
+		public function query($query){
+			$this->res = mysqli_query($this->conn, $query);
+			return $this->res;
+		}
+		public function fetch($q) {
+			return mysqli_fetch_assoc($q);
+		}
 	}
+
 	if(!isset($_SESSION["db"])){
 		$newDB = new DB("localhost", "root", "", "mpt");
 		$_SESSION["db"] = $newDB;

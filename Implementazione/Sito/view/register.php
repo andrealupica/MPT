@@ -21,7 +21,7 @@
             <div class="cols-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="inserire il tuo nome"/>
+                <input type="text" class="form-control" name="nome" id="nome"  placeholder="inserire il tuo nome" required="required"/>
               </div>
             </div>
             <p class="help-block">inserire il proprio nome, non inserire numeri o spazi</p>
@@ -32,7 +32,7 @@
             <div class="cols-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="inserire il tuo cognome"/>
+                <input type="text" class="form-control" name="cognome" id="cognome"  placeholder="inserire il tuo cognome" required="required"/>
               </div>
             </div>
             <p class="help-block">inserire il proprio cognome, non inserire numeri o spazi</p>
@@ -43,12 +43,12 @@
             <div class="cols-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="inserire la tua e-mail.edu"/>
+                <input type="text" class="form-control" name="email" id="email"  placeholder="inserire la tua e-mail.edu" required="required"/>
               </div>
             </div>
             <p class="help-block">l'email dovrebbe essere nome.cognome@edu.ti.ch</p>
           </div>
-
+          <!--  
           <div class="form-group">
             <label for="password" class="cols-sm-2 control-label">Password:</label>
             <div class="cols-sm-10">
@@ -64,18 +64,23 @@
             <div class="cols-sm-10">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password" id="password"  placeholder="ripetere la tua password"/>
+                <input type="password" class="form-control" name="repassword" id="repassword"  placeholder="ripetere la tua password"/>
               </div>
             </div>
           </div>
-
+          -->
+          <div>
+            <label class="cols-sm-3 control-label" id="errore"></label>
+          </div>
+          <br>
           <div class="form-group btn-group btn-group-justified">
             <div class="col-xs-0 col-sm-2"></div>
             <div class="col-xs-6 col-sm-3">           
-              <a href="index.php" class="btn btn-primary col-xs-12">
+              <button class="btn btn-primary col-xs-12">
                 <span></span> Registrati
-              </a>
+              </button>
             </div>
+                        <p class="help-block">invia la richiesta di registrazione all'amministratore</p>
             <div class="col-xs-0 col-sm-2"></div>
           </div>
 
