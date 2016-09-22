@@ -7,6 +7,8 @@ create table utente(
 	ute_cognome varchar(30),
 	ute_email varchar(50) primary key,
 	ute_password varchar(30),
+    ute_dataIscrizione datetime,
+    ute_gestoreEmail int default null,
 	ute_temppassword int default 1,
 	ute_docente int default 1,
 	ute_amministratore int default null,
