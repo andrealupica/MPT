@@ -26,12 +26,13 @@
 			if($newDB->query($query) != false){
 				//sess("db")->stop();
 				//	mail();
-				$query1 = "select ute_email from utente where ute_gestoreEmail is not null limit 1;";
+				$query1 = "select ute_email as 'email' from utente where ute_gestoreEmail is not null limit 1;";
 				if($newDB->query($query1)!= false  && mysqli_num_rows($newDB->query($query1)) == 1){
-					$dum = $newDB->query($query1);
-					$destinatario = $newDB->fetch($dum);						
+					$dum = $newDB->fetch($newDB->query($query1));
+					echo $dum;
+					$destinatario = $dum['email'];						
 				}
-				echo $destinatario;
+				//echo $destinatario;
 				//header("Location: index.php");
 			}
 			else{
