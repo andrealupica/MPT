@@ -23,10 +23,16 @@
 		if(strstr($email,'@')=='@edu.ti.ch'){
 			$query = "insert into utente(ute_nome,ute_cognome,ute_email) values ('".$nome."','".$cognome."','".$email."');";
 			//echo $query;
-			if($newDB->query($query) != false  && mysqli_num_rows($newDB->query($query)) == 1){
-			//sess("db")->stop();
-			//	mail();
-			header("Location: index.php");
+			if($newDB->query($query) != false){
+				//sess("db")->stop();
+				//	mail();
+				$query1 = "select ute_email from utente where ute_gestoreEmail is not null limit 1;";
+				if($newDB->query($query1)!= false  && mysqli_num_rows($newDB->query($query1)) == 1){
+					$dum = $newDB->query($query1);
+					$destinatario = $newDB->fetch($dum);						
+				}
+				echo $destinatario;
+				//header("Location: index.php");
 			}
 			else{
 				echo  "<script>document.getElementById('errore').innerHTML='Errore durante la registrazione, l\'email potrebbe essere già stata registrata' </script>";
