@@ -51,14 +51,15 @@
         </task>
         <task id="45" name="Gita Scolastica" color="#0033cc" meeting="false" start="2016-09-12" duration="6" complete="0" expand="true"/>
         <task id="49" name="Implementazione" color="#000000" meeting="false" start="2016-09-20" duration="48" complete="0" expand="true">
-            <task id="59" name="Creazione DB" color="#8cb6ce" meeting="false" start="2016-09-20" duration="2" complete="0" expand="true"/>
-            <task id="73" name="Sito Web" color="#000000" meeting="false" start="2016-09-22" duration="46" complete="0" expand="true">
-                <task id="61" name="Login AIT Docente" color="#000000" meeting="false" start="2016-09-22" duration="9" complete="0" expand="true">
-                    <task id="78" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-09-22" duration="1" complete="0" expand="true"/>
-                    <task id="76" name="Richiesta registrazione" color="#8cb6ce" meeting="false" start="2016-09-27" duration="1" complete="0" expand="true"/>
+            <task id="59" name="Creazione DB" color="#8cb6ce" meeting="false" start="2016-09-20" duration="1" complete="0" expand="true"/>
+            <task id="73" name="Sito Web" color="#000000" meeting="false" start="2016-09-21" duration="47" complete="0" expand="true">
+                <task id="61" name="Login AIT Docente" color="#000000" meeting="false" start="2016-09-21" duration="10" complete="0" expand="true">
+                    <task id="78" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-09-21" duration="1" complete="0" expand="true"/>
+                    <task id="76" name="Richiesta registrazione" color="#8cb6ce" meeting="false" start="2016-09-22" duration="4" complete="0" expand="true"/>
                     <task id="74" name="Conferma registrazione" color="#8cb6ce" meeting="false" start="2016-09-28" duration="2" complete="0" expand="true"/>
                     <task id="77" name="Gestione password" color="#8cb6ce" meeting="false" start="2016-09-29" duration="4" complete="0" expand="true"/>
                 </task>
+                <task id="149" name="online" color="#8cb6ce" meeting="true" start="2016-09-27" duration="0" complete="0" expand="true"/>
                 <task id="62" name="Gestione Accessi Docenti" color="#000000" meeting="false" start="2016-10-05" duration="5" complete="0" expand="true">
                     <task id="75" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-10-05" duration="1" complete="0" expand="true"/>
                     <task id="79" name="Gestione dati presi da DB" color="#8cb6ce" meeting="false" start="2016-10-06" duration="4" complete="0" expand="true"/>
@@ -95,7 +96,6 @@
                 </task>
             </task>
         </task>
-        <task id="145" name="online" color="#8cb6ce" meeting="true" start="2016-11-29" duration="0" complete="0" expand="true"/>
         <task id="128" name="ev correzioni" color="#8cb6ce" meeting="false" start="2016-11-30" duration="5" complete="0" expand="true"/>
         <task id="57" name="Consegna Intermedia" color="#8cb6ce" meeting="true" start="2016-12-01" duration="0" complete="0" expand="true"/>
         <task id="125" name="vacanza" color="#8cb6ce" meeting="false" start="2016-12-08" duration="1" complete="0" expand="true"/>
