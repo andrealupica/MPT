@@ -14,41 +14,9 @@
   <div class="container"  >
     <div class="col-md-16">
       <div class="main-login main-center">
-        <h1>Registrazione</h1>
+        <h1>Cambia password</h1>
         <form class="form-horizontal" method="post" action="#">
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label">Nome:</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="nome" id="nome"  placeholder="inserire il tuo nome" required="required"/>
-              </div>
-            </div>
-            <p class="help-block">inserire il proprio nome, non inserire numeri o spazi</p>
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label">Cognome:</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="cognome" id="cognome"  placeholder="inserire il tuo cognome" required="required"/>
-              </div>
-            </div>
-            <p class="help-block">inserire il proprio cognome, non inserire numeri o spazi</p>
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="cols-sm-2 control-label">Email:</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                <input type="text" class="form-control" name="email" id="email"  placeholder="inserire la tua e-mail.edu" required="required"/>
-              </div>
-            </div>
-            <p class="help-block">l'email dovrebbe essere nome.cognome@edu.ti.ch</p>
-          </div>
-          <!--  
+           
           <div class="form-group">
             <label for="password" class="cols-sm-2 control-label">Password:</label>
             <div class="cols-sm-10">
@@ -68,7 +36,7 @@
               </div>
             </div>
           </div>
-          -->
+         
           <div>
             <label class="cols-sm-3 control-label" id="errore"></label>
           </div>
@@ -77,10 +45,9 @@
             <div class="col-xs-0 col-sm-2"></div>
             <div class="col-xs-6 col-sm-3">           
               <button class="btn btn-primary col-xs-12">
-                <span></span> Registrati
+                <span></span> cambia password
               </button>
             </div>
-                        <p class="help-block">invia la richiesta di registrazione all'amministratore</p>
             <div class="col-xs-0 col-sm-2"></div>
           </div>
 

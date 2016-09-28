@@ -1,6 +1,6 @@
-drop database if exists MPT;
-create database MPT;
-use MPT;
+-- drop database if exists MPT;
+-- create database MPT;
+-- use MPT;
 
 create table utente(
 	ute_nome varchar(30),
