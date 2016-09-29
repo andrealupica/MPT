@@ -13,15 +13,24 @@
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
 			$queryTipo =" select ute_tipo as 'tipo' from utente where ute_email='$user';";
 			if($newDB->query($queryTipo)!= false && mysqli_num_rows($newDB->query($queryTipo)) == 1){
-				$_SESSION['tipo'] = $newDB->fetch($queryTipo);
+				$result = $newDB->query($queryTipo);
+				$row = $result->fetch_assoc();
+				$_SESSION['tipo'] = $row['tipo'];
 			}
 			$queryEmail =" select ute_email as 'email' from utente where ute_email='$user';";
 			if($newDB->query($queryEmail)!= false && mysqli_num_rows($newDB->query($queryEmail)) == 1){
-				$_SESSION['email'] = $newDB->fetch($queryEmail);
+				$result = $newDB->query($queryEmail);
+				$row = $result->fetch_assoc();
+				$_SESSION['email'] = $row['email'];
+				echo $_SESSION['email'];
 			}
 			$queryPasswordTemp = "select ute_temppassword as 'tpassword' from utente where ute_email='$user'";
 			if($newDB->query($queryPasswordTemp)!= false && mysqli_num_rows($newDB->query($queryPasswordTemp)) == 1){
-				if($newDB->fetch($queryPasswordTemp)!=null){
+				$result = $newDB->query($queryPasswordTemp);
+				$row = $result->fetch_assoc();
+				echo $queryPasswordTemp;
+				echo $row['tpassword'];
+				if($row['tpassword']==null){
 					header("Location: menu.php");
 				}
 				else{
