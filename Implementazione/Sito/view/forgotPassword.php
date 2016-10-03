@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Login</title>
+	<title>password dimenticata</title>
 
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -31,7 +31,7 @@
 						<div class="cols-sm-10">
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-								<input type="password" class="form-control" name="password" id="password"  placeholder="ripeti la tua email"/>
+								<input type="reemail" class="form-control" name="reemail" id="reemail"  placeholder="ripeti la tua email"/>
 							</div>
 						</div>
 					</div>
@@ -39,9 +39,10 @@
 					<div class="form-group btn-group btn-group-justified" >
 						<div class="col-xs-0 col-sm-2"></div>
 						<div class="col-xs-6 col-sm-3">
-							<a class="btn btn-primary col-xs-12" >
-								<span class="glyphicon glyphicon-send"></span>  invia email
-							</a>
+		
+			            	<button class="btn btn-primary col-xs-12">
+			                	<span class="glyphicon glyphicon-send" ></span> invia email
+			            	</button>
 						</div>
 						<p class="help-block">invia una password di riserva alla tua email</p>
 						<div class="col-xs-0 col-sm-2"></div>

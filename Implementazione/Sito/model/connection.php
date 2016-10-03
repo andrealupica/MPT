@@ -49,12 +49,13 @@
 			}
 		}
 		public function query($query){
+			if(empty(mysqli_query($this->conn, $query))){
+				return false;
+			}
 			$this->res = mysqli_query($this->conn, $query);
 			return $this->res;
 		}
-		public function fetch($q) {
-			return mysqli_fetch_assoc($q);
-		}
+
 	}
 
 	if(!isset($_SESSION["db"])){

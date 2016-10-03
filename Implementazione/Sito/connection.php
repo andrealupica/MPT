@@ -49,6 +49,9 @@
 			}
 		}
 		public function query($query){
+	//		if(empty(mysqli_query($this->conn, $query))){
+	//			return false;
+	//		}
 			$this->res = mysqli_query($this->conn, $query);
 			return $this->res;
 		}

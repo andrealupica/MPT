@@ -80,7 +80,7 @@
                 <span></span> Registrati
               </button>
             </div>
-                        <p class="help-block">invia la richiesta di registrazione all'amministratore</p>
+             <p class="help-block">invia la richiesta di registrazione all'amministratore</p>
             <div class="col-xs-0 col-sm-2"></div>
           </div>
 
