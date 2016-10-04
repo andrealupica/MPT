@@ -44,9 +44,9 @@
 					echo $query2;
 					// invio dell'email
 					$oggetto = " registrazione di ".$email. "";
-					$messaggio ="<html><body>clicca qui sotto per registrare l'utente<br><a href='http://www.samtinfo.ch/~i13lupand//MPT/confirmRegister.php>registra<a/>";
-					$tipoMessaggio = "Content-Type: text/html";
+					$messaggio ="clicca questo link per accettare la registrazione: http://www.samtinfo.ch/~i13lupand//MPT/confirmRegister.php?param=".$email."&password=".$password."";
 					$mittente =  'From: "Registrazione MPT" <prova.prova@edu.ti.ch>';
+					//$mittente .= " Content-Type: text/html; charset=ISO-8859-1";
 					echo $password."<br>";
 					echo $mittente;
 					echo $destinatario;
