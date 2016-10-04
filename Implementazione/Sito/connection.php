@@ -6,7 +6,7 @@
 		private $db;
 		private $conn;
 		private $result;
-		
+
 		public function __construct($host, $usr, $pwd, $db=''){
 			$this->host = $host;
 			$this->usr = $usr;
@@ -17,20 +17,8 @@
 			$this->start();
 		}
 
-		public function conn(){
-			if(!self::$_conn){
-					self::$_conn = new mysqli(self::$hostname,self::$usrname,self::$pwd);
-				if(self::$_conn->connect_error){
-					die('conn failed:' . self::$_conn->connect_error);
-				}
-				return self::$_conn;
-			}
-			if($conn==null){
-			mysqli_connect($this->host, $this->usr, $this->pwd, $this->db);
-			return $this->conn;			
-			}
-
-			//return 0;	
+		public function getConnection(){
+			return $this->conn;
 		}
 		public function error() {
 			return "(" . mysqli_errno($this->conn) . ") " . mysqli_error($this->conn);
@@ -49,17 +37,13 @@
 			}
 		}
 		public function query($query){
-	//		if(empty(mysqli_query($this->conn, $query))){
-	//			return false;
-	//		}
 			$this->res = mysqli_query($this->conn, $query);
 			return $this->res;
 		}
 
 	}
-
-	if(!isset($_SESSION["db"])){
+	$newDB;
+	if($newDB==null){
 		$newDB = new DB("mysql.samtinfo.ch", "i13lupand", "lupand1", "samtinfoch17");
-		$_SESSION["db"] = $newDB;
 	}
 ?>
