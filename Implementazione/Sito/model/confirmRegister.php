@@ -1,5 +1,5 @@
 <?php
-	include "connection.php";
+	include_once "connection.php";
 
 	if(isset($_GET["param"]) && isset($_GET["password"])){
 		$email = $_GET["param"];

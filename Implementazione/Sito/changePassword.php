@@ -1,5 +1,5 @@
-<?php 
-	if($_SESSION['email']!="" OR $_SESSION['email']!=null){
+<?php
+	if($_SESSION['email']=="" OR $_SESSION['email']==null){
 		echo "non hai i permessi per visualizzare questa pagina";
 	}
 	else{

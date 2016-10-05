@@ -1,5 +1,5 @@
 <?php
-	include "connection.php";
+	include_once "connection.php";
 	session_start();
 	if(isset($_POST["password"]) && isset($_POST["repassword"])){
 		$repass = $_POST["repassword"];
@@ -12,7 +12,7 @@
 				header("Location: index.php");
 			}
 			else{
-			echo  "<script>document.getElementById('errore').innerHTML='errore'</script>";		
+			echo  "<script>document.getElementById('errore').innerHTML='errore'</script>";
 				//echo $newDB->error($query);
 				//echo "sess: ".$_SESSION['email'];
 			}
@@ -20,7 +20,7 @@
 		else{
 			echo  "<script>document.getElementById('errore').innerHTML='le password non sono uguali'</script>";
 		}
-		
+
 	}
 //$connection->close();
 
