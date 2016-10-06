@@ -5,7 +5,7 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null){
 }
 else{
   include_once "connection.php";
-  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile', ute_gestoreEmail as 'Gestore' from utente;";
+  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile', ute_gestoreEmail as 'gestore' from utente order by ute_email;";
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>
@@ -20,7 +20,7 @@ else{
 
     <div class="container">
       <h1>Gestione Accessi Docenti</h1>
-      <form>
+      <form method="post">
         <table class="table">
           <thead>
             <tr>
@@ -43,20 +43,21 @@ else{
                 <td><?php echo $row["nome"];?></td>
                 <td><?php echo $row["email"];?></td>
                 <td><div class="checkbox">
-                  <label><input type="checkbox" name="<?php echo $row['$email'];?>[]" value="docente"></label>
+                  <label><input type="checkbox" value="<?php echo $row['email'];?>1" name="docente[]" <?php echo ($row['docente']==1 ? 'checked' : '');?>></label>
                 </div></td>
                 <td><div class="checkbox">
-                  <label><input type="checkbox" name="<?php echo $row['$email'];?>[]" value="responsabile"></label>
-                </div></td>
-                <td><div class="radio">
-                  <label><input type="radio" name="<?php echo $row['$email'];?>[]" value="gestore"></label>
+                  <label><input type="checkbox" value="<?php echo $row['email'];?>2" name="responsabile[]" <?php echo ($row['responsabile']==1 ? 'checked' : '');?>></label>
                 </div></td>
                 <td>
-                  <form>
-                    <button type="button" name='button' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                  <div class="radio">
+                    <label><input type="radio"  name="gestore[]" value="<?php echo $row['email'];?>3" <?php echo ($row['gestore']==1 ? 'checked' : '');?>></label>
+                  </div>
+                </td>
+                <td>
+                  <form method="post">
+                    <button type="button" name='button' id="<?php echo $row['email'];?>" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('pEliminazione').value='<?php echo $row['email'];?>';">
                       <span class="glyphicon glyphicon-remove"></span>
                     </button>
-                    <input type="hidden" name="<?php echo $row['$email'];?>">
                   </form>
                 </td>
               </tr>
@@ -66,7 +67,7 @@ else{
           </tbody>
         </table>
         <div class="col-xs-6 col-sm-3">
-          <button type="submit" class="btn btn-secondary" href="model/gestioneAccessoDocenti.php">
+          <button type="submit" class="btn btn-secondary">
             <span class="glyphicon glyphicon-floppy-disk"></span>Salva
           </button>
         </div>
@@ -74,25 +75,29 @@ else{
       <div class="container">
         <!-- Modal -->
         <div class="modal fade" id="myModal" role="dialog">
-   <div class="modal-dialog">
+          <div class="modal-dialog">
 
-     <!-- Modal content-->
-     <div class="modal-content">
-       <div class="modal-header">
-         <button type="button" class="close" data-dismiss="modal">&times;</button>
-         <h4 class="modal-title">Eliminazione account</h4>
-       </div>
-       <div class="modal-body">
-         <p>Sei sicuro di voler eliminare l'account<?php echo $_Post['name']?>?</p>
-       </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
-       </div>
-     </div>
-
-   </div>
- </div>
-
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminazione account</h4>
+              </div>
+              <div class="modal-body">
+                <p>sei sicuro di voler eliminare l'account?</p>
+              </div>
+              <div class="modal-footer">
+                <form method="post" action="">
+                  <button type="submit" class="btn btn-default">ok</button>
+                  <input type="hidden" name="emailCancellata" id="pEliminazione" required="required"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label class="cols-sm-3 control-label" id="messaggio"></label>
       </div>
     </div>
   </body>
