@@ -52,10 +52,10 @@
 							echo $queryPasswordTemp;
 							echo $row['tpassword'];
 							if($row['tpassword']==null){
-								//header("Location: menu.php");
+								header("Location: menu.php");
 							}
 							else{
-								//header("Location: changePassword.php");
+								header("Location: changePassword.php");
 							}
 						}
 						else{

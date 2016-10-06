@@ -52,9 +52,12 @@ else{
                   <label><input type="radio" name="<?php echo $row['$email'];?>[]" value="gestore"></label>
                 </div></td>
                 <td>
-                  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
-                    <span class="glyphicon glyphicon-remove"></span>
-                  </button>
+                  <form>
+                    <button type="button" name='button' class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <input type="hidden" name="<?php echo $row['$email'];?>">
+                  </form>
                 </td>
               </tr>
               <?php
@@ -80,10 +83,10 @@ else{
          <h4 class="modal-title">Eliminazione account</h4>
        </div>
        <div class="modal-body">
-         <p>Sei sicuro di voler eliminare l'account?</p>
+         <p>Sei sicuro di voler eliminare l'account<?php echo $_Post['name']?>?</p>
        </div>
        <div class="modal-footer">
-         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+         <button type="button" class="btn btn-default" data-dismiss="modal">ok</button>
        </div>
      </div>
 
