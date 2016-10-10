@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Registrazione</title>
-
+  <script src="file.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
@@ -90,6 +91,4 @@
     </div>
   </div>
 </body>
-<script src="file.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
 </html>

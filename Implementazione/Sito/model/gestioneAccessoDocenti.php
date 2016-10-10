@@ -12,26 +12,49 @@
       }
     }
 
-    $queryEmail = "select ute_email as 'email' from utente";
-    if($newDB->query($queryEmail)!=false){
-      $result = $newDB->query($queryEmail);
-      $cnt=0;
-      while($email = $result->fetch_assoc()){
-
-        $docente = $_POST['docente'];
-        echo "prova".$docente[0];
-        $responsabile = $_POST[$email['email'].'2'];
-        $isdocente = isset($docente)?'1':null;
-        $isresponsabile = isset($responsabile)?'1':null;
-        $gestore = $_POST['gestore'];
-        $queryModify = "update from utente ute_docente='".$isdocente."' & ute_responsabile='".$isresponsabile."'& ute_gestoreEmail='".$gestore."' where ute_email='".$email['email']."';";
-        echo $queryModify;
-        echo "docente:".$docente;
-        echo "responsabile:".$responsabile."<br>";
-      }
-
-
-    }
+	if(isset($_POST['docente']) && isset($_POST['responsabile']) && isset($_POST['docente'])){
+	    $queryEmail = "select ute_email as 'email' from utente";
+	    if($newDB->query($queryEmail)!=false){
+	      $result = $newDB->query($queryEmail);
+				$docente = $_POST['docente'];
+				$responsabile = $_POST['responsabile'];
+				$gestore = $_POST['gestore'];
+	      while($email = $result->fetch_assoc()){
+					//controllo se è docente
+					$isdocente='0';
+					$isresponsabile='0';
+					$isgestore='0';
+					for ($i=0; $i < count($docente) ; $i++) {
+						if($email['email']==$docente[$i]){
+							$isdocente='1';
+						}
+						else{
+						}
+					}
+					//controllo se è responsabile
+					for ($i=0; $i < count($responsabile) ; $i++) {
+						if($email['email']==$responsabile[$i]){
+							$isresponsabile='1';
+						}
+						else{
+						}
+					}
+					//controllo se è gestore
+					for ($i=0; $i < count($gestore) ; $i++) {
+						if($email['email']==$gestore[$i]){
+							$isgestore='1';
+						}
+						else{
+						}
+					}
+	        $queryModify = "update utente set ute_docente='".$isdocente."', ute_responsabile='".$isresponsabile."', ute_gestoreEmail='".$isgestore."' where ute_email='".$email['email']."';";
+	        //echo $queryModify."<br>";
+					$newDB->query($queryModify);
+					//$cnt++;
+	      }
+	    }
+			header('refresh:0');
+	}
 
 
 ?>

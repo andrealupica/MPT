@@ -9,19 +9,13 @@
 	$repass = "";
 	&& isset($_POST["password"]) && isset($_POST["repassword"])*/
 	if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["email"])){
-		/*$query1 = "select ute_email from utente where ute_gestoreEmail is not null limit 1;";
-		$res = $newDB->query($query1);
-		$newDB->fetch($res);
-		$emailAdmin = $newDB->fetch($res) ;
-		echo $emailAdmin;*/
 		$nome = $_POST["nome"];
 		$cognome = $_POST["cognome"];
 		$email = $_POST["email"];
-		$email = strtolower($email);/*
-		$pass = $_POST["password"];
-		$repass = $_POST["repassword"];*/
+		$email = strtolower($email);
 		if(strstr($email,'@')=='@edu.ti.ch'){
 		//	$query = "insert into utente(ute_nome,ute_cognome,ute_email) values ('".$nome."','".$cognome."','".$email."');";
+			// inserimento tramite statement
 			$connect=$newDB->getConnection();
 			$query = $connect->prepare("insert into utente(ute_nome,ute_cognome,ute_email) values (?,?,?);");
 			$query->bind_param("sss",$nome,$cognome,$email);
@@ -29,8 +23,7 @@
 			//echo $query;
 			//echo $query;
 			if($query != false){
-				//sess("db")->stop();
-				//	mail();
+				// prende l'email del gestore email
 				$query1 = "select ute_email as 'email' from utente where ute_gestoreEmail is not null limit 1;";
 				if($newDB->query($query1)!= false  && mysqli_num_rows($newDB->query($query1)) == 1){
 					$result = $newDB->query($query1);

@@ -3,22 +3,20 @@
 	session_start();
 	$user = "";
 	$pass = "";
-
 	if(isset($_POST["email"]) && isset($_POST["password"])){
 		$user = $_POST["email"];
 		$user = mb_strtolower($user);
 		$pass = $_POST["password"];
 
 		// data di scadenza
-
+		//echo "ok";
       $queryDate = "select ute_dataIscrizione as 'data' from utente where ute_email='$user' && ute_password='" . md5($pass) . "';";
   		if($newDB->query($queryDate) != false && mysqli_num_rows($newDB->query($queryDate)) == 1){
-
   			$result = $newDB->query($queryDate);
   			$row = $result->fetch_assoc();
   			$data = $row['data'];
   			$today_date = date("Y-m-d");
-  			if ($data<$today_date){
+  			if ($data<$today_date && $data!=null){
   				// non può piu loggarsi
   				$queryDeleteAccount = "delete from utente where ute_email='".$user."';";
   				$newDB->query($queryDeleteAccount);
@@ -26,9 +24,11 @@
   			}
         else{
         	// si logga
+					$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
+					$newDB->query($query1);
 					$query = "select ute_email as 'email' from utente where ute_email='$user' && ute_password='" . md5($pass) . "';";
 					if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
-
+						//echo "log";
 						//tipo nella sessione
 						$queryTipo =" select ute_tipo as 'tipo' from utente where ute_email='$user';";
 						if($newDB->query($queryTipo)!= false && mysqli_num_rows($newDB->query($queryTipo)) == 1){

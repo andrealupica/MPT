@@ -4,6 +4,7 @@
 	if(isset($_POST["password"]) && isset($_POST["repassword"])){
 		$repass = $_POST["repassword"];
 		$pass = $_POST["password"];
+		// se le due password combaciano
 		if($repass ==$pass){
 			$query = "update utente set ute_password='".md5($pass)."', ute_temppassword=null where ute_email='".$_SESSION['email']."';";
 			echo $query;

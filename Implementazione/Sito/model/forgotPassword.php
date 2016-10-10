@@ -3,7 +3,7 @@
 	if(isset($_POST["email"]) && isset($_POST["reemail"])){
 		$reemail = $_POST["reemail"];
 		$email = $_POST["email"];
-
+		// se le due email combaciano
 		if($reemail == $email){
 			$query1 = "select ute_email from utente where ute_email='".$email."';";
 			if($newDB->query($query1) != false && mysqli_num_rows($newDB->query($query1)) == 1){
@@ -11,6 +11,7 @@
 				$query = "update utente set ute_password='".md5($pass)."', ute_temppassword=1 where ute_email='".$email."';";
 				echo $query;
 				if($newDB->query($query)!= false){
+					// creazione dell'email
 						$destinatario = $email;
 						$oggetto = " modifica della password di: ".$email. "";
 						$messaggio ="la tua nuova password è:".$pass;

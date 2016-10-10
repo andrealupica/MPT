@@ -15,6 +15,8 @@ else{
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="file.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
 
@@ -43,14 +45,14 @@ else{
                 <td><?php echo $row["nome"];?></td>
                 <td><?php echo $row["email"];?></td>
                 <td><div class="checkbox">
-                  <label><input type="checkbox" value="<?php echo $row['email'];?>1" name="docente[]" <?php echo ($row['docente']==1 ? 'checked' : '');?>></label>
+                  <label><input type="checkbox" value="<?php echo $row['email'];?>" name="docente[]" <?php echo ($row['docente']==1 ? 'checked' : '');?>></label>
                 </div></td>
                 <td><div class="checkbox">
-                  <label><input type="checkbox" value="<?php echo $row['email'];?>2" name="responsabile[]" <?php echo ($row['responsabile']==1 ? 'checked' : '');?>></label>
+                  <label><input type="checkbox" value="<?php echo $row['email'];?>" name="responsabile[]" <?php echo ($row['responsabile']==1 ? 'checked' : '');?>></label>
                 </div></td>
                 <td>
                   <div class="radio">
-                    <label><input type="radio"  name="gestore[]" value="<?php echo $row['email'];?>3" <?php echo ($row['gestore']==1 ? 'checked' : '');?>></label>
+                    <label><input type="radio"  name="gestore[]" value="<?php echo $row['email'];?>" <?php echo ($row['gestore']==1 ? 'checked' : '');?>></label>
                   </div>
                 </td>
                 <td>
@@ -101,8 +103,6 @@ else{
       </div>
     </div>
   </body>
-  <script src="file.js"></script>
-  <script src="bootstrap/js/bootstrap.min.js"></script>
   </html>
   <?php
 }
