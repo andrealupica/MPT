@@ -1,0 +1,39 @@
+
+.body {
+	margin-top: 10px;
+ 	margin-bottom: 50px;
+}
+
+.contenitore {
+  padding: 15px 35px 45px;
+  background-color: #fff;
+	min-width: 400px;
+}
+
+
+a{
+	margin-top:10px;
+	margin-left:10px;
+	size: 2px;
+	height: 50px;
+	text-align: center;
+}
+
+
+.header{
+	margin-bottom:100px;
+}
+
+#search{
+	max-width: 400px;
+}
+
+.opzione{
+	float:right;
+	display: inline;
+}
+
+h1{
+	float:left;
+	display: inline;
+}

@@ -1,6 +1,6 @@
 <?
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null){
+if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["responsabile"]!=1){
   echo "non hai i permessi per visualizzare questa pagina";
 }
 else{
@@ -17,13 +17,33 @@ else{
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="file.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <link href="css/gestioneDocenti.css" rel="stylesheet">
   </head>
-  <body>
-
-    <div class="container">
-      <h1>Gestione Accessi Docenti</h1>
+  <body class="body">
+    <div class="container contenitore">
+      <div class="header">
+        <h1>Gestione Accessi Docenti</h1>
+        <span class="opzione">
+          <a class="btn btn-primary" href="menu.php">
+            <span class="glyphicon glyphicon-arrow-left"></span> menu
+          </a>
+          <a href="logout.php" class="btn btn-primary">
+            <span class="glyphicon glyphicon-log-out"></span> exit
+          </a>
+        </span>
+      </div>
+      <br>
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Ricerca con Cognome/Nome:</label>
+        <div class="col-sm-10">
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-search"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" id="search"></input>
+          </div>
+        </div>
+      </div>
       <form method="post">
-        <table class="table">
+        <table class="table" id="table">
           <thead>
             <tr>
               <th>Cognome</th>
@@ -102,6 +122,16 @@ else{
         <label class="cols-sm-3 control-label" id="messaggio"></label>
       </div>
     </div>
+    <script>
+    $("#search").keyup(function() {
+      var value = this.value;
+      $("#table").find("tr").each(function(index) {
+        if (index === 0) return;
+        var id = $(this).find("td").text();
+        $(this).toggle(id.indexOf(value) !== -1);
+      });
+    });
+    </script>
   </body>
   </html>
   <?php

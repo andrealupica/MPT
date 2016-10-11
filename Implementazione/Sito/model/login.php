@@ -30,11 +30,16 @@
 					if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
 						//echo "log";
 						//tipo nella sessione
-						$queryTipo =" select ute_tipo as 'tipo' from utente where ute_email='$user';";
+						$queryTipo =" select ute_docente as 'docente',ute_amministratore as 'amministratore', ute_responsabile as 'responsabile' from utente where ute_email='$user';";
 						if($newDB->query($queryTipo)!= false && mysqli_num_rows($newDB->query($queryTipo)) == 1){
 							$result = $newDB->query($queryTipo);
 							$row = $result->fetch_assoc();
-							$_SESSION['tipo'] = $row['tipo'];
+							$_SESSION['docente'] = $row['docente'];
+							$_SESSION['amministratore'] = $row['amministratore'];
+							$_SESSION['responsabile'] = $row['responsabile'];
+							echo $_SESSION['docente'];
+							echo $_SESSION['amministratore'];
+							echo $_SESSION['responsabile'];
 						}
 						// email nella sessione
 						$queryEmail =" select ute_email as 'email' from utente where ute_email='$user';";

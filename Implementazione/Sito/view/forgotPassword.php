@@ -10,16 +10,17 @@
 	<script src="file.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="body">
 
-	<div class="container">
+	<div class="container contenitore">
 		<div class="col-md-16">
 			<div class="main-login main-center">
 				<h1>Password Dimenticata</h1>
 				<form class="form-horizontal" method="post" action="#">
-					<div class="form-group">
+					<div class="form-group inputForm">
 						<label for="email" class="cols-sm-2 control-label">Email:</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
@@ -29,7 +30,7 @@
 						</div>
 					</div>
 
-					<div class="form-group">
+					<div class="form-group inputForm">
 						<label for="password" class="cols-sm-2 control-label">Ripeti Email:</label>
 						<div class="cols-sm-10">
 							<div class="input-group">

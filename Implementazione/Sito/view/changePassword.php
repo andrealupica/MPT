@@ -9,11 +9,12 @@
   <script src="file.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="body">
 
-  <div class="container"  >
+  <div class="container contenitore">
     <div class="col-md-16">
       <div class="main-login main-center">
         <h1>Cambia password</h1>
@@ -50,6 +51,7 @@
                 <span></span> cambia password
               </button>
             </div>
+            <p class="help-block">cambia la tua password momentanea in una nuova</p>
             <div class="col-xs-0 col-sm-2"></div>
           </div>
 

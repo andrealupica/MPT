@@ -9,11 +9,12 @@
 	<script src="file.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/index.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="body">
 
-	<div class="container">
+	<div class="container contenitore">
 		<div class="col-md-16">
 			<div class="main-login main-center">
 				<h1>Login AIT Docente</h1>
@@ -38,19 +39,17 @@
 						</div>
 					</div>
 					<div class="form-group btn-group btn-group-justified" >
-						<div class="col-xs-0 col-sm-2"></div>
-						<div class="col-xs-6 col-sm-3">
+						<div class="col-xs-12 col-sm-6 col-md-4 bottone">
 							<button class="btn btn-primary col-xs-12" type="submit" id="user-login">
 								<span class="glyphicon glyphicon-log-in"></span> Log-in
 							</button>
 						</div>
-						<div class="col-xs-6 col-sm-3">
+						<div class="col-xs-12 col-sm-6 col-md-4 bottone">
 							<a href="register.php" class="btn btn-primary col-xs-12">
 								<span class="glyphicon glyphicon-plus"></span> Registrati
 							</a>
 						</div>
-						<div class="col-xs-0 col-sm-2"></div>
-						<div class="col-xs-6 col-sm-3">
+						<div class="col-xs-12 col-sm-6 col-md-4 bottone">
 							<a class="btn btn-primary col-xs-12" href="forgotPassword.php">
 								<span class="glyphicon glyphicon-question-sign"></span> Password Dimenticata
 							</a>
