@@ -7,7 +7,7 @@
 .contenitore {
   padding: 15px 35px 45px;
   background-color: #fff;
-	min-width: 790px;
+	min-width: 400px;
 }
 
 
@@ -16,11 +16,11 @@
 }
 
 .header{
-	margin-bottom:50px;
+	margin-bottom:20px;
 }
 
-#search{
-	max-width: 400px;
+thead{
+	border:0px;
 }
 
 .opzione{
@@ -28,7 +28,16 @@
 	display: inline;
 }
 
-h1{
-	float:left;
-	display: inline;
+
+select,input{
+	width: 150px;
+}
+p{
+	margin-left:10px;
+	margin-right: 10px;
+}
+
+
+.altro{
+	margin-top:100px;
 }

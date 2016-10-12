@@ -10,7 +10,9 @@
 	&& isset($_POST["password"]) && isset($_POST["repassword"])*/
 	if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["email"])){
 		$nome = $_POST["nome"];
+		$nome = strtolower($nome);
 		$cognome = $_POST["cognome"];
+		$cognome = strtolower($cognome);
 		$email = $_POST["email"];
 		$email = strtolower($email);
 		if(strstr($email,'@')=='@edu.ti.ch'){

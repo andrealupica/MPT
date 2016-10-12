@@ -36,10 +36,10 @@
 							$row = $result->fetch_assoc();
 							$_SESSION['docente'] = $row['docente'];
 							$_SESSION['amministratore'] = $row['amministratore'];
-							$_SESSION['responsabile'] = $row['responsabile']; 
-							echo $_SESSION['docente'];
-							echo $_SESSION['amministratore'];
-							echo $_SESSION['responsabile'];
+							$_SESSION['responsabile'] = $row['responsabile'];
+						//	echo $_SESSION['docente'];
+						//	echo $_SESSION['amministratore'];
+						//	echo $_SESSION['responsabile'];
 						}
 						// email nella sessione
 						$queryEmail =" select ute_email as 'email' from utente where ute_email='$user';";

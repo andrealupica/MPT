@@ -22,7 +22,6 @@ else{
   <body class="body">
     <div class="container contenitore">
       <div class="header">
-        <h1>Gestione Accessi Docenti</h1>
         <span class="opzione">
           <a class="btn btn-primary" href="menu.php">
             <span class="glyphicon glyphicon-arrow-left"></span> menu
@@ -32,6 +31,7 @@ else{
           </a>
         </span>
       </div>
+      <h1>Gestione Accessi Docenti</h1>
       <br>
       <div class="form-group">
         <label class="col-sm-2 control-label">Ricerca con Cognome/Nome:</label>
