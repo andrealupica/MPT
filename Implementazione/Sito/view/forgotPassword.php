@@ -50,7 +50,7 @@
 						<p class="help-block">invia una password di riserva alla tua email</p>
 						<div class="col-xs-0 col-sm-2"></div>
 					</div>
-
+        <label class="cols-sm-3 control-label" id="messaggio"></label>
 				</form>
 			</div>
 		</div>

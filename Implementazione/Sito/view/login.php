@@ -33,8 +33,9 @@
 						<label for="password" class="cols-sm-2 control-label" id="password">Password:</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 								<input type="password" class="form-control" name="password" id="password"  placeholder="Inserire la tua password" required="required"/>
+
+								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
 							</div>
 						</div>
 					</div>
@@ -46,7 +47,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4 bottone">
 							<a href="register.php" class="btn btn-primary col-xs-12">
-								<span class="glyphicon glyphicon-plus"></span> Registrati
+								<span class="glyphicon glyphicon-plus"></span> Registrazione
 							</a>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4 bottone">
