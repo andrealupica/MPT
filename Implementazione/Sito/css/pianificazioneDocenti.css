@@ -7,7 +7,6 @@
 .contenitore {
   padding: 15px 35px 45px;
   background-color: #fff;
-	min-width: 400px;
 }
 
 
@@ -29,9 +28,10 @@ thead{
 }
 
 
-select,input{
+select{
 	width: 150px;
 }
+
 p{
 	margin-left:10px;
 	margin-right: 10px;
@@ -40,4 +40,15 @@ p{
 
 .altro{
 	margin-top:100px;
+	margin-bottom:50px;
+}
+
+input{
+	width:150px;
+}
+.titolo{
+	margin-bottom:25px;
+}
+.docente{
+	margin-top:20px;
 }

@@ -12,7 +12,7 @@
       }
     }
 
-	if(isset($_POST['docente']) && isset($_POST['responsabile']) && isset($_POST['docente'])){
+	if(isset($_POST['docente']) && isset($_POST['responsabile'])){
 	    $queryEmail = "select ute_email as 'email' from utente";
 	    if($newDB->query($queryEmail)!=false){
 	      $result = $newDB->query($queryEmail);

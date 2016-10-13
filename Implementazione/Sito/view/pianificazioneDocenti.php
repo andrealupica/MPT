@@ -33,42 +33,26 @@ else{
       </div>
       <h1>pianificazione Docenti MPT</h1>
       <br>
-      <label class="col-sm-2 control-label">Docenti</label>
+      <label class="col-sm-2 control-label titolo">Docenti</label>
+      <label class="col-sm-10 control-label"></label>
       <form method="post">
+        <?php
+          for ($i=0; $i < 4; $i++) {
+
+        ?>
         <div class="col-md-12" id="docente">
-          <span class="col-md-3">
+          <span class="col-md-3 col-xs-12">
             Cognome
-            <select name="cognome" class="form-control">
-              <!--inserimento dati tramite php-->
-              <?php
-              $cognome = "select ute_cognome as 'cognome' from utente;";
-              $result = $newDB->query($cognome);
-              while($row = $result->fetch_assoc()){
-                ?>
-                <option><?php echo $row["cognome"]?></option>
-                <?php
-              }
-              ?>
-            </select>
+            <input type="text" name="cognomeDocente" class="form-control"></input>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-3 col-xs-12">
             Nome
-            <select name="nome" class="form-control">
-              <!--inserimento dati tramite php-->
-              <?php
-              $nome = "select ute_nome as 'nome' from utente;";
-              $result = $newDB->query($nome);
-              while($row = $result->fetch_assoc()){
-                ?>
-                <option><?php echo $row["nome"]?></option>
-                <?php
-              }
-              ?>
-            </select>
+            <input type="text" name="nomeDocente" class="form-control"></input>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-3 col-xs-12">
             Materia
             <select name="materia" class="form-control">
+              <option></option>
               <!--inserimento dati tramite php-->
               <?php
               $materia = "select mat_nome as 'materia' from materia;";
@@ -81,50 +65,85 @@ else{
               ?>
             </select>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-3 col-xs-12">
             Ore Totali Materia
             <input type="number" class="form-control" name="ore" id="ore" step="0.5"/>
           </span>
         </div>
-        <div class="col-md-8 altro">
+        <?php
+          }
+        ?>
+        <div class="col-xs-12 altro">
           <span class="col-md-3">
             Tipo MPT
             <select name="corso" class="form-control">
+              <option selected="true">-- seleziona --</option>
+              <?php
+              $corso = "select cor_nome as 'corso' from corso;";
+              $result = $newDB->query($corso);
+              while($row = $result->fetch_assoc()){
+                ?>
+                <option><?php echo $row["corso"]?></option>
+                <?php
+              }
+              ?>
             </select>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-2">
             Classe
-            <select name="corso" class="form-control">
+            <select name="classe" class="form-control">
+              <?php
+              $classe = "select cla_nome as 'classe' from classe;";
+              $result = $newDB->query($classe);
+              while($row = $result->fetch_assoc()){
+                ?>
+                <option><?php echo $row["classe"]?></option>
+                <?php
+              }
+              ?>
             </select>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-2">
             Durata Ciclo
-            <select name="corso" class="form-control">
-            </select>
+            <input name="durataCiclo" tyte="text" readonly="true" class="form-control"></input>
           </span>
-          <span class="col-md-3">
+          <span class="col-md-4">
             Ciclo Formativo
             <table>
               <tr>
-                <td>
-                  <select name="corso" class="form-control">
-                  </select>
+                <td class="col-md-5">
+                  <span>
+                    <select name="ciclo" class="form-control">
+                      <?php
+                        for ($i=2013; $i < 2023; $i++) {
+                      ?>
+                        <option><?php echo $i; ?></option>
+                      <?php
+                        }
+                      ?>
+
+                    </select>
+                  </span>
                 </td>
-                <td>
-                  <p>--</p>
+                <td class="col-md-2">
+                  <span >
+                    <span>--</span>
+                  </span>
                 </td>
-                <td>
-                  <select name="corso" class="form-control"></select>
+                <td class="col-md-5">
+                  <span>
+                  <input name="tempo2" type="text" readonly="true" class="form-control"></input>
+                  </span>
                 </td>
               </tr>
             </table>
           </span>
         </div>
-        <div class="col-md-4">
+        <div class="col-xs-4">
         </div>
         <div class="col-md-12">
           <div class="col-md-9"></div>
-          <div class="col-sm-6 col-md-3">
+          <div class="col-xs-6 col-md-3">
             <button type="submit" class="btn btn-secondary">
               <span class="glyphicon glyphicon-floppy-disk"></span>Salva
             </button>
