@@ -36,10 +36,10 @@
       //echo $_SESSION['responsabile'];
       if($_SESSION['responsabile']==1){
     ?>
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Pianificazione Docenti MPT</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MPT</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docente MPT completa</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Gestione Accesso Docenti</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="gestioneAccessoDocenti.php"><span>Gestione Accesso Docenti</span></a>
     <?php
       }
       if($_SESSION['docente']==1){

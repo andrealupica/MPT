@@ -41,16 +41,26 @@ create table mat_app_cor(
 	foreign key(cor_id) references corso(cor_id)
 );
 
-create table insegna(
+create table cla_fre_cor(
+	cla_id int,
+	cor_id int,
+	primary key(cla_id,cor_id),
+	foreign key(cla_id) references classe(cla_id),
+	foreign key(cor_id) references corso(cor_id)
+)
+
+create table pianifica(
 	ute_email varchar(30),
 	cla_id int,
 	mat_id int,
+	cor_id int,
 	ins_ini_anno int,
 	ins_fin_anno int,
 	ins_ore_tot int,
 	ins_ore_AIT int,
-	primary key(ute_email,cla_id,mat_id,ins_ini_anno),
+	primary key(ute_email,cla_id,mat_id,ins_ini_anno,cor_id),
 	foreign key(ute_email) references utente(ute_email),
 	foreign key(cla_id) references classe(cla_id),
-	foreign key(mat_id) references materia(mat_id)
+	foreign key(mat_id) references materia(mat_id),
+	foreign key(cor_id) references corso(cor_id)
 );	

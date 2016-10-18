@@ -139,7 +139,8 @@ else{
             </table>
           </span>
         </div>
-        <div class="col-xs-4">
+        <div>
+          <label class="col-xs-4 control-label" id="messaggio"></label>
         </div>
         <div class="col-md-12">
           <div class="col-md-9"></div>

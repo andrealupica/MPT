@@ -59,7 +59,6 @@
 							<label class="cols-sm-3 control-label" id="errore"></label>
 						</div>
 					</div>
-
 				</form>
 			</div>
 		</div>

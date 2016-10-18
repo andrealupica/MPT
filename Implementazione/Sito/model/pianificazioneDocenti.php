@@ -1,11 +1,25 @@
 <?php
   session_start();
-	if(isset($_POST['nomeDocente']) && isset($_POST['cognomeDocente']) && isset($_POST['materia']) && isset($_POST['ciclo']) && isset($_POST['classe']) && isset($_POST['corso']) && isset($_POST['ore'])){
-      include_once "connection.php";
-      $nome=ucfirst(strtolower($_POST["nomeDocente"]));
-      $cognome=ucfirst(strtolower($_POST["cognomeDocente"]));
-      $materia=$_POST[""]
+  include_once "connection.php";
+  	 if(!empty($_POST['nomeDocente']) && !empty($_POST['cognomeDocente']) && !empty($_POST['materia']) && !empty($_POST['ciclo']) && !empty($_POST['classe']) && !empty($_POST['corso']) && !empty($_POST['ore'])){
+      $nome = ucfirst(strtolower($_POST["nomeDocente"]));
+      $cognome = ucfirst(strtolower($_POST["cognomeDocente"]));
+      $materia = $_POST["materia"];
+      $ciclo = $_Post["ciclo"];
+      $classe = $_POST["classe"];
+      $corso = $_POST["corso"];
+      $ore = $_POST["ore"];
+      echo "nome:".$nome;
+      $queryEmail ="select ute_email as 'email' from utente where ute_nome='$nome' && ute_cognome='$cognome'";
+      echo $queryEmail;
+      $ris=$newDB->query($queryEmail);
+      $email= $ris->fetch_assoc();
+
+      echo $email;
       echo "salva";
 
+    }
+    else{
+      	echo  "<script>document.getElementById('messaggio').innerHTML='inserisci tutti i campi'</script>";
     }
  ?>
