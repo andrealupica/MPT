@@ -16,7 +16,65 @@ else{
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
+    <script>
 
+      $(document).ready(function(){
+          $("#corso").change(function(){
+            valore=$("#corso").val();
+              $.ajax({
+                type:"POST",
+                url: "model/pianificazioneDocenti2.php",
+                data:{durataCorso:valore},
+                success: function(result){
+                  $('#durataCiclo').val(result);
+                  anno=$("#ciclo").val();
+                  durata=$("#durataCiclo").val();
+                    $.ajax({
+                      type:"POST",
+                      url: "model/pianificazioneDocenti2.php",
+                      data:{annoCiclo:anno,durataCiclo:durata},
+                      success: function(result){
+                        $('#ciclo2').val(result);
+                    }});
+              }});
+          });
+      });
+
+      $(document).ready(function(){
+          $("#corso").change(function(){
+            valore=$("#corso").val();
+              $.ajax({
+                type:"POST",
+                url: "model/pianificazioneDocenti2.php",
+                data:{classeCorso:valore},
+                success: function(result){
+                  result=JSON.parse(result);
+                  $("#classe").find("option").remove();
+                  for (var i = 0; i < result.length; i++) {
+                    $("#classe").append("<option value='"+result[i]+"'>"+result[i]+"</option>")
+                  }
+              }});
+
+          });
+      });
+
+      $(document).ready(function(){
+          $("#ciclo").change(function(){
+            anno=$("#ciclo").val();
+            durata=$("#durataCiclo").val();
+              $.ajax({
+                type:"POST",
+                url: "model/pianificazioneDocenti2.php",
+                data:{annoCiclo:anno,durataCiclo:durata},
+                success: function(result){
+                  $('#ciclo2').val(result);
+              }});
+
+          });
+      });
+
+
+    </script>
   </head>
 
   <body class="body">
@@ -43,16 +101,16 @@ else{
         <div class="col-md-12" id="docente">
           <span class="col-md-3 col-xs-12">
             Cognome
-            <input type="text" name="cognomeDocente" class="form-control"></input>
+            <input type="text" name="cognomeDocente[]" class="form-control"></input>
           </span>
           <span class="col-md-3 col-xs-12">
             Nome
-            <input type="text" name="nomeDocente" class="form-control"></input>
+            <input type="text" name="nomeDocente[]" class="form-control"></input>
           </span>
           <span class="col-md-3 col-xs-12">
             Materia
-            <select name="materia" class="form-control">
-              <option></option>
+            <select name="materia[]" class="form-control">
+              <option selected="true" value="">-- seleziona --</option>
               <!--inserimento dati tramite php-->
               <?php
               $materia = "select mat_nome as 'materia' from materia;";
@@ -67,7 +125,7 @@ else{
           </span>
           <span class="col-md-3 col-xs-12">
             Ore Totali Materia
-            <input type="number" class="form-control" name="ore" id="ore" step="0.5"/>
+            <input type="number" class="form-control" name="ore[]" id="ore" step="0.5"/>
           </span>
         </div>
         <?php
@@ -76,8 +134,8 @@ else{
         <div class="col-xs-12 altro">
           <span class="col-md-3">
             Tipo MPT
-            <select name="corso" class="form-control">
-              <option selected="true">-- seleziona --</option>
+            <select name="corso" id="corso" class="form-control">
+              <option selected="true" value="">-- seleziona --</option>
               <?php
               $corso = "select cor_nome as 'corso' from corso;";
               $result = $newDB->query($corso);
@@ -91,21 +149,23 @@ else{
           </span>
           <span class="col-md-2">
             Classe
-            <select name="classe" class="form-control">
+            <select name="classe" id="classe" class="form-control">
+              <option selected="true" value=""> -- </option>
               <?php
-              $classe = "select cla_nome as 'classe' from classe;";
+              /*$classe = "select cla_nome as 'classe' from classe;";
               $result = $newDB->query($classe);
               while($row = $result->fetch_assoc()){
                 ?>
                 <option><?php echo $row["classe"]?></option>
                 <?php
               }
+              */
               ?>
             </select>
           </span>
           <span class="col-md-2">
             Durata Ciclo
-            <input name="durataCiclo" tyte="text" readonly="true" class="form-control"></input>
+            <input name="durataCiclo" id="durataCiclo" tyte="text" readonly="true" class="form-control"></input>
           </span>
           <span class="col-md-4">
             Ciclo Formativo
@@ -113,7 +173,7 @@ else{
               <tr>
                 <td class="col-md-5">
                   <span>
-                    <select name="ciclo" class="form-control">
+                    <select name="ciclo" id="ciclo" class="form-control">
                       <?php
                         for ($i=2013; $i < 2023; $i++) {
                       ?>
@@ -132,7 +192,7 @@ else{
                 </td>
                 <td class="col-md-5">
                   <span>
-                  <input name="tempo2" type="text" readonly="true" class="form-control"></input>
+                  <input name="ciclo2" id="ciclo2" type="text" readonly="true" class="form-control"></input>
                   </span>
                 </td>
               </tr>

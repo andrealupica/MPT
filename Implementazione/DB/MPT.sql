@@ -26,11 +26,10 @@ create table corso(
 	cor_durata int
 );
 
+##riscrivi
 create table classe(
 	cla_id int primary key auto_increment,
 	cla_nome varchar(30),
-	cor_id int,
-	foreign key(cor_id) references corso(cor_id)
 );
 
 create table mat_app_cor(
@@ -54,11 +53,11 @@ create table pianifica(
 	cla_id int,
 	mat_id int,
 	cor_id int,
-	ins_ini_anno int,
-	ins_fin_anno int,
-	ins_ore_tot int,
-	ins_ore_AIT int,
-	primary key(ute_email,cla_id,mat_id,ins_ini_anno,cor_id),
+	pia_ini_anno int,
+	pia_fin_anno int,
+	pia_ore_tot int,
+	pia_ore_AIT int,
+	primary key(ute_email,cla_id,mat_id,pia_ini_anno,cor_id),
 	foreign key(ute_email) references utente(ute_email),
 	foreign key(cla_id) references classe(cla_id),
 	foreign key(mat_id) references materia(mat_id),
