@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Login</title>
-	<script src="file.js"></script>
+	<script src="script.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/index.css" rel="stylesheet">
@@ -33,8 +33,8 @@
 						<label for="password" class="cols-sm-2 control-label" id="password">Password:</label>
 						<div class="cols-sm-10">
 							<div class="input-group">
-								<input type="password" class="form-control" name="password" id="password"  placeholder="Inserire la tua password" required="required"/>
 								<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+								<input type="password" class="form-control" name="password" id="password"  placeholder="Inserire la tua password" required="required"/>
 							</div>
 						</div>
 					</div>

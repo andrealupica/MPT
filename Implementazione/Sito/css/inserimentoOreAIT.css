@@ -6,17 +6,15 @@
 
 .contenitore {
   padding: 15px 35px 45px;
-  background-color: #fff;
 	min-width: 790px;
 }
-
 
 .bottone{
 	margin-top:10px;
 }
 
 .header{
-	margin-bottom:100px;
+	margin-bottom:50px;
 }
 
 #search{
@@ -28,7 +26,6 @@
 	display: inline;
 }
 
-h1{
-	float:left;
-	display: inline;
+.salva{
+  margin-top:15px;
 }

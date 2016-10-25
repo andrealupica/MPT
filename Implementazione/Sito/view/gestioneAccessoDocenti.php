@@ -5,6 +5,7 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["responsabil
 }
 else{
   include_once "connection.php";
+  // aggiungere: quando data creazione != nulla
   $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile', ute_gestoreEmail as 'gestore' from utente order by ute_email;";
   $result = $newDB->query($query);
   ?>
@@ -15,7 +16,7 @@ else{
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="file.js"></script>
+    <script src="script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="css/gestioneDocenti.css" rel="stylesheet">
   </head>
@@ -31,7 +32,7 @@ else{
           </a>
         </span>
       </div>
-      <h1>Gestione Accessi Docenti</h1>
+      <h1 class="col-xs-12">Gestione Accessi Docenti</h1>
       <br>
       <div class="form-group">
         <label class="col-sm-2 control-label">Ricerca con Cognome/Nome:</label>

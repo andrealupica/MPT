@@ -26,19 +26,19 @@ create table corso(
 	cor_durata int
 );
 
-##riscrivi
 create table classe(
 	cla_id int primary key auto_increment,
 	cla_nome varchar(30),
 );
 
-create table mat_app_cor(
+/*create table mat_app_cor(
 	mat_id int,
 	cor_id int,
 	primary key(mat_id,cor_id),
 	foreign key(mat_id) references materia(mat_id),
 	foreign key(cor_id) references corso(cor_id)
 );
+*/
 
 create table cla_fre_cor(
 	cla_id int,

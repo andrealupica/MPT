@@ -18,11 +18,10 @@ insert into corso(cor_id,cor_nome,cor_durata) values(7,'MP1 SAMT Chimica',3);
 insert into corso(cor_id,cor_nome,cor_durata) values(8,'MP2 Tecnica (CPQ)',1);
 insert into corso(cor_id,cor_nome,cor_durata) values(9,'MP2 Natura (CPQ)',1);
 
-insert into utente(ute_nome,ute_cognome,ute_email,ute_password,ute_amministratore,ute_gestoreEmail) values('nome','cognome','andrea.lupica@samtrevano.ch','1a1dc91c907325c69271ddf0c944bc72',1,1);
-insert into utente(ute_nome,ute_cognome,ute_email,ute_password,ute_amministratore) values('nome','cognome','nome.cognome@edu.ti.ch','1a1dc91c907325c69271ddf0c944bc72',1);
+insert into utente(ute_nome,ute_cognome,ute_email,ute_password,ute_amministratore,ute_gestoreEmail,ute_responsabile) values('Andrea','Lupica','andrea.lupica@samtrevano.ch','1a1dc91c907325c69271ddf0c944bc72',1,1,1);
+insert into utente(ute_nome,ute_cognome,ute_email,ute_password,ute_amministratore,ute_responsabile) values('Ursula','Holliger','ursula.holliger@edu.ti.ch','1a1dc91c907325c69271ddf0c944bc72',1,1);
+insert into utente(ute_nome,ute_cognome,ute_email,ute_password) values('Fabrizio','Valsangiacomo','fabrizio.valsangiacomo@edu.ti.ch','1a1dc91c907325c69271ddf0c944bc72');
 
-
-##inserisci
 insert into classe(cla_id,cla_nome) values(1,'1');
 insert into classe(cla_id,cla_nome) values(2,'2');
 insert into classe(cla_id,cla_nome) values(3,'3');

@@ -12,7 +12,7 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>pianificazione Docenti</title>
-    <script src="file.js"></script>
+    <script src="script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
@@ -89,25 +89,24 @@ else{
           </a>
         </span>
       </div>
-      <h1>pianificazione Docenti MPT</h1>
+      <h1>pianificazione Docenti MP</h1>
       <br>
-      <label class="col-sm-2 control-label titolo">Docenti</label>
-      <label class="col-sm-10 control-label"></label>
+      <label class="col-sm-12 col-xs-12 control-label titolo">Docenti</label>
       <form method="post">
         <?php
           for ($i=0; $i < 4; $i++) {
 
         ?>
         <div class="col-md-12" id="docente">
-          <span class="col-md-3 col-xs-12">
+          <span class="col-md-3 col-xs-6">
             Cognome
             <input type="text" name="cognomeDocente[]" class="form-control"></input>
           </span>
-          <span class="col-md-3 col-xs-12">
+          <span class="col-md-3 col-xs-6">
             Nome
             <input type="text" name="nomeDocente[]" class="form-control"></input>
           </span>
-          <span class="col-md-3 col-xs-12">
+          <span class="col-md-3 col-xs-6">
             Materia
             <select name="materia[]" class="form-control">
               <option selected="true" value="">-- seleziona --</option>
@@ -123,8 +122,8 @@ else{
               ?>
             </select>
           </span>
-          <span class="col-md-3 col-xs-12">
-            Ore Totali Materia
+          <span class="col-md-3 col-xs-6">
+            Ore Annuale Materia
             <input type="number" class="form-control" name="ore[]" id="ore" step="0.5"/>
           </span>
         </div>
@@ -133,7 +132,7 @@ else{
         ?>
         <div class="col-xs-12 altro">
           <span class="col-md-3">
-            Tipo MPT
+            Tipo MP
             <select name="corso" id="corso" class="form-control">
               <option selected="true" value="">-- seleziona --</option>
               <?php
@@ -212,15 +211,6 @@ else{
         </div>
       </form>
     </div>
-    <?php
-
-    $cognome = "select ute_cognome as 'cognome' from utente;";
-    $result = $newDB->query($cognome);
-    while($row = $result->fetch_assoc()){
-      echo $row["cognome"];
-      echo "<br>";
-    }
-    ?>
   </body>
   </html>
   <?php
