@@ -4,7 +4,19 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["docente"]!=
   echo "non hai i permessi per visualizzare questa pagina";
 }
 else{
-  include_once "connection.php";?>
+  include_once "connection.php";
+
+  // aggiungere: quando data creazione != nulla
+  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
+  pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
+  FROM pianifica pi
+  JOIN classe cl ON cl.cla_id = pi.cla_id
+  JOIN materia ma ON ma.mat_id = pi.mat_id
+  JOIN corso co ON co.cor_id = pi.cor_id
+  WHERE pi.ute_email='".$_SESSION['email']."'";
+  //  echo $query;
+  $result = $newDB->query($query);
+  ?>
   <!DOCTYPE html>
   <html lang="it">
   <head>
@@ -17,7 +29,8 @@ else{
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/inserimentoOreAIT.css" rel="stylesheet">
   </head>
-
+  <script>
+  </script>
   <body class="body">
     <div class="container contenitore">
       <div class="header">
@@ -32,56 +45,59 @@ else{
       </div>
       <h1>inserimento ore AIT </h1>
       <br>
-      <label class="col-sm-2 control-label">Docenti</label>
-      <label class="col-sm-10 control-label"></label>
-      <form method="post">
-        <?php
-          for ($i=0; $i < 1; $i++) {
-
-        ?>
-        <div class="col-md-12" id="docente">
-          <span class="col-md-2 col-xs-12">
-            Materia
-            <input type="text" name="materia[]" class="form-control" readonly="true"></input>
-          </span>
-          <span class="col-md-1 col-xs-12">
-            Classe
-            <input type="text" name="classe[]" class="form-control" readonly="true"></input>
-          </span>
-          <span class="col-md-2 col-xs-12">
-            Tipo MP
-            <input type="text" name="corso[]" class="form-control" readonly="true"></input>
-          </span>
-          <span class="col-md-4 col-xs-6">
-            <span class="col-md-12 col-xs-12">
-                  Ciclo Formativo
-            </span>
-            <span class="col-md-5 col-xs-5">
-              <input type="text" class="form-control" name="ciclo[]"  readonly="true"/>
-            </span>
-            <span  class="col-md-2 col-xs-2">
-              --
-            </span>
-            <span  class="col-md-5 col-xs-5">
-              <input type="text" class="form-control" name="ciclo[]"  readonly="true"/>
-            </span>
-          </span>
-          <span class="col-md-1 col-xs-2">
-            Ore_AIT
-            <input type="text" class="form-control" name="ore[]"  readonly="true"/>
-          </span>
-          <span class="col-md-1 col-xs-2">
-            % AIT
-            <input type="text" class="form-control"  readonly="true"/>
-          </span>
-          <span class="col-md-1 col-xs-2">
-            Dettaglio
-            <input type="button" class="form-control" name="dettaglio[]"  readonly="true"/>
-          </span>
+      <div class="form-group">
+        <label class="col-xs-2 control-label">Ricerca:</label>
+        <div class="col-xs-10">
+          <div class="input-group">
+            <span class="input-group-addon glyphicon glyphicon-search"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+            <input type="text" class="form-control" id="search"></input>
+          </div>
         </div>
-        <?php
+      </div>
+      <form method="post">
+        <div id="docente">
+          <div>
+            <span>
+              <input hidden="true" class="col-xs-0"/>
+            </span>
+          </div>
+          <?php
+          while($row = $result->fetch_assoc()){
+            ?>
+            <div class="col-xs-12 riga">
+              <span class="col-md-2 col-xs-5">
+                Materia
+                <input type="text" name="materia[]" class="form-control" readonly="true"  text="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"></input>
+              </span>
+              <span class="col-md-2 col-xs-2">
+                Classe
+                <input type="text" name="classe[]" class="form-control" readonly="true"  text="<?php echo $row["classe"];?>" title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"></input>
+              </span>
+              <span class="col-md-2 col-xs-5">
+                Tipo MP
+                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"></input>
+              </span>
+              <span class="col-md-2 col-xs-4 ciclo">
+                Ciclo Formativo
+                <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="<?php echo $row["inizio anno"];?>"/>
+              </span>
+              <span class="col-md-1 col-xs-2">
+                Ore_AIT
+                <input type="text" class="form-control" name="ore[]"  value="<?php echo $row["AIT"]; ?>" id="ore"/>
+              </span>
+              <span class="col-md-2 col-xs-2">
+                % AIT
+                <input type="text" class="form-control"  readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
+              </span>
+              <span class="col-md-1 col-xs-2">
+                Dettaglio
+                <input type="button" class="form-control" name="dettaglio[]" value="..." readonly="true"  id="<?php echo 'dettaglio'.$i;?>"/>
+              </span>
+            </div>
+            <?php
           }
-        ?>
+          ?>
+        </div>
         <div>
           <label class="col-sm-4 control-label" id="messaggio"></label>
         </div>
@@ -95,8 +111,48 @@ else{
         </div>
       </form>
     </div>
-  </body>
-  </html>
-  <?php
+    <script>
+    $("#search").keyup(function() {
+      var value = this.value;
+      var flag = 0;
+      //alert("value"+value);
+      $("#docente").find("div").each(function(index) {
+        //alert(index);
+        if (index === 0) return;
+        $(this).find("span").each(function(index) {
+        if (index === 0) return;
+        var id = $(this).find("input").val();
+        if(id.indexOf(value) !== -1){
+          flag=1;
+        }
+        else{
+
+        }
+        $(this).find("div").toggle();
+        alert(flag);
+      });
+      flag=0;
+    });
+    //$("#docente").find("div").find("span:nth-child(4)").find("input").val()
+    //span:nth-child(3)
+    //$("#docente").find("div:nth-child(4)").find("span").find("input").css("background-color", "blue");
+    //$("#docente").find("div:nth-child(4)").toggle();
+    //$(this).toggle(id.indexOf(value) !== -1);
+    /*$("#search").keyup(function() {
+    var value = this.value;
+    //alert("value"+value);
+    $("#docente").find("div").each(function(index) {
+    //alert(index);
+    if (index === 0) return;
+    $(this).find("span").each(function(index) {
+    var id = $(this).find("input").val();
+    $(this).find("div").toggle(id.indexOf(value) !== -1);
+  });
+});
+});*/
+</script>
+</body>
+</html>
+<?php
 }
 ?>

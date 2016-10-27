@@ -17,18 +17,18 @@ create table utente(
 
 create table materia(
 	mat_id int primary key auto_increment,
-	mat_nome varchar(30)	
+	mat_nome varchar(30) unique	
 );
 
 create table corso(
 	cor_id int primary key auto_increment,
-	cor_nome varchar(30),
+	cor_nome varchar(30) unique,
 	cor_durata int
 );
 
 create table classe(
 	cla_id int primary key auto_increment,
-	cla_nome varchar(30),
+	cla_nome varchar(30) unique
 );
 
 /*create table mat_app_cor(
@@ -49,7 +49,7 @@ create table cla_fre_cor(
 )
 
 create table pianifica(
-	ute_email varchar(30),
+	ute_email varchar(50),
 	cla_id int,
 	mat_id int,
 	cor_id int,

@@ -131,7 +131,7 @@ else{
           }
         ?>
         <div class="col-xs-12 altro">
-          <span class="col-md-3">
+          <span class="col-md-3 col-xs-4">
             Tipo MP
             <select name="corso" id="corso" class="form-control">
               <option selected="true" value="">-- seleziona --</option>
@@ -146,7 +146,7 @@ else{
               ?>
             </select>
           </span>
-          <span class="col-md-2">
+          <span class="col-md-2 col-xs-4">
             Classe
             <select name="classe" id="classe" class="form-control">
               <option selected="true" value=""> -- </option>
@@ -162,15 +162,15 @@ else{
               ?>
             </select>
           </span>
-          <span class="col-md-2">
+          <span class="col-md-2 col-xs-4">
             Durata Ciclo
             <input name="durataCiclo" id="durataCiclo" tyte="text" readonly="true" class="form-control"></input>
           </span>
-          <span class="col-md-4">
+          <span class="col-md-4 col-xs-12">
             Ciclo Formativo
             <table>
               <tr>
-                <td class="col-md-5">
+                <td class="col-xs-5">
                   <span>
                     <select name="ciclo" id="ciclo" class="form-control">
                       <?php
@@ -184,12 +184,12 @@ else{
                     </select>
                   </span>
                 </td>
-                <td class="col-md-2">
+                <td class="col-xs-2">
                   <span >
                     <span>--</span>
                   </span>
                 </td>
-                <td class="col-md-5">
+                <td class="col-xs -5">
                   <span>
                   <input name="ciclo2" id="ciclo2" type="text" readonly="true" class="form-control"></input>
                   </span>

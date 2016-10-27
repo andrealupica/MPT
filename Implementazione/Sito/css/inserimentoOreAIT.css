@@ -5,8 +5,6 @@
 }
 
 .contenitore {
-  padding: 15px 35px 45px;
-	min-width: 790px;
 }
 
 .bottone{
@@ -28,4 +26,12 @@
 
 .salva{
   margin-top:15px;
+}
+
+.riga{
+	margin-top:25px;
+}
+
+.input-group-addon{
+	top:0px;
 }
