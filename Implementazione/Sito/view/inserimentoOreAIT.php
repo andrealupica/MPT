@@ -67,15 +67,15 @@ else{
             <div class="col-xs-12 riga">
               <span class="col-md-2 col-xs-5">
                 Materia
-                <input type="text" name="materia[]" class="form-control" readonly="true"  text="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"></input>
+                <input type="text" name="materia[]" class="form-control" readonly="true"  text="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
               </span>
               <span class="col-md-2 col-xs-2">
                 Classe
-                <input type="text" name="classe[]" class="form-control" readonly="true"  text="<?php echo $row["classe"];?>" title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"></input>
+                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"/>
               </span>
-              <span class="col-md-2 col-xs-5">
+              <span class="col-md-3 col-xs-5">
                 Tipo MP
-                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"></input>
+                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"/>
               </span>
               <span class="col-md-2 col-xs-4 ciclo">
                 Ciclo Formativo
@@ -85,13 +85,14 @@ else{
                 Ore_AIT
                 <input type="text" class="form-control" name="ore[]"  value="<?php echo $row["AIT"]; ?>" id="ore"/>
               </span>
-              <span class="col-md-2 col-xs-2">
+              <span class="col-md-1 col-xs-2">
                 % AIT
                 <input type="text" class="form-control"  readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
-                <input type="button" class="form-control" name="dettaglio[]" value="..." readonly="true"  id="<?php echo 'dettaglio'.$i;?>"/>
+                <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
+                  class="form-control" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"></a>
               </span>
             </div>
             <?php
@@ -112,6 +113,7 @@ else{
       </form>
     </div>
     <script>
+/*
     $("#search").keyup(function() {
       var value = this.value;
       var flag = 0;
@@ -119,20 +121,53 @@ else{
       $("#docente").find("div").each(function(index) {
         //alert(index);
         if (index === 0) return;
-        $(this).find("span").each(function(index) {
+        for (var i = 0; i < 3; i++) {
+          var id = $(this).find("span:nth-child("+i+")").find("input").val();
+          if(id.indexOf(value) !== -1){
+            flag=1;
+          }
+        }
+        $(this).toggle(flag===1);
+        flag=0;
+      });
+    });
+*/
+$("#search").keyup(function() {
+  var value = this.value;
+  //alert("value"+value);
+  $("#docente").find("div").each(function(index) {
+    //alert(index);
+    if (index === 0) return;
+    var id = $(this).find("span").find("input").val();
+    $(this).toggle(id.indexOf(value) !== -1);
+  });
+});
+/*
+    $("#search").keyup(function() {
+      var value = this.value;
+      var flag = 0;
+      $("#docente").find("div").each(function(index) {
+        //alert(index);
         if (index === 0) return;
-        var id = $(this).find("input").val();
-        if(id.indexOf(value) !== -1){
-          flag=1;
-        }
-        else{
+        $(this).find("span").each(function(index){
+          alert("2:"+flag);
+          if (index === 0) return;
+          var id = $(this).find("input").val();
+          if(id.indexOf(value) !== -1){
+            flag=1;
+          }
+          else{
 
+          }
+        });
+        alert(flag);
+        if(flag==1){
+          $(this).toggle();
         }
-        $(this).find("div").toggle();
+        flag=0;
         alert(flag);
       });
-      flag=0;
-    });
+    });*/
     //$("#docente").find("div").find("span:nth-child(4)").find("input").val()
     //span:nth-child(3)
     //$("#docente").find("div:nth-child(4)").find("span").find("input").css("background-color", "blue");

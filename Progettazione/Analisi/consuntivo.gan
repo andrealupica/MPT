@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="558" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="383" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="43" order="0"/>
+        <field id="tpd3" name="Nome" width="42" order="0"/>
         <field id="tpd4" name="Data d'inizio" width="28" order="1"/>
         <field id="tpd5" name="Data di fine" width="28" order="2"/>
         <timeline><![CDATA[104]]></timeline>
@@ -67,9 +67,9 @@
                 <task id="64" name="Menu Principale AIT" meeting="false" start="2016-10-11" duration="1" complete="0" expand="true">
                     <task id="80" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-10-11" duration="1" complete="0" expand="true"/>
                 </task>
-                <task id="65" name="Pianificazione Docenti MPT" meeting="false" start="2016-10-12" duration="6" complete="0" expand="true">
+                <task id="65" name="Pianificazione Docenti MPT" meeting="false" start="2016-10-12" duration="7" complete="0" expand="true">
                     <task id="81" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-10-12" duration="1" complete="0" expand="true"/>
-                    <task id="82" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-10-13" duration="5" complete="0" expand="true"/>
+                    <task id="82" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-10-13" duration="6" complete="0" expand="true"/>
                 </task>
                 <task id="67" name="Inserimento ore AIT Docente MPT(Personale)" meeting="false" start="2016-10-20" duration="5" complete="0" expand="true">
                     <task id="83" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-10-20" duration="1" complete="0" expand="true"/>
@@ -112,9 +112,9 @@
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd12" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="232" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="154" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="153" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="155" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="105" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="104" visible="true"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>

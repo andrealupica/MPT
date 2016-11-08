@@ -38,7 +38,7 @@
     ?>
     <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MPT</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docente MPT completa</span></a>
+    <!--<a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docente MPT completa</span></a>-->
     <a class="btn btn-primary col-md-5 col-xs-12" href="gestioneAccessoDocenti.php"><span>Gestione Accesso Docenti</span></a>
     <?php
       }
