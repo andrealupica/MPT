@@ -22,7 +22,7 @@
   <div class="container contenitore">
     <div class="header">
       <span class="opzione">
-        <a href="logout.php" class="btn btn-primary">
+        <a href="logout.php" class="btn btn-primary  button">
           <span class="glyphicon glyphicon-log-out"></span> exit
         </a>
       </span>
@@ -45,8 +45,8 @@
       if($_SESSION['docente']==1){
     ?>
     <!--docente-->
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Inserimento ore AIT Docente</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docente MPT</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="inserimentoOreAIT.php"><span>Inserimento ore AIT Docente</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href=""><span>Visione Pianificazione Personale MPT</span></a>
     <?php } ?>
     <!--altro-->
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Visioni Particolari</span></a>

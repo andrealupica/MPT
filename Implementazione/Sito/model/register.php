@@ -41,19 +41,23 @@
 						// invio dell'email
 						$oggetto = " registrazione di ".$email. "";
 						$messaggio ="clicca questo link per accettare la registrazione: http://www.samtinfo.ch/~i13lupand//MPT/confirmRegister.php?param=".$email."&password=".$password."";
-						$mittente =  'From: "Registrazione MPT" <prova.prova@edu.ti.ch>';
+						$query3 = "select ute_email as 'email' from utente where ute_gestoreEmail=1 limit 1;";
+						$result = $newDB->query($query3);
+						$row = $result->fetch_assoc();
+						$emailMittente=$row['email'];
+						$mittente = 'From: Responsabile email <'.$emailMittente.'>';
 						//$mittente .= " Content-Type: text/html; charset=ISO-8859-1";
-						echo $password."<br>";
-						echo $mittente;
-						echo $destinatario;
-						echo $oggetto;
-						echo $messaggio;
+						//echo $password."<br>";
+						//echo $mittente."<br>";
+						//echo $destinatario."<br>";
+						//echo $oggetto."<br>";
+						//echo $messaggio."<br>";
 						mail($destinatario,$oggetto,$messaggio,$mittente);
-						echo "email inviata all'amministratore";
+						echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile' </script>";
 					}
 					else{
 						echo "error";
-						echo $query2;
+						//echo $query2;
 					}
 					//header("Location: index.php");
 				}

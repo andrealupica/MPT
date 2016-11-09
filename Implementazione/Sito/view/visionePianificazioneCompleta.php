@@ -42,10 +42,13 @@ else{
       <div class="header">
         <span class="opzione">
           <a class="btn btn-primary" href="menu.php">
-            <span class="glyphicon glyphicon-arrow-left"></span> menu
+            <span class="glyphicon glyphicon-arrow-left button"></span> menu
           </a>
           <a href="logout.php" class="btn btn-primary">
-            <span class="glyphicon glyphicon-log-out"></span> exit
+            <span class="glyphicon glyphicon-log-out butoon"></span> exit
+          </a>
+          <a href="inserimentoOreAIT.php" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left button"></span> indietro
           </a>
         </span>
       </div>
@@ -73,11 +76,11 @@ else{
             Materia
             <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $row["materia"];?>" ></input>
           </span>
-          <span class="col-md-2 col-xs-6">
+          <span class="col-md-2 col-xs-3">
             Ore Annuale Materia
             <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["AIT"]; echo $ris ?>"/>
           </span>
-          <span class="col-md-2 col-xs-6">
+          <span class="col-md-2 col-xs-3">
             % ore AIT
             <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>"/>
           </span>

@@ -36,10 +36,10 @@ else{
       <div class="header">
         <span class="opzione">
           <a class="btn btn-primary" href="menu.php">
-            <span class="glyphicon glyphicon-arrow-left"></span> menu
+            <span class="glyphicon glyphicon-arrow-left button"></span> menu
           </a>
           <a href="logout.php" class="btn btn-primary">
-            <span class="glyphicon glyphicon-log-out"></span> exit
+            <span class="glyphicon glyphicon-log-out button"></span> exit
           </a>
         </span>
       </div>
@@ -65,9 +65,13 @@ else{
           while($row = $result->fetch_assoc()){
             ?>
             <div class="col-xs-12 riga">
+              <span class="col-md-0 col-xs-0">
+                <input type="text" readonly="true" hidden="true"
+                value="<?php echo $row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
+              </span>
               <span class="col-md-2 col-xs-5">
                 Materia
-                <input type="text" name="materia[]" class="form-control" readonly="true"  text="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
+                <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
               </span>
               <span class="col-md-2 col-xs-2">
                 Classe
@@ -92,7 +96,7 @@ else{
               <span class="col-md-1 col-xs-2">
                 Dettaglio
                 <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
-                  class="form-control" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"></a>
+                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
               </span>
             </div>
             <?php
@@ -106,32 +110,13 @@ else{
           <div class="col-sm-9"></div>
           <div class="col-sm-6 col-md-3">
             <button type="submit" class="btn btn-secondary">
-              <span class="glyphicon glyphicon-floppy-disk"></span>Salva
+              <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
             </button>
           </div>
         </div>
       </form>
     </div>
     <script>
-/*
-    $("#search").keyup(function() {
-      var value = this.value;
-      var flag = 0;
-      //alert("value"+value);
-      $("#docente").find("div").each(function(index) {
-        //alert(index);
-        if (index === 0) return;
-        for (var i = 0; i < 3; i++) {
-          var id = $(this).find("span:nth-child("+i+")").find("input").val();
-          if(id.indexOf(value) !== -1){
-            flag=1;
-          }
-        }
-        $(this).toggle(flag===1);
-        flag=0;
-      });
-    });
-*/
 $("#search").keyup(function() {
   var value = this.value;
   //alert("value"+value);
@@ -142,49 +127,6 @@ $("#search").keyup(function() {
     $(this).toggle(id.indexOf(value) !== -1);
   });
 });
-/*
-    $("#search").keyup(function() {
-      var value = this.value;
-      var flag = 0;
-      $("#docente").find("div").each(function(index) {
-        //alert(index);
-        if (index === 0) return;
-        $(this).find("span").each(function(index){
-          alert("2:"+flag);
-          if (index === 0) return;
-          var id = $(this).find("input").val();
-          if(id.indexOf(value) !== -1){
-            flag=1;
-          }
-          else{
-
-          }
-        });
-        alert(flag);
-        if(flag==1){
-          $(this).toggle();
-        }
-        flag=0;
-        alert(flag);
-      });
-    });*/
-    //$("#docente").find("div").find("span:nth-child(4)").find("input").val()
-    //span:nth-child(3)
-    //$("#docente").find("div:nth-child(4)").find("span").find("input").css("background-color", "blue");
-    //$("#docente").find("div:nth-child(4)").toggle();
-    //$(this).toggle(id.indexOf(value) !== -1);
-    /*$("#search").keyup(function() {
-    var value = this.value;
-    //alert("value"+value);
-    $("#docente").find("div").each(function(index) {
-    //alert(index);
-    if (index === 0) return;
-    $(this).find("span").each(function(index) {
-    var id = $(this).find("input").val();
-    $(this).find("div").toggle(id.indexOf(value) !== -1);
-  });
-});
-});*/
 </script>
 </body>
 </html>

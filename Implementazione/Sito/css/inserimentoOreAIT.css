@@ -5,6 +5,7 @@
 }
 
 .contenitore {
+		min-width: 525px;
 }
 
 .bottone{
@@ -29,9 +30,18 @@
 }
 
 .riga{
-	margin-top:25px;
+	margin-top:20px;
 }
 
 .input-group-addon{
 	top:0px;
+}
+span{
+	margin-top:20px;
+}
+.button{
+	margin-top:-1px;
+}
+.dettaglio{
+	text-align: center;
 }

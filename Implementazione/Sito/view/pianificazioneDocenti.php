@@ -82,10 +82,10 @@ else{
       <div class="header">
         <span class="opzione">
           <a class="btn btn-primary" href="menu.php">
-            <span class="glyphicon glyphicon-arrow-left"></span> menu
+            <span class="glyphicon glyphicon-arrow-left button"></span> menu
           </a>
           <a href="logout.php" class="btn btn-primary">
-            <span class="glyphicon glyphicon-log-out"></span> exit
+            <span class="glyphicon glyphicon-log-out button"></span> exit
           </a>
         </span>
       </div>
@@ -124,7 +124,7 @@ else{
           </span>
           <span class="col-md-3 col-xs-6">
             Ore Annuale Materia
-            <input type="number" class="form-control" name="ore[]" id="ore" step="0.5"/>
+            <input type="number" class="form-control" name="ore[]" id="ore" step="1"/>
           </span>
         </div>
         <?php

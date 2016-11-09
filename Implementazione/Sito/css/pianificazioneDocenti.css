@@ -7,6 +7,7 @@
 .contenitore {
   padding: 15px 35px 45px;
   background-color: #fff;
+	min-width: 450px;
 }
 
 
@@ -51,4 +52,8 @@ input{
 }
 .docente{
 	margin-top:20px;
+}
+
+.button{
+	margin-top:-1px;
 }
