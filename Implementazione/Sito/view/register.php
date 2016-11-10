@@ -39,7 +39,22 @@
             </div>
             <p class="help-block">inserire il proprio cognome, non inserire numeri o spazi</p>
           </div>
+          <div class="form-group">
+            <label for="captcha" class="cols-sm-2 control-label">Captcha:</label>
+            <div>
+              <div class="input-group col-xs-12">
+                <span>
+                  <img src="captcha.php" width="180"  height="40" border="1" alt="CAPTCHA" class="col-xs-6">
+                  <div class="input-group  col-xs-12">
+                    <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                      <input type="text" size="6" maxlength="5" name="captcha" class="form-control col-xs-12" value="">
+                  </div>
+                </span>
 
+              </div>
+            </div>
+            <p class="help-block">inserire il codice captcha</p>
+          </div>
           <div class="form-group">
             <label for="email" class="cols-sm-2 control-label">Email:</label>
             <div class="cols-sm-10">
@@ -50,27 +65,6 @@
             </div>
             <p class="help-block">l'email dovrebbe essere nome.cognome@edu.ti.ch</p>
           </div>
-          <!--
-          <div class="form-group">
-            <label for="password" class="cols-sm-2 control-label">Password:</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="password" id="password"  placeholder="Inserire la tua password"/>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="cols-sm-2 control-label">Conferma password:</label>
-            <div class="cols-sm-10">
-              <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                <input type="password" class="form-control" name="repassword" id="repassword"  placeholder="ripetere la tua password"/>
-              </div>
-            </div>
-          </div>
-          -->
           <div>
             <label class="cols-sm-3 control-label" id="errore"></label>
           </div>

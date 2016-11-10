@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if($_SESSION['email']=="" OR $_SESSION['email']==null){
-		echo "non hai i permessi per visualizzare questa pagina";
+		header("location:index.php");
 	}
 	else{
 		include 'view/menu.php';

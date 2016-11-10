@@ -1,3 +1,4 @@
+<!-- pagina per la pianificazione dei docenti-->
 <?
 session_start();
 if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["responsabile"]!=1){
@@ -16,6 +17,7 @@ else{
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
+<!-- script per la gestione dei select -->
     <script>
 
       $(document).ready(function(){
@@ -89,7 +91,7 @@ else{
           </a>
         </span>
       </div>
-      <h1>pianificazione Docenti MP</h1>
+      <h1>Pianificazione Docenti MP</h1>
       <br>
       <label class="col-sm-12 col-xs-12 control-label titolo">Docenti</label>
       <form method="post">

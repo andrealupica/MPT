@@ -1,4 +1,5 @@
 <?php
+// pagina del login
 include_once "connection.php";
 session_start();
 $user = "";
@@ -70,7 +71,7 @@ $pass = "";
 
 			}
 			else{
-				echo  "<script>document.getElementById('errore').innerHTML='email o password non sono corrette'</script>";
+				echo  "<script>document.getElementById('errore').innerHTML='l email o la password non è corretta'</script>";
 			}
 
 		}

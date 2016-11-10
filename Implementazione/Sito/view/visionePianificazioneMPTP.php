@@ -1,4 +1,4 @@
-<!-- pagina per l'inserimento delle ore AIT da parte dei docenti-->
+<!-- pagina per la visione della pianificazione dei docenti visto dal Docente-->
 <?
 session_start();
 if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["docente"]!=1){
@@ -44,7 +44,7 @@ else{
           </a>
         </span>
       </div>
-      <h1>Inserimento ore AIT </h1>
+      <h1>Visione Pianificazione Docente MP </h1>
       <br>
       <div class="form-group">
         <label class="col-xs-2 control-label">Ricerca:</label>
@@ -67,7 +67,8 @@ else{
             ?>
             <div class="col-xs-12 riga">
               <span class="col-md-0 col-xs-0">
-                <input type="text" readonly="true" hidden="true" value="<?php echo $row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
+                <input type="text" readonly="true" hidden="true"
+                value="<?php echo $row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
               </span>
               <span class="col-md-2 col-xs-5">
                 Materia
@@ -85,11 +86,7 @@ else{
                 Ciclo Formativo
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="<?php echo $row["inizio anno"];?>"/>
               </span>
-              <span class="col-md-1 col-xs-2">
-                Ore_AIT
-                <input type="text" class="form-control" name="ore[]"  value="<?php echo $row["AIT"]; ?>" id="ore"/>
-              </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-2 col-xs-2">
                 % AIT
                 <input type="text" class="form-control"  readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
               </span>
@@ -106,26 +103,18 @@ else{
         <div>
           <label class="col-sm-4 control-label" id="messaggio"></label>
         </div>
-        <div class="col-md-12  salva">
-          <div class="col-sm-9"></div>
-          <div class="col-sm-6 col-md-3">
-            <button type="submit" class="btn btn-secondary">
-              <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
-            </button>
-          </div>
-        </div>
       </form>
     </div>
     <script>
-$("#search").keyup(function() {
-  var value = this.value;
-  //alert("value"+value);
-  $("#docente").find(".riga").each(function(index) {
-    //alert(index);
-    var id = $(this).find("span").find("input").val();
-    $(this).toggle(id.indexOf(value) !== -1);
-  });
-});
+    $("#search").keyup(function() {
+      var value = this.value;
+      //alert("value"+value);
+      $("#docente").find(".riga").each(function(index) {
+        //alert(index);
+        var id = $(this).find("span").find("input").val();
+        $(this).toggle(id.indexOf(value) !== -1);
+      });
+    });
 </script>
 </body>
 </html>

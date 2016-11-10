@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="383" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="707" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="42" order="0"/>
-        <field id="tpd4" name="Data d'inizio" width="28" order="1"/>
-        <field id="tpd5" name="Data di fine" width="28" order="2"/>
+        <field id="tpd3" name="Nome" width="38" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="30" order="1"/>
+        <field id="tpd5" name="Data di fine" width="30" order="2"/>
         <timeline><![CDATA[104]]></timeline>
         <option id="color.recent"><![CDATA[#000000 #0033ff #0033cc]]></option>
     </view>
@@ -50,9 +50,9 @@
             <task id="32" name="Design delle interfacce" color="#8cb6ce" meeting="false" start="2016-09-08" duration="1" complete="0" expand="true"/>
         </task>
         <task id="45" name="Gita Scolastica" color="#0033cc" meeting="false" start="2016-09-12" duration="6" complete="0" expand="true"/>
-        <task id="49" name="Implementazione" color="#000000" meeting="false" start="2016-09-20" duration="48" complete="0" expand="true">
+        <task id="49" name="Implementazione" color="#000000" meeting="false" start="2016-09-20" duration="51" complete="0" expand="true">
             <task id="59" name="Creazione DB" color="#8cb6ce" meeting="false" start="2016-09-20" duration="1" complete="0" expand="true"/>
-            <task id="73" name="Sito Web" color="#000000" meeting="false" start="2016-09-21" duration="47" complete="0" expand="true">
+            <task id="73" name="Sito Web" color="#000000" meeting="false" start="2016-09-21" duration="50" complete="0" expand="true">
                 <task id="61" name="Login AIT Docente" color="#000000" meeting="false" start="2016-09-21" duration="10" complete="0" expand="true">
                     <task id="78" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-09-21" duration="1" complete="0" expand="true"/>
                     <task id="76" name="Richiesta registrazione" color="#8cb6ce" meeting="false" start="2016-09-22" duration="4" complete="0" expand="true"/>
@@ -79,20 +79,21 @@
                     <task id="87" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-10-27" duration="1" complete="0" expand="true"/>
                     <task id="88" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-11-08" duration="2" complete="0" expand="true"/>
                 </task>
-                <task id="90" name="Visione Pianificazione Docenti MPT(Personale)" meeting="false" start="2016-11-10" duration="4" complete="0" expand="true">
-                    <task id="92" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
-                    <task id="94" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-11-15" duration="1" complete="0" expand="true"/>
-                </task>
                 <task id="104" name="Vacanza dei morti" color="#0033ff" meeting="false" start="2016-10-28" duration="7" complete="0" expand="true"/>
-                <task id="68" name="Visione Pianificazione Docenti MPT" meeting="false" start="2016-11-16" duration="5" complete="0" expand="true">
-                    <task id="85" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-16" duration="2" complete="0" expand="true"/>
-                    <task id="86" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-11-17" duration="4" complete="0" expand="true"/>
+                <task id="155" name="captcha in registrazione" color="#8cb6ce" meeting="false" start="2016-11-09" duration="1" complete="0" expand="true"/>
+                <task id="90" name="Visione Pianificazione Docenti MPT(Personale)" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true">
+                    <task id="92" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
+                    <task id="94" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
                 </task>
-                <task id="70" name="Visioni Particolari" meeting="false" start="2016-11-22" duration="3" complete="0" expand="true">
-                    <task id="95" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-22" duration="1" complete="0" expand="true"/>
-                    <task id="96" name="Creazione report" color="#8cb6ce" meeting="false" start="2016-11-22" duration="2" complete="0" expand="true"/>
-                    <task id="97" name="Visualizzazione report" color="#8cb6ce" meeting="false" start="2016-11-23" duration="2" complete="0" expand="true"/>
-                    <task id="117" name="Stampa dei report" color="#8cb6ce" meeting="false" start="2016-11-24" duration="1" complete="0" expand="true"/>
+                <task id="68" name="Visione Pianificazione Docenti MPT" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true">
+                    <task id="85" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
+                    <task id="86" name="Gestione forms" color="#8cb6ce" meeting="false" start="2016-11-10" duration="1" complete="0" expand="true"/>
+                </task>
+                <task id="70" name="Visioni Particolari" meeting="false" start="2016-11-15" duration="11" complete="0" expand="true">
+                    <task id="95" name="Creazione pagina" color="#8cb6ce" meeting="false" start="2016-11-15" duration="1" complete="0" expand="true"/>
+                    <task id="96" name="Creazione report" color="#8cb6ce" meeting="false" start="2016-11-16" duration="2" complete="0" expand="true"/>
+                    <task id="97" name="Visualizzazione report" color="#8cb6ce" meeting="false" start="2016-11-17" duration="4" complete="0" expand="true"/>
+                    <task id="117" name="Stampa dei report" color="#8cb6ce" meeting="false" start="2016-11-22" duration="6" complete="0" expand="true"/>
                 </task>
             </task>
         </task>
@@ -112,9 +113,9 @@
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd12" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="155" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="105" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="104" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="263" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="213" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="212" visible="true"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>

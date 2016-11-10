@@ -1,4 +1,5 @@
 <?php
+// pagina per la gestione degli utenti
 	  include_once "connection.php";
     echo $_POST["email"];
     //cancellazione email

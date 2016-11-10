@@ -1,6 +1,8 @@
 <?php
+	// pagina per la conferma della registrazione
 	include_once "connection.php";
 
+	// se sono stati inviati come get dall'email che il resposanbile ha ricevuto i seguenti parametri
 	if(isset($_GET["param"]) && isset($_GET["password"])){
 		$email = $_GET["param"];
 		$password = $_GET["password"];
@@ -19,9 +21,10 @@
 		//echo $destinatario;
 		//echo $oggetto;
 		echo $messaggio."<br>";
-
+		// setto la data limite per la conferma
 		$date = time()+ (4 * 24 * 60 * 60);
 		$date = date("Y-m-d",$date);
+		//inserisco la data di iscrizione massima
 		$query = "insert into utente(ute_dataIscrizione) values('".$date."') where ='".$email."';";
 		$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$email."';";
 
@@ -29,7 +32,7 @@
 		if($newDB->query($query)!= false){
 			mail($destinatario,$oggetto,$messaggio,$mittente);
 			echo "email inviata all'amministratore";
-			echo $date;
+			//echo $date;
 		}
 	}
 	else{

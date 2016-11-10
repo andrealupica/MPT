@@ -1,7 +1,7 @@
 <?php
 	session_start();
-	if($_SESSION['email']=="" OR $_SESSION['email']==null OR $_SESSION["docente"]!=1){
-		echo "non hai i permessi per visualizzare questa pagina";
+	if($_SESSION['email']=="" OR $_SESSION['email']==null OR $_SESSION["docente"]!=1 OR $_SESSION["responsabile"]!=1){
+		header("location:index.php");
 		//echo "email: ".$_SESSION['email'];
 	}
 	else{

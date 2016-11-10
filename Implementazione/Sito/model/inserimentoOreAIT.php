@@ -1,4 +1,5 @@
 <?php
+// pagina per l'inserimento delle ore dei docenti
 	include_once "connection.php";
 	session_start();
   //echo "a";
@@ -13,14 +14,7 @@
     $email=$_SESSION["email"];
     //echo count($email);
     for ($i=0; $i < count($materia); $i++) {
-        /*echo "<br>".$i;
-        echo "<br>email:".$email;
-        echo "<br>classe:".$classe[$i];
-        echo "<br>materia:".$materia[$i];
-        echo "<br>corso:".$corso[$i];
-        echo "<br>inizio:".$inizio[$i];
-        echo "<br>ore:".$ore[$i];*/
-        //prendo l'id della classe
+				// prendo l id della classe
         $query="select cla_id as 'id' from classe where cla_nome='".$classe[$i]."'";
         $result = $newDB->query($query);
         $row = $result->fetch_assoc();

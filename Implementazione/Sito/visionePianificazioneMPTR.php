@@ -5,8 +5,7 @@
 		//echo "email: ".$_SESSION['email'];
 	}
 	else{
-		include 'view/gestioneAccessoDocenti.php';
-		include 'model/gestioneAccessoDocenti.php';
+		include 'view/visionePianificazioneMPTR.php';
+		include 'model/visionePianificazioneMPTR.php';
 	}
-
 ?>

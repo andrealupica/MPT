@@ -1,5 +1,7 @@
 <?php
+// pagina per una nuova password
 	include_once "connection.php";
+	// controlle se il form è stato inviato e se gli input sono stati riempiti
 	if(isset($_POST["email"]) && isset($_POST["reemail"])){
 		if(!empty($_POST["email"]) && !empty($_POST["reemail"])){
 			$reemail = $_POST["reemail"];
@@ -32,7 +34,6 @@
 				}
 				else{
 					echo  "<script>document.getElementById('messaggio').innerHTML=errore, l email potrebbe non essere stata registrata</script>";
-
 				}
 			}
 			else{

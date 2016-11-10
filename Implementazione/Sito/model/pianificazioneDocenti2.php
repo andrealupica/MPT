@@ -1,4 +1,5 @@
 <?php
+// pagina per i valori all'interno degli option select
     include_once "../connection.php";
     if(isset($_POST['durataCorso'])){
       $corso = $_POST['durataCorso'];

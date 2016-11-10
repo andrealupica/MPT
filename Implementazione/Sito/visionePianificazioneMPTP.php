@@ -5,8 +5,7 @@
 		//echo "email: ".$_SESSION['email'];
 	}
 	else{
-		include 'view/inserimentoOreAIT.php';
-		include 'model/inserimentoOreAIT.php';
+		include 'view/visionePianificazioneMPTP.php';
+		include 'model/visionePianificazioneMPTP.php';
 	}
-
 ?>

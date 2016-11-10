@@ -1,6 +1,7 @@
+<!-- pagina per la gestione degli accessi di tutti i docenti-->
 <?
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["responsabile"]!=1){
+if($_SESSION['email']=="" OR $_SESSION['email']==null AND ($_SESSION["responsabile"]!=1 OR $_SESSION["amministratore"]!=1)){ // da riguardare
   echo "non hai i permessi per visualizzare questa pagina";
 }
 else{

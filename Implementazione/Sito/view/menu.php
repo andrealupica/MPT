@@ -1,3 +1,4 @@
+<!-- pagina del menu-->
 <?
   session_start();
   if($_SESSION['email']=="" OR $_SESSION['email']==null){
@@ -26,19 +27,14 @@
           <span class="glyphicon glyphicon-log-out"></span> exit
         </a>
       </span>
-            <h1>Menu principale AIT</h1>
+            <h1>Menu Principale AIT</h1>
     </div>
     <!--responsabile-->
-
     <?php
-      //echo $_SESSION['docente'];
-      //echo $_SESSION['amministratore'];
-      //echo $_SESSION['responsabile'];
       if($_SESSION['responsabile']==1){
     ?>
     <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MPT</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>
-    <!--<a class="btn btn-primary col-md-5 col-xs-12"><span>Visione Pianificazione Docente MPT completa</span></a>-->
+    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTR.php"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12" href="gestioneAccessoDocenti.php"><span>Gestione Accesso Docenti</span></a>
     <?php
       }
@@ -46,7 +42,7 @@
     ?>
     <!--docente-->
     <a class="btn btn-primary col-md-5 col-xs-12" href="inserimentoOreAIT.php"><span>Inserimento ore AIT Docente</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12" href=""><span>Visione Pianificazione Personale MPT</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTP.php"><span>Visione Pianificazione Personale MPT</span></a>
     <?php } ?>
     <!--altro-->
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Visioni Particolari</span></a>
