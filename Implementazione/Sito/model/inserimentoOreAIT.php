@@ -3,7 +3,7 @@
 	include_once "connection.php";
 	session_start();
   //echo "a";
-  echo $_POST["ore"];
+  //echo $_POST["ore"];
 	if(isset($_POST["ore"])){
     //echo "in";
     $ore=$_POST["ore"];
@@ -33,7 +33,7 @@
         $idCorso = $row['id'];
         $nOre=$ore[$i];
 				$inizio[$i]=substr($inizio[$i],0,4);
-				echo $inizio[$i];
+				//echo $inizio[$i];
         //echo "<br>update pianifica set pia_ore_AIT=? where ute_email='$email' AND pia_ini_anno='$inizio[$i]' AND mat_id=$idMateria AND cla_id=$idClasse AND cor_id=$idCorso;";
         $query = $newDB->getConnection()->prepare("update pianifica set pia_ore_AIT=? where ute_email='$email' AND pia_ini_anno=$inizio[$i] AND mat_id=$idMateria AND cla_id=$idClasse AND cor_id=$idCorso;");
         $query->bind_param("i",$nOre);

@@ -4,8 +4,8 @@
 		include '404.php';
 	}
 	else{
-		include 'view/changePassword.php';
-		include 'model/changePassword.php';
+		include 'view/visioniParticolari.php';
+		include 'model/visioniParticolari.php';
 	}
 
 ?>

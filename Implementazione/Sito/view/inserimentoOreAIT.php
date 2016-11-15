@@ -1,7 +1,7 @@
 <!-- pagina per l'inserimento delle ore AIT da parte dei docenti-->
 <?
 session_start();
-if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1)){// da riguardare
   include_once "connection.php";
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
@@ -94,9 +94,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                 Dettaglio
                 <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
                   class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
-                </span>
-              </div>
-              <?php
+              </span>
+            </div>
+            <?php
             }
             ?>
           </div>
@@ -114,15 +114,15 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
         </form>
       </div>
       <script>
-      $("#search").keyup(function() {
-        var value = this.value;
-        //alert("value"+value);
-        $("#docente").find(".riga").each(function(index) {
-          //alert(index);
-          var id = $(this).find("span").find("input").val();
-          $(this).toggle(id.indexOf(value) !== -1);
+        $("#search").keyup(function() {
+          var value = this.value;
+          //alert("value"+value);
+          $("#docente").find(".riga").each(function(index) {
+            //alert(index);
+            var id = $(this).find("span").find("input").val();
+            $(this).toggle(id.indexOf(value) !== -1);
+          });
         });
-      });
       </script>
     </body>
     </html>

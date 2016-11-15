@@ -7,6 +7,6 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
 		//echo "email: ".$_SESSION['email'];
 	}
 	else{
-		header("location:index.php");
+		include '404.php';
 	}
 ?>

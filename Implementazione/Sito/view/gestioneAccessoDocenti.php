@@ -4,7 +4,7 @@ session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
-  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null order by ute_email;";
+  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null order by ute_email;";
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>
@@ -75,11 +75,31 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                   </div>
                 </td>
                 <td>
+                  <?php if($row['amministratore']==1){ // se non è amministratore non mostrare
+
+                  }
+                  else if($row['responsabile']==1 AND $_SESSION["amministratore"]==1){ // se è responsabile e admin loggato mostra
+                  ?>
                   <form method="post">
                     <button type="button" name='button' id="<?php echo $row['email'];?>" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('pEliminazione').value='<?php echo $row['email'];?>';">
                       <span class="glyphicon glyphicon-remove"></span>
                     </button>
                   </form>
+                  <?php
+                  }
+                  else if($row['responsabile']==1  AND $_SESSION["amministratore"]!=1){ // se è responsabile e non  admin loggato non mostrare
+
+                  }
+                  else{
+                  ?>
+                  <form method="post">
+                    <button type="button" name='button' id="<?php echo $row['email'];?>" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('pEliminazione').value='<?php echo $row['email'];?>';">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                  </form>
+                  <?php
+                  }
+                  ?>
                 </td>
               </tr>
               <?php

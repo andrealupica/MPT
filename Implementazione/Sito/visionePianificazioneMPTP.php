@@ -7,6 +7,6 @@
 		//echo "email: ".$_SESSION['email'];
 	}
 	else{
-		header("location:index.php");
+		include '404.php';
 	}
 ?>

@@ -1,7 +1,10 @@
 <!-- pagina per la visione della pianificazione dei docenti visto dal Responsabile-->
 <?
 session_start();
-if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
+if($_SESSION['email']=="" OR $_SESSION['email']==null){
+  echo "non hai i permessi per visualizzare questa pagina";
+}
+else{
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
   $query = "SELECT ut.ute_nome AS 'nome', ut.ute_cognome AS 'cognome', cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
@@ -119,8 +122,5 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
 </body>
 </html>
 <?php
-}
-else{
-  echo "non hai i permessi per visualizzare questa pagina";
 }
 ?>

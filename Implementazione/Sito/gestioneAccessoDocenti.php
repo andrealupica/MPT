@@ -6,7 +6,7 @@
 		include 'model/gestioneAccessoDocenti.php';
 	}
 	else{
-		header("location:index.php");
+		include '404.php';
 	}
 
 ?>

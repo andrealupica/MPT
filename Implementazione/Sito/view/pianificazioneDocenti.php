@@ -123,7 +123,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
           </span>
           <span class="col-md-3 col-xs-6">
             Ore Annuale Materia
-            <input type="number" class="form-control" name="ore[]" id="ore" step="1"/>
+            <input type="number" class="form-control" name="ore[]" id="ore" step="1" min="0"/>
           </span>
         </div>
         <?php
