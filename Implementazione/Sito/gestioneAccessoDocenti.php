@@ -1,12 +1,12 @@
 <?php
 	session_start();
-	if($_SESSION['email']=="" OR $_SESSION['email']==null OR $_SESSION["responsabile"]!=1){
-		header("location:index.php");
+	if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
 		//echo "email: ".$_SESSION['email'];
-	}
-	else{
 		include 'view/gestioneAccessoDocenti.php';
 		include 'model/gestioneAccessoDocenti.php';
+	}
+	else{
+		header("location:index.php");
 	}
 
 ?>

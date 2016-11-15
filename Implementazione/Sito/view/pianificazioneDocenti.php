@@ -1,10 +1,7 @@
 <!-- pagina per la pianificazione dei docenti-->
 <?
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["responsabile"]!=1){
-  echo "non hai i permessi per visualizzare questa pagina";
-}
-else{
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";?>
   <!DOCTYPE html>
   <html lang="it">
@@ -217,4 +214,7 @@ else{
   </html>
   <?php
 }
+else{
+  echo "non hai i permessi per visualizzare questa pagina";
+  }
 ?>

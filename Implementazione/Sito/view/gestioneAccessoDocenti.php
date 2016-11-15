@@ -1,10 +1,7 @@
 <!-- pagina per la gestione degli accessi di tutti i docenti-->
 <?
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null AND ($_SESSION["responsabile"]!=1 OR $_SESSION["amministratore"]!=1)){ // da riguardare
-  echo "non hai i permessi per visualizzare questa pagina";
-}
-else{
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
   $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null order by ute_email;";
@@ -90,10 +87,14 @@ else{
             ?>
           </tbody>
         </table>
-        <div class="col-xs-6 col-sm-3">
-          <button type="submit" class="btn btn-secondary">
+        <div>
+        </div>
+        <div class="col-xs-12 col-sm-12">
+          <button type="submit" class="btn btn-secondary col-xs-2">
             <span class="glyphicon glyphicon-floppy-disk"></span>Salva
           </button>
+          <span class="col-xs-1"></span>
+          <label class="cols-xs-9 label label-warning" id="messaggio">le modifiche verranno apportate solo con il pulsante salva</label>
         </div>
       </form>
       <div class="container">
@@ -120,9 +121,6 @@ else{
           </div>
         </div>
       </div>
-      <div>
-        <label class="cols-sm-3 control-label" id="messaggio"></label>
-      </div>
     </div>
     <script>
     $("#search").keyup(function() {
@@ -137,5 +135,9 @@ else{
   </body>
   </html>
   <?php
+}
+else{
+  echo "non hai i permessi per visualizzare questa pagina";
+
 }
 ?>

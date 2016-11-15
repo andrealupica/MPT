@@ -3,6 +3,7 @@
   session_start();
   if($_SESSION['email']=="" OR $_SESSION['email']==null){
     echo "non hai i permessi per visualizzare questa pagina";
+    // reindirizzamento login
   }
   else{
 ?>
@@ -31,7 +32,7 @@
     </div>
     <!--responsabile-->
     <?php
-      if($_SESSION['responsabile']==1){
+      if($_SESSION['responsabile']==1 OR $_SESSION['amministratore']==1){
     ?>
     <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MPT</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTR.php"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>

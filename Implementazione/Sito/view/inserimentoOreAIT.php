@@ -1,12 +1,9 @@
 <!-- pagina per l'inserimento delle ore AIT da parte dei docenti-->
 <?
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null OR  $_SESSION["docente"]!=1){
-  echo "non hai i permessi per visualizzare questa pagina";
-}
-else{
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
-
+  include_once "connection.php";
   // aggiungere: quando data creazione != nulla
   $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
@@ -97,38 +94,41 @@ else{
                 Dettaglio
                 <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
                   class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
-              </span>
-            </div>
-            <?php
-          }
-          ?>
-        </div>
-        <div>
-          <label class="col-sm-4 control-label" id="messaggio"></label>
-        </div>
-        <div class="col-md-12  salva">
-          <div class="col-sm-9"></div>
-          <div class="col-sm-6 col-md-3">
-            <button type="submit" class="btn btn-secondary">
-              <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
-            </button>
+                </span>
+              </div>
+              <?php
+            }
+            ?>
           </div>
-        </div>
-      </form>
-    </div>
-    <script>
-$("#search").keyup(function() {
-  var value = this.value;
-  //alert("value"+value);
-  $("#docente").find(".riga").each(function(index) {
-    //alert(index);
-    var id = $(this).find("span").find("input").val();
-    $(this).toggle(id.indexOf(value) !== -1);
-  });
-});
-</script>
-</body>
-</html>
-<?php
-}
-?>
+          <div>
+            <label class="col-sm-4 control-label" id="messaggio"></label>
+          </div>
+          <div class="col-md-12  salva">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-6 col-md-3">
+              <button type="submit" class="btn btn-secondary">
+                <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <script>
+      $("#search").keyup(function() {
+        var value = this.value;
+        //alert("value"+value);
+        $("#docente").find(".riga").each(function(index) {
+          //alert(index);
+          var id = $(this).find("span").find("input").val();
+          $(this).toggle(id.indexOf(value) !== -1);
+        });
+      });
+      </script>
+    </body>
+    </html>
+    <?php
+  }
+  else{
+    echo "non hai i permessi per visualizzare questa pagina";
+  }
+  ?>
