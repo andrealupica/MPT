@@ -5,7 +5,6 @@
 	}
 	else{
 		include 'view/menu.php';
-		include 'model/menu.php';
 	}
 
 ?>

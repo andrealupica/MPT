@@ -144,10 +144,10 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
     </div>
     <script>
     $("#search").keyup(function() {
-      var value = this.value;
+      var value = this.value.toLowerCase();
       $("#table").find("tr").each(function(index) {
         if (index === 0) return;
-        var id = $(this).find("td").text();
+        var id = $(this).find("td").text().toLowerCase();
         $(this).toggle(id.indexOf(value) !== -1);
       });
     });

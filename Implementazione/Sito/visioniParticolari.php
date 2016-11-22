@@ -5,7 +5,6 @@
 	}
 	else{
 		include 'view/visioniParticolari.php';
-		include 'model/visioniParticolari.php';
 	}
 
 ?>

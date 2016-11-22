@@ -3,7 +3,6 @@
 session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1)){// da riguardare
   include_once "connection.php";
-  include_once "connection.php";
   // aggiungere: quando data creazione != nulla
   $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
@@ -115,11 +114,11 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
       </div>
       <script>
         $("#search").keyup(function() {
-          var value = this.value;
+          var value = this.value.toLowerCase();
           //alert("value"+value);
           $("#docente").find(".riga").each(function(index) {
             //alert(index);
-            var id = $(this).find("span").find("input").val();
+            var id = $(this).find("span").find("input").val().toLowerCase();
             $(this).toggle(id.indexOf(value) !== -1);
           });
         });

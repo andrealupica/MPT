@@ -27,12 +27,12 @@
 
 .salva{
   margin-top:15px;
+	margin-bottom:20px;
 }
 
 .riga{
 	margin-top:20px;
 }
-
 .input-group-addon{
 	top:0px;
 }
@@ -44,4 +44,10 @@ span{
 }
 .dettaglio{
 	text-align: center;
+}
+td{
+	padding-top:20px;
+}
+#visione{
+	margin-top:25px;
 }

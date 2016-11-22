@@ -46,7 +46,7 @@
     <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTP.php"><span>Visione Pianificazione Personale MPT</span></a>
     <?php } ?>
     <!--altro-->
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Visioni Particolari</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12 " href="visioniParticolari.php"><span>Visioni Particolari</span></a>
     <?php
       if($_SESSION['amministratore']==1){
     ?>
