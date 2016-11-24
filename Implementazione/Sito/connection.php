@@ -6,6 +6,7 @@
 		private $db;
 		private $conn;
 		private $result;
+		private $newDB;
 
 		public function __construct($host, $usr, $pwd, $db=''){
 			$this->host = $host;
@@ -42,7 +43,6 @@
 		}
 
 	}
-	$newDB;
 	if($newDB==null){
 		$newDB = new DB("mysql.samtinfo.ch", "i13lupand", "lupand1", "samtinfoch17");
 	}

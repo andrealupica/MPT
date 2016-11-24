@@ -114,11 +114,11 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
       </div>
       <script>
         $("#search").keyup(function() {
-          var value = this.value.toLowerCase();
+          var value = this.value;
           //alert("value"+value);
           $("#docente").find(".riga").each(function(index) {
             //alert(index);
-            var id = $(this).find("span").find("input").val().toLowerCase();
+            var id = $(this).find("span").find("input").val();
             $(this).toggle(id.indexOf(value) !== -1);
           });
         });

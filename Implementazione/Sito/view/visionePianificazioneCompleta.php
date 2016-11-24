@@ -45,7 +45,7 @@ else{
             <a href="logout.php" class="btn btn-primary">
               <span class="glyphicon glyphicon-log-out butoon"></span> exit
             </a>
-            <a href="inserimentoOreAIT.php" class="btn btn-primary">
+            <a href="javascript:history.go(-1)" class="btn btn-primary">
               <span class=" glyphicon glyphicon-arrow-left button"></span> indietro
             </a>
           </span>

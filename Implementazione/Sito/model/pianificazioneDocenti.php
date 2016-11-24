@@ -13,14 +13,15 @@
         $corso = $_POST["corso"];
     	if(!empty($nome[0]) && !empty($nome[1]) && !empty($cognome[0]) && !empty($cognome[1]) && $materia[0]!="" && $materia[1]!="" && !empty($ore[0]) && !empty($ore[1])  && !empty($_POST['ciclo']) &&  !empty($_POST['ciclo2']) && !empty($_POST['classe']) && !empty($_POST['corso']) ){
         // && !empty($_POST['durataCiclo']) && !empty($_POST['ciclo2'])
-        // gestire il tutto, sono array !!!!
         $queryEmailProva="";
         $controllo=0;
         for ($j=0; $j < count($cognome)-1; $j++) {
-          if($j==3 && empty($cognome[$j]) && empty($nome[$j])){
+          // se il 4 campo fosse vuoto allora fa niente
+          if($j==3 && empty($cognome[$j]) && empty($nome[$j]) && empty($ore[$j]) ){
 
           }
-          if($j==2 && empty($cognome[$j]) && empty($nome[$j])){
+          // se il 3 campo fosse vuoto
+          if($j==2 && empty($cognome[$j]) && empty($nome[$j]) && empty($ore[$j]) ){
 
           }
           else{
@@ -36,10 +37,9 @@
             }
           //  echo $controllo;
           }
-
-          //eseguo la query
         //  echo $queryEmailProva;
         }
+        // se non ci sono stati errori sul nome del docente o se i dati sono stati riempiti
         if($controllo==0){
           for ($i=0; $i < count($cognome)-1; $i++) {
             if($i==3 && empty($cognome[$i]) && empty($nome[$i])){
@@ -54,7 +54,6 @@
               $cognome[$j]=ucfirst(strtolower($cognome[$j]));
               $queryEmail ="select ute_email as 'email' from utente where ute_nome='$nome[$i]' && ute_cognome='$cognome[$i]'";
               //eseguo la query
-
               $ris = $newDB->query($queryEmail);
               // fetcho la query
               $dum = $ris->fetch_assoc();
@@ -91,7 +90,7 @@
           }
         }
         else{
-          echo  "<script>document.getElementById('messaggio').innerHTML='errore, qualche docente non esiste'</script>";
+          echo  "<script>document.getElementById('messaggio').innerHTML='errore, qualche docente non esiste o campo ore vuoto'</script>";
         }
 
       }

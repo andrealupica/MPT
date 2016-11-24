@@ -54,5 +54,4 @@
 	    return $pass;
 	}
 //$connection->close();
-
 ?>

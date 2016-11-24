@@ -56,14 +56,14 @@ else{
           </a>
         </span>
       </div>
-      <form method="post" action="model/visioniParticolari.php">
+      <form method="post" action="model/visioniParticolari.php" target="_blank">
       <h1>Visioni Particolari</h1>
       <div class="form-group col-xs-12">
         <label class="col-xs-2 control-label">Ricerca:</label>
         <div class="col-xs-10">
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-search"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            <input type="text" name="cerca" class="form-control" id="search"></input>
+            <input type="text" name="cerca" class="form-control" id="search" placeholder="filtraggio+con+più+parole"></input>
           </div>
         </div>
       </div>
@@ -125,17 +125,33 @@ else{
               </button>
             </div>
           </div>
-              </form>
+      </form>
       </div>
     <?php } ?>
   </body>
   <script>
   $("#search").keyup(function() {
     var value = this.value.toLowerCase();
+    var words = value.split('+');
     $("#table").find("tr").each(function(index) {
       if (index === 0) return;
-      var id = $(this).find("td").text().toLowerCase();
-      $(this).toggle(id.indexOf(value) !== -1);
+      var ris = $(this).find("td").text().toLowerCase();
+      var flag=0;
+      // controllo se l'array di parole spittate è contenuto nella riga
+      for (i = 0; i < words.length; i++) {
+        if(ris.indexOf(words[i])!=-1){
+        }
+        else{
+          flag=1;
+        }
+      }
+      if(flag==0){
+        $(this).show();
+      }
+      else{
+        $(this).hide();
+      }
+      flag=0;
     });
   });
     $("label input").change(function(){

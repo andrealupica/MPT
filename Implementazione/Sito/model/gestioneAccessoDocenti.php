@@ -21,7 +21,8 @@
 				$responsabile = $_POST['responsabile'];
 				$gestore = $_POST['gestore'];
 	      while($email = $result->fetch_assoc()){
-					//controllo se è docente
+					//controllo se è docente ovvero se l'email è stata inviata come post del checkbox
+					// docente, allora vuol dire che è stato settato e quindi imposta la variabile a 1
 					$isdocente='0';
 					$isresponsabile='0';
 					$isgestore='0';

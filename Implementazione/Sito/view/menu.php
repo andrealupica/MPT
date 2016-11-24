@@ -34,8 +34,8 @@
     <?php
       if($_SESSION['responsabile']==1 OR $_SESSION['amministratore']==1){
     ?>
-    <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MPT</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTR.php"><span>Visione Pianificazione Docenti MPT(Responsabile)</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="pianificazioneDocenti.php"><span>Pianificazione Docenti MP</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTR.php"><span>Visione Pianificazione Docenti MP(Responsabile)</span></a>
     <a class="btn btn-primary col-md-5 col-xs-12" href="gestioneAccessoDocenti.php"><span>Gestione Accesso Docenti</span></a>
     <?php
       }
@@ -43,13 +43,14 @@
     ?>
     <!--docente-->
     <a class="btn btn-primary col-md-5 col-xs-12" href="inserimentoOreAIT.php"><span>Inserimento ore AIT Docente</span></a>
-    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTP.php"><span>Visione Pianificazione Personale MPT</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTP.php"><span>Visione Pianificazione Personale MP</span></a>
     <?php } ?>
     <!--altro-->
     <a class="btn btn-primary col-md-5 col-xs-12 " href="visioniParticolari.php"><span>Visioni Particolari</span></a>
     <?php
       if($_SESSION['amministratore']==1){
     ?>
+    <!-- amministratore -->
     <a class="btn btn-primary col-md-5 col-xs-12"><span>Amministrazione</span></a>
     <?php
       }
