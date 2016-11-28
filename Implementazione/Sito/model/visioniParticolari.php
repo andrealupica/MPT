@@ -1,12 +1,16 @@
 <?php
+  ### file pdf della visione dei particolari
+  // inclusione del file per la connessione al DB
   include_once "../connection.php";
+  // start della sessione
   session_start();
+  // richiesta per la libreria pdf
   require('../pdf/fpdf.php');
   $query="";
   $colonne="";
   $where="";
   // funziona quando il bottone viene cliccato poiché nel momento in cui viene
-  //cliccato il bottone viene inviato un post del cerca anche se è vuoto al
+  //cliccato il bottone viene inviato un post del cerca (anche se è vuoto) al
   //contrario dei checkbox che non vengono settati se non checkati
   if(isset($_POST["cerca"])){
     // se è checckato il docente allora seleziona il nome e il cognome del docente
@@ -65,16 +69,12 @@
     JOIN materia ma ON ma.mat_id = pi.mat_id
     JOIN corso co ON co.cor_id = pi.cor_id
     JOIN utente ut ON ut.ute_email = pi.ute_email".$where.";";
-    //echo $query;
     $result = $newDB->query($query);
-
-    //echo $query;
     $queryEmail = "SELECT CONCAT(ute_cognome,' ',ute_nome) AS 'utente' FROM utente WHERE ute_email ='".$_SESSION['email']."';";
-    //echo $queryEmail;
     $resultQuery = $newDB->query($queryEmail);
     $dum = $resultQuery->fetch_assoc();
     $utente =  $dum['utente'];
-    //echo $utente;
+
     ### creazione del file pdf
     // creazione della classe PDF per l'intestazione
     class PDF extends FPDF{
@@ -90,7 +90,9 @@
           $this->SetFont('Arial','',12);
           // utente
           $this->Cell(100,10,"Creato da: ".$this->ute,0,0,'L');
+          // logo
           $this->Image('../img/logo.png',130,6,30);
+          // spazio per mettere la data all'angolo
           $this->Cell(120,10,"",0,0,'L');
           // data
           $this->Cell(100,10,"Data: ".$date,0,0,'L');
@@ -165,7 +167,7 @@
       //vado a capo
       $pdf->Cell(0,7,'','',1,'L',0);
     }
-    // stampo il file
+    // stampo il file pdf
     $pdf->Output();
   }
 ?>

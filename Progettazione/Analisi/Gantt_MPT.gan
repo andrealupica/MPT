@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="558" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="526" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
-    <view zooming-state="default:8" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="54" order="0"/>
-        <field id="tpd4" name="Data d'inizio" width="16" order="1"/>
-        <field id="tpd5" name="Data di fine" width="28" order="2"/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="41" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="34" order="1"/>
+        <field id="tpd5" name="Data di fine" width="24" order="2"/>
         <timeline><![CDATA[104]]></timeline>
         <option id="color.recent"><![CDATA[#000000 #0033ff #0033cc]]></option>
     </view>
@@ -96,10 +96,10 @@
             </task>
         </task>
         <task id="145" name="online" color="#8cb6ce" meeting="true" start="2016-11-29" duration="0" complete="0" expand="true"/>
-        <task id="128" name="ev correzioni" color="#8cb6ce" meeting="false" start="2016-11-30" duration="5" complete="0" expand="true"/>
+        <task id="128" name="ev correzioni" color="#8cb6ce" meeting="false" start="2016-11-30" duration="2" complete="0" expand="true"/>
         <task id="57" name="Consegna Intermedia" color="#8cb6ce" meeting="true" start="2016-12-01" duration="0" complete="0" expand="true"/>
         <task id="125" name="vacanza" color="#8cb6ce" meeting="false" start="2016-12-08" duration="1" complete="0" expand="true"/>
-        <task id="148" name="pagina amministratore" color="#8cb6ce" meeting="false" start="2016-12-13" duration="2" complete="0" expand="true"/>
+        <task id="148" name="pagina amministratore" color="#8cb6ce" meeting="false" start="2016-12-06" duration="7" complete="0" expand="true"/>
         <task id="120" name="Design sito web" color="#8cb6ce" meeting="false" start="2016-12-15" duration="1" complete="0" expand="true"/>
         <task id="118" name="Test" color="#8cb6ce" meeting="false" start="2016-12-20" duration="3" complete="0" expand="true"/>
         <task id="53" name="Consegna" color="#8cb6ce" meeting="true" start="2016-12-22" duration="0" complete="0" expand="true"/>
@@ -112,9 +112,9 @@
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd12" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="296" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="90" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="153" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="211" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="173" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="123" visible="true"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>

@@ -1,19 +1,18 @@
 <?php
-// pagina per la gestione degli utenti
+	### pagina per la gestione degli utenti
 	  include_once "connection.php";
-    echo $_POST["email"];
-    //cancellazione email
+
+    // se si vuole eliminare l'email
     if(isset($_POST["emailCancellata"])){
       $email1 = $_POST['email'];
       $query ="delete from utente where ute_email='".$email1."';";
-      echo $query;
       if($newDB->query($query)!=false){
         echo  "<script>document.getElementById('messaggio').innerHTML='email cancellata con successo'</script>";
         header("Location: gestioneAccessoDocenti.php");
       }
     }
-
-	if(isset($_POST['docente']) && isset($_POST['responsabile'])){
+		// se si vuole gestire i docenti
+		if(isset($_POST['docente']) && isset($_POST['responsabile'])){
 	    $queryEmail = "select ute_email as 'email' from utente";
 	    if($newDB->query($queryEmail)!=false){
 	      $result = $newDB->query($queryEmail);
@@ -22,7 +21,7 @@
 				$gestore = $_POST['gestore'];
 	      while($email = $result->fetch_assoc()){
 					//controllo se è docente ovvero se l'email è stata inviata come post del checkbox
-					// docente, allora vuol dire che è stato settato e quindi imposta la variabile a 1
+					// docente, se è così vuol dire che è stato settato e quindi imposto la variabile a 1
 					$isdocente='0';
 					$isresponsabile='0';
 					$isgestore='0';
@@ -33,7 +32,7 @@
 						else{
 						}
 					}
-					//controllo se è responsabile
+					//controllo se è responsabile nello stesso modo del docente
 					for ($i=0; $i < count($responsabile) ; $i++) {
 						if($email['email']==$responsabile[$i]){
 							$isresponsabile='1';
@@ -41,7 +40,7 @@
 						else{
 						}
 					}
-					//controllo se è gestore
+					//controllo se è gestore nello stesso del docente
 					for ($i=0; $i < count($gestore) ; $i++) {
 						if($email['email']==$gestore[$i]){
 							$isgestore='1';
@@ -49,14 +48,12 @@
 						else{
 						}
 					}
+					// creazione della query ed esequzione
 	        $queryModify = "update utente set ute_docente='".$isdocente."', ute_responsabile='".$isresponsabile."', ute_gestoreEmail='".$isgestore."' where ute_email='".$email['email']."';";
-	        //echo $queryModify."<br>";
 					$newDB->query($queryModify);
-					//$cnt++;
 	      }
 	    }
-			header('refresh:0');
+			// ricarico la pagina
+			echo "<script> location.href='gestioneAccessoDocenti.php'</script>";
 	}
-
-
 ?>

@@ -75,10 +75,10 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                   </div>
                 </td>
                 <td>
-                  <?php if($row['amministratore']==1){ // se non è amministratore non mostrare
+                  <?php if($row['amministratore']==1){ // se è amministratore non mostrare
 
                   }
-                  else if($row['responsabile']==1 AND $_SESSION["amministratore"]==1){ // se è responsabile e admin loggato mostra
+                  else if($row['responsabile']==1 AND $_SESSION["amministratore"]==1){ // se la riga è responsabile ma è admin il loggato mostra
                   ?>
                   <form method="post">
                     <button type="button" name='button' id="<?php echo $row['email'];?>" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('pEliminazione').value='<?php echo $row['email'];?>';">
@@ -87,7 +87,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                   </form>
                   <?php
                   }
-                  else if($row['responsabile']==1  AND $_SESSION["amministratore"]!=1){ // se è responsabile e non  admin loggato non mostrare
+                  else if($row['responsabile']==1  AND $_SESSION["amministratore"]!=1){ // se è responsabile e non admin loggato non mostrare
 
                   }
                   else{

@@ -10,10 +10,8 @@
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
-
 </head>
 <body class="body">
-
   <div class="container contenitore">
     <div class="col-md-16">
       <div class="main-login main-center">

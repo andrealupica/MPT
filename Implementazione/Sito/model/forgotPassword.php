@@ -1,5 +1,6 @@
 <?php
-// pagina per una nuova password
+	### pagina per una nuova password
+	//inclusione del file per la connessione al DB
 	include_once "connection.php";
 	// controlle se il form è stato inviato e se gli input sono stati riempiti
 	if(isset($_POST["email"]) && isset($_POST["reemail"])){
@@ -20,13 +21,9 @@
 							$messaggio ="la tua nuova password è:".$pass;
 							$tipoMessaggio = "Content-Type: text/html";
 							$mittente =  'From: "sito MPT" <prova.prova@edu.ti.ch>';
-							echo $pass."<br>";
-							echo $mittente;
-							echo $destinatario;
-							echo $oggetto;
-							echo $messaggio;
+							// dopo l'invio dell'email reindirizza alla pagina di login
 							mail($destinatario,$oggetto,$messaggio,$mittente);
-						//header("Location: index.php");
+							header("Location: index.php");
 					}
 					else{
 						echo  "<script>document.getElementById('messaggio').innerHTML=errore</script>";
@@ -45,6 +42,7 @@
 		}
 	}
 
+	// funzione per una password randomica
 	function randomPassword() {
 	    $alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	    for ($i = 0; $i < 10; $i++) {
@@ -53,5 +51,4 @@
 	    }
 	    return $pass;
 	}
-//$connection->close();
 ?>

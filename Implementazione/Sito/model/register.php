@@ -1,25 +1,30 @@
 <?php
-// pagina per la registrazione
+ 	### pagina per la registrazione
+	// inclusione del per la connessione al DB
 	include_once "connection.php";
+	// file per il captcha
 	require_once "./captcha/include/fgcontactform.php";
 	require_once "./captcha/include/captcha-creator.php";
+	// start della sessione
 	session_start();
 	$nome = "";
 	$cognome = "";
 	$email = "";
 	$emailAdmin = "";
-
+// se sono stati riempiti tutti i campi
 	if(isset($_POST["nome"]) && isset($_POST["cognome"]) && isset($_POST["email"]) && isset($_POST["captcha"])){
+		// se il messaggio del captcha non corrsiponde al testo scritto
 		if($_POST["captcha"]!=$_SESSION['digit']){
 			echo "<script>document.getElementById('errore').innerHTML='Captcha non corretto'</script>";
 		}
 		else{
+			// se i campi del nome, del cognome e dell'email non sono vuoti
 			if(!empty($_POST["nome"]) && !empty($_POST["cognome"]) && !empty($_POST["email"])){
 					// se il captcha è corretto
 						$nome = $_POST["nome"];
-						$nome = ucfirst(strtolower($nome));
+						$nome = ucfirst(strtolower($nome)); // rendo soltanto la prima lettera in maiuscolo
 						$cognome = $_POST["cognome"];
-						$cognome = ucfirst(strtolower($cognome));
+						$cognome = ucfirst(strtolower($cognome)); // rendo soltanto la prima lettere in maiuscolo
 						$email = $_POST["email"];
 						$email = strtolower($email);
 						if(strstr($email,'@')=='@edu.ti.ch'){
@@ -49,6 +54,7 @@
 									$row = $result->fetch_assoc();
 									$emailMittente=$row['email'];
 									$mittente = 'From: Responsabile email <'.$emailMittente.'>';
+									// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 									mail($destinatario,$oggetto,$messaggio,$mittente);
 									echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile' </script>";
 								}
@@ -81,5 +87,4 @@
 	    }
 	    return $pass;
 	}
-//$connection->close();
 ?>

@@ -1,5 +1,6 @@
 <?php
-	// pagina per la conferma della registrazione
+	### pagina per la conferma della registrazione
+	// inclusione del file per la connessione al DB
 	include_once "connection.php";
 
 	// se sono stati inviati come get dall'email che il resposanbile ha ricevuto i seguenti parametri
@@ -13,30 +14,19 @@
 		$result = $newDB->query($query3);
 		$row = $result->fetch_assoc();
 		$emailMittente=$row['email'];
-		//echo "mittente:".$emailMittente."<br>";
 		$mittente = 'From: Responsabile email<'.$emailMittente.'>';
-		//$mittente .= " Content-Type: text/html; charset=ISO-8859-1";
-		//echo $password."<br>";
-		//echo $mittente;
-		//echo $destinatario;
-		//echo $oggetto;
-		//echo $messaggio."<br>";
 		// setto la data limite per la conferma
 		$date = time()+ (4 * 24 * 60 * 60);
 		$date = date("Y-m-d",$date);
 		//inserisco la data di iscrizione massima
-		//$query = "insert into utente(ute_dataIscrizione) values('".$date."') where ='".$email."';";
 		$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$email."';";
-
-		//echo $query;
+		// se la query ha avuto successo allora invia l'email segnalando l'iscrizione
 		if($newDB->query($query)!= false){
 			mail($destinatario,$oggetto,$messaggio,$mittente);
 			echo "email inviata all'amministratore";
-			//echo $date;
 		}
 	}
 	else{
 		echo "404 not found";
 	}
-
 ?>

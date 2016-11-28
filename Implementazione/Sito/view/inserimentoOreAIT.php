@@ -1,9 +1,8 @@
 <!-- pagina per l'inserimento delle ore AIT da parte dei docenti-->
 <?
 session_start();
-if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1)){// da riguardare
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1 OR $_SESSION["amministratore"]==1)){// da riguardare
   include_once "connection.php";
-  // aggiungere: quando data creazione != nulla
   $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
   FROM pianifica pi
@@ -11,7 +10,6 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
   WHERE pi.ute_email='".$_SESSION['email']."'";
-  //  echo $query;
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>

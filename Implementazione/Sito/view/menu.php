@@ -39,7 +39,7 @@
     <a class="btn btn-primary col-md-5 col-xs-12" href="gestioneAccessoDocenti.php"><span>Gestione Accesso Docenti</span></a>
     <?php
       }
-      if($_SESSION['docente']==1){
+      if($_SESSION['docente']==1 OR $_SESSION['amministratore']==1){
     ?>
     <!--docente-->
     <a class="btn btn-primary col-md-5 col-xs-12" href="inserimentoOreAIT.php"><span>Inserimento ore AIT Docente</span></a>

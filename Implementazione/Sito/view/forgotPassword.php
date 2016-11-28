@@ -43,9 +43,9 @@
 					<div class="form-group btn-group btn-group-justified" >
 						<div class="col-xs-0 col-sm-2"></div>
 						<div class="col-xs-6 col-sm-3">
-			            	<button class="btn btn-primary col-xs-12">
-			                	<span class="glyphicon glyphicon-send" ></span> invia email
-			            	</button>
+	          	<button class="btn btn-primary col-xs-12">
+	              	<span class="glyphicon glyphicon-send" ></span> invia email
+	          	</button>
 						</div>
 						<p class="help-block">invia una password di riserva alla tua email</p>
 						<div class="col-xs-0 col-sm-2"></div>
