@@ -64,12 +64,10 @@ $pass = "";
 				else{
 				echo  "<script>document.getElementById('errore').innerHTML='errore durante il login'</script>";
 				}
-
 			}
 			else{
 				echo  "<script>document.getElementById('errore').innerHTML='l email o la password non è corretta'</script>";
 			}
-
 		}
 		else{
 			echo  "<script>document.getElementById('errore').innerHTML='riempire entrambi i campi'</script>";

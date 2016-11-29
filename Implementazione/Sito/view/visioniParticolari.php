@@ -130,30 +130,32 @@ else{
     <?php } ?>
   </body>
   <script>
-  $("#search").keyup(function() {
-    var value = this.value.toLowerCase();
-    var words = value.split('+');
-    $("#table").find("tr").each(function(index) {
-      if (index === 0) return;
-      var ris = $(this).find("td").text().toLowerCase();
-      var flag=0;
-      // controllo se l'array di parole spittate è contenuto nella riga
-      for (i = 0; i < words.length; i++) {
-        if(ris.indexOf(words[i])!=-1){
+    // funzione per la barra di ricerca
+    $("#search").keyup(function() {
+      var value = this.value.toLowerCase();
+      var words = value.split('+');
+      $("#table").find("tr").each(function(index) {
+        if (index === 0) return;
+        var ris = $(this).find("td").text().toLowerCase();
+        var flag=0;
+        // controllo se l'array di parole splittate è contenuto nella riga
+        for (i = 0; i < words.length; i++) {
+          if(ris.indexOf(words[i])!=-1){
+          }
+          else{
+            flag=1;
+          }
+        }
+        if(flag==0){
+          $(this).show();
         }
         else{
-          flag=1;
+          $(this).hide();
         }
-      }
-      if(flag==0){
-        $(this).show();
-      }
-      else{
-        $(this).hide();
-      }
-      flag=0;
+        flag=0;
+      });
     });
-  });
+    // funzione per la visibilità delle colonne
     $("label input").change(function(){
       var valore=this.value;
         $("#table").find("tr").each(function(index) {

@@ -20,7 +20,7 @@
 							$oggetto = " modifica della password di: ".$email. "";
 							$messaggio ="la tua nuova password è:".$pass;
 							$tipoMessaggio = "Content-Type: text/html";
-							$mittente =  'From: "sito MPT" <prova.prova@edu.ti.ch>';
+							$mittente =  'From: "sito MPT" <'.$_SERVER["SERVER_NAME"].'>';
 							// dopo l'invio dell'email reindirizza alla pagina di login
 							mail($destinatario,$oggetto,$messaggio,$mittente);
 							header("Location: index.php");

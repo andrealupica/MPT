@@ -131,8 +131,8 @@ else{
   </body>
   </html>
   <?php
-}
-else{
-}
+  }
+  else{
+  }
 }
 ?>

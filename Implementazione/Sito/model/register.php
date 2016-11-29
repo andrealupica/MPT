@@ -48,12 +48,9 @@
 									//echo $query2;
 									// invio dell'email
 									$oggetto = " registrazione di ".$email. "";
-									$messaggio ="clicca questo link per accettare la registrazione: http://www.samtinfo.ch/~i13lupand//MPT/confirmRegister.php?param=".$email."&password=".$password."";
-									$query3 = "select ute_email as 'email' from utente where ute_gestoreEmail=1 limit 1;";
-									$result = $newDB->query($query3);
-									$row = $result->fetch_assoc();
-									$emailMittente=$row['email'];
-									$mittente = 'From: Responsabile email <'.$emailMittente.'>';
+									// bisogna ricordarsi di cambiare questo percorso !!
+									$messaggio ="clicca questo link per accettare la registrazione: http://".$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"]."?param=".$email."&password=".$password."";
+									$mittente = 'From: registrazione MPT <'.$email.'>';
 									// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 									mail($destinatario,$oggetto,$messaggio,$mittente);
 									echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile' </script>";

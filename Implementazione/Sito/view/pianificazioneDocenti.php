@@ -16,7 +16,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
 <!-- script per la gestione dei select -->
     <script>
-
+      // funzione che viene eseguita quando si cambia il corso
       $(document).ready(function(){
           $("#corso").change(function(){
             valore=$("#corso").val();
@@ -38,7 +38,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
               }});
           });
       });
-
+      // funzione che viene eseguita quando si cambia il corso
       $(document).ready(function(){
           $("#corso").change(function(){
             valore=$("#corso").val();
@@ -53,10 +53,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                     $("#classe").append("<option value='"+result[i]+"'>"+result[i]+"</option>")
                   }
               }});
-
           });
       });
-
+      // funzione che viene eseguita quando si cambia il ciclo
       $(document).ready(function(){
           $("#ciclo").change(function(){
             anno=$("#ciclo").val();
@@ -68,7 +67,6 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                 success: function(result){
                   $('#ciclo2').val(result);
               }});
-
           });
       });
 
@@ -149,16 +147,6 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
             Classe
             <select name="classe" id="classe" class="form-control">
               <option selected="true" value=""> -- </option>
-              <?php
-              /*$classe = "select cla_nome as 'classe' from classe;";
-              $result = $newDB->query($classe);
-              while($row = $result->fetch_assoc()){
-                ?>
-                <option><?php echo $row["classe"]?></option>
-                <?php
-              }
-              */
-              ?>
             </select>
           </span>
           <span class="col-md-2 col-xs-4">

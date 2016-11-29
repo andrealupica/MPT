@@ -9,21 +9,23 @@
 		$password = $_GET["password"];
 		$destinatario = $email;
 		$oggetto = " registrazione di ".$email. " al sito web";
-		$messaggio ="sei stato registrato al sito web www.samtinfo.ch, le tue credenziali sono username: ".$email." password: ".$password. " appena effettuerai l'accesso potrai cambiare la password. Hai solo 3 giorni per effettuare il primo login, dopodiché bisognerà rieffettuare la registrazione";
+		$messaggio ="sei stato/a registrato al sito web ".$_SERVER["SERVER_NAME"].", le tue credenziali sono username: ".$email." password: ".$password. " appena effettuerai l'accesso potrai cambiare la password. Hai solo 3 giorni per effettuare il primo login, dopodiché bisognerà rieffettuare la registrazione";
 		$query3 = "select ute_email as 'email' from utente where ute_gestoreEmail=1 limit 1;";
 		$result = $newDB->query($query3);
 		$row = $result->fetch_assoc();
 		$emailMittente=$row['email'];
 		$mittente = 'From: Responsabile email<'.$emailMittente.'>';
 		// setto la data limite per la conferma
-		$date = time()+ (4 * 24 * 60 * 60);
+		$date = time()+(4 * 24 * 60 * 60);
 		$date = date("Y-m-d",$date);
 		//inserisco la data di iscrizione massima
 		$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$email."';";
+		//echo $query;
 		// se la query ha avuto successo allora invia l'email segnalando l'iscrizione
+		// la query funziona sempre perché è un update!!!!!
 		if($newDB->query($query)!= false){
 			mail($destinatario,$oggetto,$messaggio,$mittente);
-			echo "email inviata all'amministratore";
+			echo "email inviata al docente";
 		}
 	}
 	else{

@@ -109,11 +109,10 @@ else{
       </form>
     </div>
     <script>
+    // funzione per la barra di ricerca
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();;
-      //alert("value"+value);
       $("#docente").find(".riga").each(function(index) {
-        //alert(index);
         var id = $(this).find("span").find("input").val().toLowerCase();
         $(this).toggle(id.indexOf(value) !== -1);
       });

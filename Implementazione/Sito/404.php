@@ -18,10 +18,8 @@
   </span>
   <span class="col-xs-3">
   </span>
-
   <span class="col-xs-3">
   </span>
-
   <span class="col-xs-3">
   </span>
   </body>

@@ -7,5 +7,4 @@
 		include 'view/changePassword.php';
 		include 'model/changePassword.php';
 	}
-
 ?>
