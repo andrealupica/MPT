@@ -1,0 +1,44 @@
+
+.body {
+	margin-top: 10px;
+ 	margin-bottom: 50px;
+}
+
+.contenitore {
+	margin-top:25px;
+	min-width: 300px;
+}
+
+.bottone{
+	margin-top:10px;
+}
+
+.header{
+	margin-bottom:50px;
+}
+
+#search,#addMateria{
+	max-width: 300px;
+}
+
+.opzione{
+	float:right;
+	display: inline;
+}
+
+.salva{
+  margin-top:15px;
+}
+
+.riga{
+	margin-top:20px;
+}
+
+.input-group-addon{
+	top:0px;
+}
+
+
+.dettaglio{
+	text-align: center;
+}

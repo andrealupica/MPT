@@ -51,7 +51,7 @@
       if($_SESSION['amministratore']==1){
     ?>
     <!-- amministratore -->
-    <a class="btn btn-primary col-md-5 col-xs-12"><span>Amministrazione</span></a>
+    <a class="btn btn-primary col-md-5 col-xs-12" href="amministrazione.php"><span>Amministrazione</span></a>
     <?php
       }
      ?>

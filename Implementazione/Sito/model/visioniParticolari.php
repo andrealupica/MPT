@@ -138,7 +138,6 @@
     $pdf->Cell(0,7,'','',1,'L',0);
     // setto il font
 		$pdf->SetFont('Arial','',10);
-    $finfo = $result->fetch_field();// nomi della colonna (array)
     // faccio un while riga per riga cosi da avere una select per ciclo
     while($row = $result->fetch_array()){
       //cella di spazio laterale sinistro

@@ -14,7 +14,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
-<!-- script per la gestione dei select -->
+    <!-- script per la gestione dei select -->
     <script>
       // funzione che viene eseguita quando si cambia il corso
       $(document).ready(function(){

@@ -75,7 +75,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                   </div>
                 </td>
                 <td>
-                  <?php if($row['amministratore']==1){ // se è amministratore non mostrare
+                  <?php if($row['amministratore']==1 OR $_SESSION["email"]==$row["email"]){ // se è amministratore o utente loggato non mostrare
 
                   }
                   else if($row['responsabile']==1 AND $_SESSION["amministratore"]==1){ // se la riga è responsabile ma è admin il loggato mostra

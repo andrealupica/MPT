@@ -21,28 +21,6 @@ else{
     <link href="css/visioniParticolari.css" rel="stylesheet">
   </head>
   <script>
-  /*$(document).ready(function(){
-      $("#button").click(function(){
-        alert("ok");
-        docente = $("#docente").is(':checked');
-        materia = $("#materia").is(':checked');
-        classe = $("#classe").is(':checked');
-        tipo = $("#tipo").is(':checked');
-        durata = $("#durata").is(':checked');
-        ore = $("#ore").is(':checked');
-        ait = $("#AIT").is(':checked');
-        ricerca = $("#search").val();
-
-        $.ajax({
-          type:"POST",
-          url: "model/visioniParticolari.php",
-          data:{docente:docente,materia:materia,classe:classe,tipo:tipo,durata:durata,ore:ore,ait:ait,ricerca:ricerca},
-
-          success: function(result){
-          }
-          });
-      });
-  });*/
   </script>
   <body>
     <div class="container contenitore">

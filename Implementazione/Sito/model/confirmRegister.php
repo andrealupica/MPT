@@ -19,6 +19,7 @@
 		$date = time()+(4 * 24 * 60 * 60);
 		$date = date("Y-m-d",$date);
 		//inserisco la data di iscrizione massima
+		//controllare poiché non funziona
 		$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$email."';";
 		//echo $query;
 		// se la query ha avuto successo allora invia l'email segnalando l'iscrizione
