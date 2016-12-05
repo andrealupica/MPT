@@ -49,7 +49,7 @@
 									// invio dell'email
 									$oggetto = " registrazione di ".$email. "";
 									// bisogna ricordarsi di cambiare questo percorso !!
-									$messaggio ="clicca questo link per accettare la registrazione: http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-13)."confirmRegister.php?param=".$email."&password=".$password."";
+									$messaggio ="clicca questo link per accettare la registrazione: http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-13)."/confirmRegister.php?param=".$email."&password=".$password."";
 									$mittente = 'From: registrazione MPT <'.$email.'>';
 									// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 									mail($destinatario,$oggetto,$messaggio,$mittente);

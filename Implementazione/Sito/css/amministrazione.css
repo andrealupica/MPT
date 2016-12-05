@@ -6,7 +6,7 @@
 
 .contenitore {
 	margin-top:25px;
-	min-width: 300px;
+	min-width: 575px;
 }
 
 .bottone{
@@ -17,7 +17,7 @@
 	margin-bottom:50px;
 }
 
-#search,#addMateria{
+#search,#addMateria,#addCorso,#addClasse{
 	max-width: 300px;
 }
 

@@ -10,28 +10,27 @@
     $(document).ready(function(){
       $("#buttonAdd").click(function(){
         valore=$("#addCorso").val();
-        //alert(valore);
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
           data:{addCor:valore},
           success: function(result){
-            // location.reload();
-          $("#creaCorso").load("view/amministrazioneCreaCorso.php");
+          $("#Gestione").load("view/amministrazioneCreaCorso.php");
           }
         });
       });
       $("#buttonRemove").click(function(){
         valore=$("#removeCorso").val();
-        $('#myModal').modal('hide');
-        //alert(valore);
+        //aggiunte queste righe per far funzionare la rimozione della parte nera
+        $("#myModal").modal("hide");
+        $("body").removeClass("modal-open");
+        $(".modal-backdrop").remove();
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
           data:{removeCor:valore},
           success: function(result){
-            // location.reload();
-          $("#creaCorso").load("view/amministrazioneCreaCorso.php");
+          $("#Gestione").load("view/amministrazioneCreaCorso.php");
           }
         });
       });
@@ -48,10 +47,15 @@
             <span class="input-group-btn">
               <button style="height:34px" id="buttonAdd"  class="btn glyphicon glyphicon-plus" type="submit" onclick="return false"></button>
             </span>
-            <input  style="margin-top: 0.0625em" type="text" class="form-control" name="addCorso" id="addCorso" placeholder="clicca il + per salvare la corso"></input>
+            <input  style="margin-top: 0.0625em" type="text" class="form-control" name="addCorso" id="addCorso" placeholder="clicca il + per salvare"></input>
+            <input  style="margin-top: 0.0625em" type="number" min="1" class="form-control" name="addCorsoDurata" id="addCorsoDurata" placeholder="durata"></input>
           </div>
         </div>
       </form>
+
+    </div>
+
+
     </div>
     <div class="form-group col-xs-12">
       <label class="col-xs-3 control-label">Ricerca:</label>
@@ -64,7 +68,7 @@
     </div>
     <div>
       <table id="table" class="table col-xs-12">
-        <tr><th>nome della corso</th><th>elimina</th></th>
+        <tr><th>nome del corso</th><th>elimina</th></th>
         <?php
         while($row = $result->fetch_assoc()){
           ?>
@@ -79,7 +83,7 @@
           <?php } ?>
       </table>
     </div>
-    <div class="container" id="myModal1">
+    <div class="container">
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -93,7 +97,7 @@
             <div class="modal-body">
               <p>sei sicuro di voler eliminare il corso?</p>
               <div class="alert alert-warning">
-                <strong>Attenzione!</strong> Se il corso è stata inserita in una pianificazione non sarà possibile eliminarla
+                <strong>Attenzione!</strong> Se il corso è stata inserita in una pianificazione non sarà possibile eliminarlo
               </div>
             </div>
             <div class="modal-footer">

@@ -3,10 +3,14 @@
 session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
-  //$date = time()+(4 * 24 * 60 * 60);
-  //$date = date("Y-m-d",$date);
-	//$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$_SESSION['email']."';";
+  /*
+  $date = time()+(4 * 24 * 60 * 60);
+  $date = date("Y-m-d",$date);
+	$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$_SESSION['email']."';";
+  echo $_SERVER["PHP_SELF"]."<br>";
   echo $query;
+  */
+  //echo "http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-20)."/confirmRegister.php";
   ?>
   <!DOCTYPE html>
   <html lang="it">
@@ -29,25 +33,27 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
         document.getElementById("bCreaCorso").setAttribute("class","btn btn-primary col-xs-3");
         document.getElementById("bCreaClasse").setAttribute("class","btn btn-primary col-xs-3");
         document.getElementById("bGestioneClasse").setAttribute("class","btn btn-primary col-xs-3");
-
+        //$("#Gestione").load("");
       }
         $("#bCreaMateria").click(function(){
           resetProperty();
           this.setAttribute("class","btn btn-info col-xs-3");
-          $("#creaMateria").load("view/amministrazioneCreaMateria.php");
+          $("#Gestione").load("view/amministrazioneCreaMateria.php");
         });
         $("#bCreaCorso").click(function(){
           resetProperty();
           this.setAttribute("class","btn btn-info col-xs-3");
-          $("#creaCorso").load("view/amministrazioneCreaCorso.php");
+          $("#Gestione").load("view/amministrazioneCreaCorso.php");
         });
         $("#bCreaClasse").click(function(){
           resetProperty();
           this.setAttribute("class","btn btn-info col-xs-3");
+          $("#Gestione").load("view/amministrazioneCreaClasse.php");
         });
         $("#bGestioneClasse").click(function(){
           resetProperty();
           this.setAttribute("class","btn btn-info col-xs-3");
+          //$("#Gestione").load("view/amministrazioneGestioneClaCor.php");
         });
     });
     </script>
@@ -84,19 +90,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
       <div class="col-xs-2"></div>
       <div class="col-xs-8">
         <!-- pagina di Creazione Materia -->
-        <div id="creaMateria">
-
-        </div>
-
-        <div id="creaCorso">
-
-        </div>
-
-        <div id="creaClasse">
-
-        </div>
-
-        <div id="gestioneClasse">
+        <div id="Gestione">
 
         </div>
       </div>

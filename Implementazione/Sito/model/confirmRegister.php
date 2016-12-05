@@ -8,8 +8,8 @@
 		$email = $_GET["param"];
 		$password = $_GET["password"];
 		$destinatario = $email;
-		$oggetto = " registrazione di ".$email. " al sito web";
-		$messaggio ="sei stato/a registrato al sito web ".$_SERVER["SERVER_NAME"].", le tue credenziali sono username: ".$email." password: ".$password. " appena effettuerai l'accesso potrai cambiare la password. Hai solo 3 giorni per effettuare il primo login, dopodiché bisognerà rieffettuare la registrazione";
+		$oggetto = " registrazione di ".$email. " al sito web"; // aggiunta una parte, controllare se funziona !!!
+		$messaggio ="sei stato/a registrato al sito web ".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-20)", le tue credenziali sono username: ".$email." password: ".$password. " appena effettuerai l'accesso potrai cambiare la password. Hai solo 3 giorni per effettuare il primo login, dopodiché bisognerà rieffettuare la registrazione";
 		$query3 = "select ute_email as 'email' from utente where ute_gestoreEmail=1 limit 1;";
 		$result = $newDB->query($query3);
 		$row = $result->fetch_assoc();

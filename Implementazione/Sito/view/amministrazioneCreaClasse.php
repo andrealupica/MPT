@@ -2,25 +2,25 @@
   session_start();
   include "../connection.php";
   if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){
-    $query="select mat_nome AS 'nome' from materia order by mat_nome";
+    $query="select cla_nome AS 'nome' from classe order by cla_nome";
     $result = $newDB->query($query);
   ?>
   <body>
     <script>
     $(document).ready(function(){
       $("#buttonAdd").click(function(){
-        valore=$("#addMateria").val();
+        valore=$("#addClasse").val();
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
-          data:{addMat:valore},
+          data:{addCor:valore},
           success: function(result){
-          $("#Gestione").load("view/amministrazioneCreaMateria.php");
+          $("#Gestione").load("view/amministrazioneCreaClasse.php");
           }
         });
       });
       $("#buttonRemove").click(function(){
-        valore=$("#removeMateria").val();
+        valore=$("#removeClasse").val();
         //aggiunte queste righe per far funzionare la rimozione della parte nera
         $("#myModal").modal("hide");
         $("body").removeClass("modal-open");
@@ -28,9 +28,9 @@
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
-          data:{removeMat:valore},
+          data:{removeCor:valore},
           success: function(result){
-          $("#Gestione").load("view/amministrazioneCreaMateria.php");
+          $("#Gestione").load("view/amministrazioneCreaClasse.php");
           }
         });
       });
@@ -38,16 +38,16 @@
     </script>
   <div></div>
   <div clas="contenitore">
-    <h4>Creazione Materia</h4>
+    <h4>Creazione Classe</h4>
     <div class="form-group col-xs-12">
-      <label class="col-xs-3 control-label">Crea Materia:</label>
+      <label class="col-xs-3 control-label">Crea Classe:</label>
       <form method="post">
         <div class="col-xs-9">
           <div class="input-group">
             <span class="input-group-btn">
               <button style="height:34px" id="buttonAdd"  class="btn glyphicon glyphicon-plus" type="submit" onclick="return false"></button>
             </span>
-            <input  style="margin-top: 0.0625em" type="text" class="form-control" name="addMateria" id="addMateria" placeholder="clicca il + per salvare"></input>
+            <input  style="margin-top: 0.0625em" type="text" class="form-control" name="addClasse" id="addClasse" placeholder="clicca il + per salvare"></input>
           </div>
         </div>
       </form>
@@ -63,14 +63,14 @@
     </div>
     <div>
       <table id="table" class="table col-xs-12">
-        <tr><th>nome della materia</th><th>elimina</th></th>
+        <tr><th>nome della classe</th><th>elimina</th></th>
         <?php
         while($row = $result->fetch_assoc()){
           ?>
           <tr>
             <td class="col-xs-10"><?php echo $row["nome"];?></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeMateria').value='<?php echo $row['nome'];?>';">
+              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeClasse').value='<?php echo $row['nome'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>
@@ -87,18 +87,18 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Eliminazione Materia</h4>
+              <h4 class="modal-title">Eliminazione Classe</h4>
             </div>
             <div class="modal-body">
-              <p>sei sicuro di voler eliminare la materia?</p>
+              <p>sei sicuro di voler eliminare la classe?</p>
               <div class="alert alert-warning">
-                <strong>Attenzione!</strong> Se la materia è stata inserita in una pianificazione non sarà possibile eliminarla
+                <strong>Attenzione!</strong> Se la classe è stata inserita in una pianificazione non sarà possibile eliminarla
               </div>
             </div>
             <div class="modal-footer">
               <form method="post" action="">
                 <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
-                <input type="hidden" id="removeMateria" name="removeMateria" required="required"/>
+                <input type="hidden" id="removeClasse" name="removeClasse" required="required"/>
               </form>
             </div>
           </div>
