@@ -45,10 +45,10 @@ create table cla_fre_cor(
 	cor_id int,
 	primary key(cla_id,cor_id),
 	foreign key(cla_id) references classe(cla_id)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE 
 	ON DELETE NO ACTION,
 	foreign key(cor_id) references corso(cor_id)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE 
 	ON DELETE NO ACTION
 );
 
@@ -63,15 +63,15 @@ create table pianifica(
 	pia_ore_AIT int,
 	primary key(ute_email,cla_id,mat_id,pia_ini_anno,cor_id),
 	foreign key(ute_email) references utente(ute_email)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE
 	ON DELETE NO ACTION,
 	foreign key(cla_id) references classe(cla_id)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE 
 	ON DELETE NO ACTION,
 	foreign key(mat_id) references materia(mat_id)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE 
 	ON DELETE NO ACTION,
 	foreign key(cor_id) references corso(cor_id)
-	ON UPDATE NO ACTION 
+	ON UPDATE CASCADE 
 	ON DELETE NO ACTION
 );	

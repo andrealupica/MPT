@@ -27,7 +27,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
     <script>
 
     $(document).ready(function(){
-
+      $("#Gestione").load("view/amministrazioneCreaMateria.php");
       function resetProperty(){
         document.getElementById("bCreaMateria").setAttribute("class","btn btn-primary col-xs-3");
         document.getElementById("bCreaCorso").setAttribute("class","btn btn-primary col-xs-3");
@@ -53,7 +53,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
         $("#bGestioneClasse").click(function(){
           resetProperty();
           this.setAttribute("class","btn btn-info col-xs-3");
-          //$("#Gestione").load("view/amministrazioneGestioneClaCor.php");
+          $("#Gestione").load("view/amministrazioneGestioneClaCor.php");
         });
     });
     </script>
@@ -94,6 +94,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
 
         </div>
       </div>
+    </div>
+    <div>
+      <label class="cols-sm-3 control-label" id="errore"></label>
     </div>
   </body>
   </html>

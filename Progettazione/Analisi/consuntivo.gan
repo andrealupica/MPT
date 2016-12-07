@@ -97,10 +97,11 @@
                 </task>
             </task>
         </task>
+        <task id="157" name="online sull'altro server" color="#8cb6ce" meeting="false" start="2016-11-29" duration="1" complete="0" expand="true"/>
         <task id="128" name="ev correzioni" color="#8cb6ce" meeting="false" start="2016-11-29" duration="2" complete="0" expand="true"/>
         <task id="57" name="Consegna Intermedia" color="#8cb6ce" meeting="true" start="2016-12-01" duration="0" complete="0" expand="true"/>
         <task id="125" name="vacanza" color="#8cb6ce" meeting="false" start="2016-12-08" duration="1" complete="0" expand="true"/>
-        <task id="148" name="pagina amministratore" color="#8cb6ce" meeting="false" start="2016-12-06" duration="6" complete="0" expand="true"/>
+        <task id="148" name="pagina amministratore" color="#8cb6ce" meeting="false" start="2016-11-29" duration="7" complete="0" expand="true"/>
         <task id="120" name="Design sito web" color="#8cb6ce" meeting="false" start="2016-12-14" duration="1" complete="0" expand="true"/>
         <task id="118" name="Test" color="#8cb6ce" meeting="false" start="2016-12-15" duration="6" complete="0" expand="true"/>
         <task id="53" name="Consegna" color="#8cb6ce" meeting="true" start="2016-12-22" duration="0" complete="0" expand="true"/>

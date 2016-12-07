@@ -2,8 +2,6 @@
   session_start();
   include "../connection.php";
   if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){
-    $query="select mat_nome AS 'nome' from materia order by mat_nome";
-    $result = $newDB->query($query);
   ?>
   <body>
     <script>
@@ -19,6 +17,7 @@
           }
         });
       });
+
       $("#buttonRemove").click(function(){
         valore=$("#removeMateria").val();
         //aggiunte queste righe per far funzionare la rimozione della parte nera
@@ -29,6 +28,23 @@
           type:"POST",
           url: "model/amministrazione.php",
           data:{removeMat:valore},
+          success: function(result){
+          $("#Gestione").load("view/amministrazioneCreaMateria.php");
+          }
+        });
+      });
+
+      $("#buttonModify").click(function(){
+        id = $("#modifyMateria").val();;
+        nome = $("#"+id).val();
+        //alert(nome+" "+id);
+        $("#myModalM").modal("hide");
+        $("body").removeClass("modal-open");
+        $(".modal-backdrop").remove();
+        $.ajax({
+          type:"POST",
+          url: "model/amministrazione.php",
+          data:{modifyNomeMateria:nome,modifyMateriaId:id},
           success: function(result){
           $("#Gestione").load("view/amministrazioneCreaMateria.php");
           }
@@ -63,14 +79,21 @@
     </div>
     <div>
       <table id="table" class="table col-xs-12">
-        <tr><th>nome della materia</th><th>elimina</th></th>
+        <tr><th>nome della materia</th><th>modifica</th><th>elimina</th></th>
         <?php
+        $query="select mat_nome AS 'nome',mat_id from materia order by mat_nome";
+        $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
           <tr>
-            <td class="col-xs-10"><?php echo $row["nome"];?></td>
+            <td class="col-xs-8"><input type="text" class="form-control" id="<?php echo $row['mat_id'];?>" value="<?php echo $row['nome'];?>"></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeMateria').value='<?php echo $row['nome'];?>';">
+              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyMateria').value='<?php echo $row['mat_id'];?>';">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+            </td>
+            <td class="col-xs-2">
+              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeMateria').value='<?php echo $row['mat_id'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>
@@ -99,6 +122,33 @@
               <form method="post" action="">
                 <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
                 <input type="hidden" id="removeMateria" name="removeMateria" required="required"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModalM" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modifica Materia</h4>
+            </div>
+            <div class="modal-body">
+              <p>sei sicuro di voler modificare la materia?</p>
+              <div class="alert alert-info">
+                <strong>Info!</strong> Le modifiche verranno appportate anche alle altre pagine
+              </div>
+            </div>
+            <div class="modal-footer">
+              <form method="post" action="">
+                <button type="submit" onclick="return false" class="btn btn-default" id="buttonModify">ok</button>
+                <input type="hidden" id="modifyMateria" name="modifyMateria" required="required"/>
               </form>
             </div>
           </div>

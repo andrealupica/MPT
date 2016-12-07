@@ -52,7 +52,7 @@
     if(!empty($_POST["cerca"])){
       $where.=" where ";
       $ricerca = $_POST["cerca"];
-      $option = explode("+",$ricerca);
+      $option = explode(" ",$ricerca);
       //print_r($option);
       for($i=0;$i<count($option);$i++){
         $where .=" (ut.ute_cognome like '%".$option[$i]."%' OR ut.ute_nome like '%".$option[$i]."%' OR cl.cla_nome like '%".$option[$i]."%'

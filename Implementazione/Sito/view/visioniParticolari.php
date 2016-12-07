@@ -41,7 +41,7 @@ else{
         <div class="col-xs-10">
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-search"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-            <input type="text" name="cerca" class="form-control" id="search" placeholder="filtraggio+con+più+parole"></input>
+            <input type="text" name="cerca" class="form-control" id="search" placeholder="filtraggio con più parole"></input>
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@ else{
     // funzione per la barra di ricerca
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();
-      var words = value.split('+');
+      var words = value.split(' ');
       $("#table").find("tr").each(function(index) {
         if (index === 0) return;
         var ris = $(this).find("td").text().toLowerCase();

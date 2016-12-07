@@ -2,8 +2,6 @@
   session_start();
   include "../connection.php";
   if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){
-    $query="select cla_nome AS 'nome' from classe order by cla_nome";
-    $result = $newDB->query($query);
   ?>
   <body>
     <script>
@@ -13,12 +11,13 @@
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
-          data:{addCor:valore},
+          data:{addCla:valore},
           success: function(result){
           $("#Gestione").load("view/amministrazioneCreaClasse.php");
           }
         });
       });
+
       $("#buttonRemove").click(function(){
         valore=$("#removeClasse").val();
         //aggiunte queste righe per far funzionare la rimozione della parte nera
@@ -28,8 +27,26 @@
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
-          data:{removeCor:valore},
+          data:{removeCla:valore},
           success: function(result){
+          $("#Gestione").load("view/amministrazioneCreaClasse.php");
+          }
+        });
+      });
+
+      $("#buttonModify").click(function(){
+        id = $("#modifyClasse").val();;
+        nome = $("#"+id).val();
+        //alert(nome+" "+id);
+        $("#myModalM").modal("hide");
+        $("body").removeClass("modal-open");
+        $(".modal-backdrop").remove();
+        $.ajax({
+          type:"POST",
+          url: "model/amministrazione.php",
+          data:{modifyNomeClasse:nome,modifyClasseId:id},
+          success: function(result){
+          //alert(result);
           $("#Gestione").load("view/amministrazioneCreaClasse.php");
           }
         });
@@ -63,14 +80,21 @@
     </div>
     <div>
       <table id="table" class="table col-xs-12">
-        <tr><th>nome della classe</th><th>elimina</th></th>
+        <tr><th>nome della classe</th><th>modifica</th><th>elimina</th></th>
         <?php
+        $query="select cla_nome AS 'nome',cla_id from classe order by cla_nome";
+        $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
           <tr>
-            <td class="col-xs-10"><?php echo $row["nome"];?></td>
+            <td class="col-xs-8"><input type="text" class="form-control" id="<?php echo $row['cla_id'];?>" value="<?php echo $row['nome'];?>"></input></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeClasse').value='<?php echo $row['nome'];?>';">
+              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyClasse').value='<?php echo $row['cla_id'];?>';">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+            </td>
+            <td class="col-xs-2">
+              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeClasse').value='<?php echo $row['cla_id'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>
@@ -99,6 +123,34 @@
               <form method="post" action="">
                 <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
                 <input type="hidden" id="removeClasse" name="removeClasse" required="required"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModalM" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Modifica Classe</h4>
+            </div>
+            <div class="modal-body">
+              <p>sei sicuro di voler modificare la classe?</p>
+              <div class="alert alert-info">
+                <strong>Info!</strong> Le modifiche verranno appportate anche alle altre pagine
+              </div>
+            </div>
+            <div class="modal-footer">
+              <form method="post" action="">
+                <button type="submit" onclick="return false" class="btn btn-default" id="buttonModify">ok</button>
+                <input type="hidden" id="modifyClasse" name="modifyClasse" required="required"/>
               </form>
             </div>
           </div>
