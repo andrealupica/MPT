@@ -76,7 +76,7 @@ else{
               </span>
               <span class="col-md-2 col-xs-3">
                 Ore Annuale Materia
-                <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["AIT"]; echo $ris ?>"/>
+                <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["ore totali"]; echo $ris ?>"/>
               </span>
               <span class="col-md-2 col-xs-3">
                 % ore AIT

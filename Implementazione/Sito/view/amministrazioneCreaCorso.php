@@ -130,7 +130,7 @@
             <div class="modal-body">
               <p>sei sicuro di voler eliminare il corso?</p>
               <div class="alert alert-warning">
-                <strong>Attenzione!</strong> Se il corso è stata inserita in una pianificazione non sarà possibile eliminarlo
+                <strong>Attenzione!</strong> Se il corso è stato inserito in una pianificazione non sarà possibile eliminarlo
               </div>
             </div>
             <div class="modal-footer">
