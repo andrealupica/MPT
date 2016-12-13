@@ -10,8 +10,14 @@
   <script src="bootstrap/js/bootstrap.min.js"></script>
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/index.css" rel="stylesheet">
-
 </head>
+<script>
+$(document).ready(function(){
+  $("#OkRegister").click(function(){
+    $(location).attr('href', 'index.php')
+  });
+});
+</script>
 <body class="body">
   <div class="container contenitore">
     <div class="col-md-16">
@@ -81,6 +87,30 @@
           </div>
 
         </form>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Registrazione effettuata</h4>
+            </div>
+            <div class="modal-body">
+              <p>È stata inviata un'email all'amministratore</p>
+              <div class="alert alert-info">
+                Riceverai un'email quando l'amministratore confermerà la tua registrazione
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" onclick="return false" class="btn btn-default" id="OkRegister">ok</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

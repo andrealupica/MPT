@@ -33,7 +33,7 @@
 							$query = $connect->prepare("insert into utente(ute_nome,ute_cognome,ute_email) values (?,?,?);");
 							$query->bind_param("sss",$nome,$cognome,$email);
 							$query->execute();
-							if($query != false){
+							if($query != false && $query->affected_rows==1){
 								// prende l'email del gestore email
 								$query1 = "select ute_email as 'email' from utente where ute_gestoreEmail='1' limit 1;";
 								if($newDB->query($query1)!= false  && mysqli_num_rows($newDB->query($query1)) == 1){
@@ -53,7 +53,8 @@
 									$mittente = 'From: registrazione MPT <'.$email.'>';
 									// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 									mail($destinatario,$oggetto,$messaggio,$mittente);
-									echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile' </script>";
+									//echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile'</script>";
+									echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
 								}
 								else{
 									echo "error";

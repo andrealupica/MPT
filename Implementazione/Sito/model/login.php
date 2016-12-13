@@ -28,9 +28,10 @@ $pass = "";
 						$newDB->query($queryDeleteAccount);
 						echo  "<script>document.getElementById('errore').innerHTML='l account è stato eliminato poiché non è stato effettuato il login entro il tempo limite'</script>";
 					}
+					$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
+					$newDB->query($query1);
 				}
-				$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
-				$newDB->query($query1);
+
 				// seleziono i tipi del docente che sta facendo il login e li salvo come sessioni
 				$queryTipo ="select ute_docente as 'docente',ute_amministratore as 'amministratore', ute_responsabile as 'responsabile' from utente where ute_email='$user';";
 				if($newDB->query($queryTipo)!= false && mysqli_num_rows($newDB->query($queryTipo)) == 1){
