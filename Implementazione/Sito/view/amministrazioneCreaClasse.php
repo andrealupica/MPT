@@ -164,7 +164,7 @@
     var value = this.value.toLowerCase();
     $("#table").find("tr").each(function(index) {
       if (index === 0) return;
-      var id = $(this).find("td").text().toLowerCase();
+      var id = $(this).find("td").find("input").val().toLowerCase();
       $(this).toggle(id.indexOf(value) !== -1);
     });
   });

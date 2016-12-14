@@ -4,7 +4,7 @@ session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
-  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null order by ute_email;";
+  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null AND ute_temppassword order by ute_email;";
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>

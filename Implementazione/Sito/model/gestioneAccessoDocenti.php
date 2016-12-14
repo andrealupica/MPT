@@ -4,11 +4,11 @@
 
     // se si vuole eliminare l'email
     if(isset($_POST["emailCancellata"])){
-      $email1 = $_POST['email'];
+      $email1 = $_POST['emailCancellata'];
       $query ="delete from utente where ute_email='".$email1."';";
       if($newDB->query($query)!=false){
+				header("Location: gestioneAccessoDocenti.php");
         echo  "<script>document.getElementById('messaggio').innerHTML='email cancellata con successo'</script>";
-        header("Location: gestioneAccessoDocenti.php");
       }
     }
 		// se si vuole gestire i docenti

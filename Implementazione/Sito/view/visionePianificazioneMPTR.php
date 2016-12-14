@@ -30,6 +30,27 @@ else{
     <link href="css/inserimentoOreAIT.css" rel="stylesheet">
   </head>
   <script>
+  $(document).ready(function(){
+    $("#buttonRemove").click(function(){
+      n=$("#removeId").val();
+      //alert(n);
+      docente = $(".riga:nth-child("+n+")").find("span:nth-child(2)").find("input").val();
+      classe  = $(".riga:nth-child("+n+")").find("span:nth-child(4)").find("input").val();
+      corso  = $(".riga:nth-child("+n+")").find("span:nth-child(5)").find("input").val();
+      anno  = $(".riga:nth-child("+n+")").find("span:nth-child(6)").find("input").val();
+      materia  = $(".riga:nth-child("+n+")").find("span:nth-child(3)").find("input").val();
+      $.ajax({
+        type:"POST",
+        url: "model/visionePianificazioneMPTR.php",
+        data:{docente:docente,classe:classe,corso:corso,anno:anno,materia:materia},
+        success: function(result){
+          //alert(result);
+          location.reload();
+        }
+      });
+    });
+
+  });
   </script>
   <body class="body">
     <div class="container contenitore">
@@ -54,7 +75,6 @@ else{
           </div>
         </div>
       </div>
-      <form method="post">
         <div id="docente">
           <div>
             <span>
@@ -62,6 +82,7 @@ else{
             </span>
           </div>
           <?php
+          $cnt=2;
           while($row = $result->fetch_assoc()){
             ?>
             <div class="col-xs-12 riga">
@@ -69,25 +90,25 @@ else{
                 <input type="text" readonly="true" hidden="true"
                 value="<?php echo $row["nome"].$row["cognome"].$row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
               </span>
-              <span class="col-md-3 col-xs-5">
+              <span class="col-md-2 col-xs-5">
                 Docente
-                <input type="text" name="docente[]" class="form-control" readonly="true"  title="<?php echo $row["cognome"]." ".$row["nome"];?>" value="<?php echo  $row["cognome"]." ".$row["nome"];?>" id="<?php echo 'nome'.$i;?>"/>
+                <input type="text" name="docente[]" class="form-control" readonly="true"  title="<?php echo $row["cognome"]." ".$row["nome"];?>" value="<?php echo  $row["cognome"]." ".$row["nome"];?>" id="nome"/>
               </span>
               <span class="col-md-2 col-xs-5">
                 Materia
-                <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
+                <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="materia"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 Classe
-                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"/>
+                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
               </span>
-              <span class="col-md-2 col-xs-4">
+              <span class="col-md-2 col-xs-5">
                 Tipo MP
-                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"/>
+                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="corso"/>
               </span>
-              <span class="col-md-2 col-xs-4 ciclo">
+              <span class="col-md-2 col-xs-5 ciclo">
                 Ciclo Formativo
-                <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="<?php echo $row["inizio anno"];?>"/>
+                <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="anno"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 % AIT
@@ -98,20 +119,56 @@ else{
                 <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
                   class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
               </span>
+              <span class="col-md-1 col-xs-2">
+                Elimina
+                <button class="form-control dettaglio" id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $cnt;?>';" >
+                  <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"/>
+                  <div class="glyphicon glyphicon-remove"></div>
+                </button>
+              </span>
             </div>
             <?php
+            $cnt++;
           }
+
           ?>
         </div>
         <div>
           <label class="col-sm-4 control-label" id="messaggio"></label>
         </div>
-      </form>
+
+      <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalM" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Elimina pianificazione</h4>
+              </div>
+              <div class="modal-body">
+                <p>sei sicuro di voler eliminare la pianificazione?</p>
+                <div class="alert alert-danger">
+                  <strong>Attezione!</strong> L'eliminazione è irreversibile
+                </div>
+              </div>
+              <div class="modal-footer">
+                <form method="post" action="">
+                  <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
+                  <input type="hidden" id="removeId" name="remove" required="required"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script>
     // funzione per la barra di ricerca
     $("#search").keyup(function() {
-      var value = this.value.toLowerCase();;
+      var value = this.value.toLowerCase();
       $("#docente").find(".riga").each(function(index) {
         var id = $(this).find("span").find("input").val().toLowerCase();
         $(this).toggle(id.indexOf(value) !== -1);

@@ -18,7 +18,6 @@
 	if(isset($_POST["modifyNomeMateria"]) && !empty($_POST["modifyNomeMateria"]) && isset($_POST["modifyMateriaId"]) && !empty($_POST["modifyMateriaId"])){
 		$materia = $_POST["modifyNomeMateria"];
 		$id = $_POST["modifyMateriaId"];
-		// se non è presente in nessuna prianificazione
 		$query = "update materia set mat_nome='".$materia."' where mat_id='".$id."'";
 		if($newDB->query($query) != false){
 		}
@@ -29,9 +28,10 @@
 	// rimozione della materia
 	if(isset($_POST["removeMat"])){
 		$materia = $_POST["removeMat"];
-		// se non è presente in nessuna pianificazione
 		$query = "select * from pianifica p,materia m where p.mat_id=m.mat_id && m.mat_nome='".$materia."'";
+		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
+			// allora puoi eliminarla
 			$query = "delete from materia where mat_id='".$materia."'";
 			if($newDB->query($query) != false){
 			}
@@ -39,9 +39,6 @@
 			}
 		}
 	}
-
-
-
 
 	### parte per la pagina di creazione corso
 	// inserimento del corso
@@ -58,7 +55,6 @@
 		$corso = $_POST["modifyNomeCorso"];
 		$durata = $_POST["modifyCorsoDurata"];
 		$id = $_POST["modifyCorsoId"];
-		// se non è presente in nessuna prianificazione
 		$query = "update corso set cor_nome='".$corso."', cor_durata='".$durata."' where cor_id='".$id."'";
 		if($newDB->query($query) != false){
 		}
@@ -68,9 +64,10 @@
 	// rimozione del corso
 	if(isset($_POST["removeCor"])){
 		$corso = $_POST["removeCor"];
-		// se non è presente in nessuna prianificazione
 		$query = "select * from pianifica p,corso c where p.cor_id=c.cor_id && c.cor_id='".$corso."'";
+		// se non è presente in nessuna prianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
+			// allora puoi eliminarlo
 			$query = "delete from corso where cor_id='".$corso."'";
 			if($newDB->query($query) != false){
 			}
@@ -91,19 +88,20 @@
 	if(isset($_POST["modifyNomeClasse"]) && !empty($_POST["modifyNomeClasse"]) && isset($_POST["modifyClasseId"]) && !empty($_POST["modifyClasseId"])){
 		$corso = $_POST["modifyNomeClasse"];
 		$id = $_POST["modifyClasseId"];
-		// se non è presente in nessuna prianificazione
 		$query = "update classe set cla_nome='".$corso."' where cla_id='".$id."'";
 		if($newDB->query($query) != false){
 		}
 		else{
 		}
 	}
+
 	// rimozione della classe
 	if(isset($_POST["removeCla"])){
 		$classe = $_POST["removeCla"];
-		// se non è presente in nessuna pianificazione
 		$query = "select * from pianifica p,classe cl where p.mat_id=cl.cla_id && cl.cla_id='".$classe."'";
+		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
+			// allora puoi eliminarla
 			$query = "delete from classe where cla_id='".$classe."'";
 			if($newDB->query($query) != false){
 			}
@@ -113,19 +111,21 @@
 	}
 	// inserimento della gestione
 	if(isset($_POST["addCorso"]) && !empty($_POST["addCorso"]) && isset($_POST["addClasse"]) && !empty($_POST["addClasse"])){
-		$classe=$_POST["addClasse"];
-		$corso=$_POST["addCorso"];
-    //$query="select f.cla_id as 'classe',f.cor_id as 'corso' from cla_fre_cor f,classe cl, corso co where co.cor_id=f.cor_id AND cl.cla_id=f.cla_id;";
-		$queryIdClasse = "SELECT cla_id FROM classe WHERE cla_nome='".$classe."'";
-		//echo $queryIdClasse;
-		$result = $newDB->query($queryIdClasse);
-		$row = $result->fetch_assoc();
-		$claId=$row['cla_id'];
-		$queryIdCorso = "select cor_id from corso where cor_nome='".$corso."'";
-		$result = $newDB->query($queryIdCorso);
-		$row = $result->fetch_assoc();
-		$corId = $row['cor_id'];
+		// se non sono stati lasciati i valori di default
 		if($corso!="-- corso --" && $classe!="-- classe --"){
+			$classe=$_POST["addClasse"];
+			$corso=$_POST["addCorso"];
+			// selezione l'id della classe
+			$queryIdClasse = "SELECT cla_id FROM classe WHERE cla_nome='".$classe."'";
+			$result = $newDB->query($queryIdClasse);
+			$row = $result->fetch_assoc();
+			$claId=$row['cla_id'];
+			// seleziona l'id del corso
+			$queryIdCorso = "select cor_id from corso where cor_nome='".$corso."'";
+			$result = $newDB->query($queryIdCorso);
+			$row = $result->fetch_assoc();
+			$corId = $row['cor_id'];
+			// inserisci nella tabella cla_fre_cor la classe e il suo corso
 			$query ="insert into cla_fre_cor(cla_id,cor_id) values('".$claId."','".$corId."')";
 			if($newDB->query($query) != false){
 			}
@@ -137,17 +137,18 @@
 		$gest=explode("+",$_POST["removeGestione"]);
 		$classe=$gest[0];
 		$corso=$gest[1];
+		// seleziona l'id della classe
 		$queryIdClasse = "SELECT cla_id FROM classe WHERE cla_nome='".$classe."'";
-		//echo $queryIdClasse;
 		$result = $newDB->query($queryIdClasse);
 		$row = $result->fetch_assoc();
 		$claId=$row['cla_id'];
+		// seleziona l'id del corso
 		$queryIdCorso = "select cor_id from corso where cor_nome='".$corso."'";
 		$result = $newDB->query($queryIdCorso);
 		$row = $result->fetch_assoc();
 		$corId = $row['cor_id'];
+		// elimina l'associazione classe-corso
 		$query = "delete from cla_fre_cor where cla_id='".$claId."' AND cor_id='".$corId."'";
-		//echo $query;
 		if($newDB->query($query) != false){
 		}
 		else{
