@@ -21,9 +21,7 @@
 		//inserisco la data di iscrizione massima
 		//controllare poiché non funziona
 		$query = "UPDATE utente SET ute_dataIscrizione='".$date."' where ute_email='".$email."';";
-		//echo $query;
 		// se la query ha avuto successo allora invia l'email segnalando l'iscrizione
-		// la query funziona sempre perché è un update!!!!!
 		if($newDB->query($query)!= false){
 			mail($destinatario,$oggetto,$messaggio,$mittente);
 			echo "email inviata al docente";

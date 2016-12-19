@@ -17,7 +17,8 @@
       // se gli input delle prime righe non sono vuoti
     	if(!empty($nome[0]) && !empty($nome[1]) && !empty($cognome[0]) && !empty($cognome[1]) && $materia[0]!="" && $materia[1]!="" && !empty($ore[0]) && !empty($ore[1])  && !empty($_POST['ciclo']) &&  !empty($_POST['ciclo2']) && !empty($_POST['classe']) && !empty($_POST['corso']) ){
         $queryEmail="";
-        $controllo=0;
+        $controllo=array();
+        // check di errori
         for ($j=0; $j < count($cognome)-1; $j++) {
           // se il 4 campo fosse vuoto allora fa niente
           if($j==3 && empty($cognome[$j]) && empty($nome[$j]) && empty($ore[$j]) ){
@@ -32,19 +33,19 @@
             $nome[$j]=ucfirst(strtolower($nome[$j]));
             $cognome[$j]=ucfirst(strtolower($cognome[$j]));
             $queryEmail ="select ute_email as 'email' from utente where ute_nome='$nome[$j]' && ute_cognome='$cognome[$j]';";
-            //echo "<br>".$queryEmail;
-            if($newDB->query($queryEmail)!= false){
 
+            // eseguo la query e se funziona setto la posizione dell'array a 0
+            if($newDB->query($queryEmail)!= false && mysqli_num_rows($newDB->query($queryEmail)) == 1){
+              $controllo[$j]=0;
             }
+            // altrimenti se da errore inserisco nella posizione dell'array un 1
             else{
-              $controllo=1;
+              $controllo[$j]=1;
             }
-          //  echo $controllo;
           }
-        //  echo $queryEmail;
         }
         // se non ci sono stati errori sul nome del docente o se i dati sono stati riempiti
-        if($controllo==0){
+        if(in_array(1,$controllo)!=true){
           for ($i=0; $i < count($cognome)-1; $i++) {
             if($i==3 && empty($cognome[$i]) && empty($nome[$i])){
 
@@ -85,21 +86,21 @@
               $queryPianifica->bind_param("siiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i]);
               // se non ci sono problemi nella query mostro un messaggio positivo
               if($queryPianifica->execute()!=false){
-                  echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!'</script>";
+                  echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!';document.getElementById('messaggio').setAttribute('class','control-label alert alert-success')</script>";
               }
               else{
-                  echo  "<script>document.getElementById('messaggio').innerHTML='errore durante il salvataggio dei dati'</script>";
+                  echo  "<script>document.getElementById('messaggio').innerHTML='errore durante il salvataggio dei dati';document.getElementById('messaggio').setAttribute('class','control-label alert alert-danger')</script>";
               }
             }
           }
         }
         else{
-          echo  "<script>document.getElementById('messaggio').innerHTML='errore, qualche docente non esiste o campo ore vuoto'</script>";
+          echo  "<script>document.getElementById('messaggio').innerHTML='errore, qualche docente non esiste o campo ore vuoto';document.getElementById('messaggio').setAttribute('class','control-label alert alert-danger')</script>";
         }
 
       }
       else{
-        	echo  "<script>document.getElementById('messaggio').innerHTML='inserisci tutti i campi in almeno le prime 2 righe e nella riga finale'</script>";
+        	echo  "<script>document.getElementById('messaggio').innerHTML='inserisci tutti i campi in almeno le prime 2 righe e nella riga finale';document.getElementById('messaggio').setAttribute('class','control-label alert alert-warning')</script>";
       }
     }
  ?>

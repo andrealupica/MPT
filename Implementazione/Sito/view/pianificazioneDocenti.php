@@ -186,9 +186,11 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
           </span>
         </div>
         <div>
-          <label class="col-xs-4 control-label" id="messaggio"></label>
+          <span class="col-xs-6">
+          <label class="col-xs-12 control-label" id="messaggio"></label>
+          </span>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="col-md-9"></div>
           <div class="col-xs-6 col-md-3">
             <button type="submit" class="btn btn-secondary">

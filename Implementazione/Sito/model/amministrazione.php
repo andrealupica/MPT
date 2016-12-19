@@ -61,6 +61,7 @@
 		else{
 		}
 	}
+
 	// rimozione del corso
 	if(isset($_POST["removeCor"])){
 		$corso = $_POST["removeCor"];
@@ -109,6 +110,7 @@
 			}
 		}
 	}
+
 	// inserimento della gestione
 	if(isset($_POST["addCorso"]) && !empty($_POST["addCorso"]) && isset($_POST["addClasse"]) && !empty($_POST["addClasse"])){
 		// se non sono stati lasciati i valori di default

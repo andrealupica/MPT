@@ -67,21 +67,21 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
                 Materia
                 <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
               </span>
-              <span class="col-md-2 col-xs-2">
+              <span class="col-md-1 col-xs-2">
                 Classe
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"/>
               </span>
-              <span class="col-md-3 col-xs-5">
+              <span class="col-md-3 col-xs-4">
                 Tipo MP
                 <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"/>
               </span>
-              <span class="col-md-2 col-xs-4 ciclo">
+              <span class="col-md-2 col-xs-5 ciclo">
                 Ciclo Formativo
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="<?php echo $row["inizio anno"];?>"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-2 col-xs-2">
                 Ore_AIT
-                <input type="text" class="form-control" name="ore[]"  value="<?php echo $row["AIT"]; ?>" id="ore"/>
+                <input type="number" class="form-control" name="ore[]"  min="0" value="<?php echo $row["AIT"]; ?>" id="ore"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 % AIT
@@ -97,12 +97,12 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
             }
             ?>
           </div>
-          <div>
-            <label class="col-sm-4 control-label" id="messaggio"></label>
-          </div>
-          <div class="col-md-12  salva">
-            <div class="col-sm-9"></div>
-            <div class="col-sm-6 col-md-3">
+
+          <div class="col-xs-12 salva">
+            <div class="col-xs-9" >
+              <label class="col-xs-9 alert alert-warning" id="messaggio">le modifiche verranno apportate solo con il pulsante salva</label>
+            </div>
+            <div class="col-md-3">
               <button type="submit" class="btn btn-secondary">
                 <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
               </button>
@@ -112,11 +112,11 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
       </div>
       <script>
         $("#search").keyup(function() {
-          var value = this.value;
+          var value = this.value.toLowerCase();
           //alert("value"+value);
           $("#docente").find(".riga").each(function(index) {
             //alert(index);
-            var id = $(this).find("span").find("input").val();
+            var id = $(this).find("span").find("input").val().toLowerCase();
             $(this).toggle(id.indexOf(value) !== -1);
           });
         });
