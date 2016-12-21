@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-11-01" view-index="0" gantt-divider-location="561" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2016-08-01" view-index="0" gantt-divider-location="561" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
     <view zooming-state="default:8" id="gantt-chart">
         <field id="tpd3" name="Nome" width="38" order="0"/>
@@ -50,6 +50,7 @@
             <task id="32" name="Design delle interfacce" color="#8cb6ce" meeting="false" start="2016-09-08" duration="1" complete="0" expand="true"/>
         </task>
         <task id="45" name="Gita Scolastica" color="#0033cc" meeting="false" start="2016-09-12" duration="6" complete="0" expand="true"/>
+        <task id="158" name="Esame di economia" color="#8cb6ce" meeting="false" start="2016-09-29" duration="1" complete="0" expand="true"/>
         <task id="49" name="Implementazione" color="#000000" meeting="false" start="2016-09-20" duration="48" complete="0" expand="true">
             <task id="59" name="Creazione DB" color="#8cb6ce" meeting="false" start="2016-09-20" duration="1" complete="0" expand="true"/>
             <task id="73" name="Sito Web" color="#000000" meeting="false" start="2016-09-21" duration="47" complete="0" expand="true">
@@ -97,6 +98,8 @@
                 </task>
             </task>
         </task>
+        <task id="160" name="Presentazione progetto" meeting="false" start="2016-10-25" duration="1" complete="0" expand="true"/>
+        <task id="161" name="Giornata a Friborgo" color="#8cb6ce" meeting="false" start="2016-11-23" duration="1" complete="0" expand="true"/>
         <task id="157" name="online sull'altro server" color="#8cb6ce" meeting="false" start="2016-11-29" duration="1" complete="0" expand="true"/>
         <task id="128" name="ev correzioni" color="#8cb6ce" meeting="false" start="2016-11-29" duration="2" complete="0" expand="true"/>
         <task id="57" name="Consegna Intermedia" color="#8cb6ce" meeting="true" start="2016-12-01" duration="0" complete="0" expand="true"/>

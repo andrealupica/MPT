@@ -88,7 +88,7 @@ else{
               <td ><?php echo $row['corso'] ?></td>
               <td ><?php echo $row['classe'] ?></td>
               <td ><?php echo $row['durata'] ?></td>
-              <td ><?php echo $row['AIT'] ?></td>
+              <td ><?php echo $row['ore totali'] ?></td>
               <td ><?php echo $row['inizio anno']." -- ".$row["fine anno"] ?></td>
               <td ><?php echo $row['AIT']/$row['ore totali']*100 ?></td>
             </tr>

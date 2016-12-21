@@ -35,7 +35,7 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ore"])){
-      $colonne.="pi.pia_ore_tot AS 'ore totali',";
+      $colonne.="pi.pia_ore_tot AS 'ore annuali',";
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ciclo"])){
@@ -43,17 +43,15 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["AIT"])){
-      $colonne.="CONCAT(pi.pia_ore_AIT,'%') as 'AIT',";
+      $colonne.="CONCAT(ROUND(if(pi.pia_ore_AIT is null,0,pi.pia_ore_AIT)/pia_ore_tot*100,2),'%') as 'AIT',";
     }
     // cancella l'ultima virgola della SELECT
     $colonne=substr($colonne,0,count($colonne)-2);
-    //echo $colonne."<br>";
     // filtraggio della barra di ricerca tramite where
     if(!empty($_POST["cerca"])){
       $where.=" where ";
       $ricerca = $_POST["cerca"];
       $option = explode(" ",$ricerca);
-      //print_r($option);
       for($i=0;$i<count($option);$i++){
         $where .=" (ut.ute_cognome like '%".$option[$i]."%' OR ut.ute_nome like '%".$option[$i]."%' OR cl.cla_nome like '%".$option[$i]."%'
         OR ma.mat_nome like '%".$option[$i]."%' OR co.cor_nome like '%".$option[$i]."%' OR co.cor_durata like '%".$option[$i]."%' OR pi.pia_ini_anno like '%".$option[$i]."%'
@@ -68,7 +66,7 @@
     JOIN classe cl ON cl.cla_id = pi.cla_id
     JOIN materia ma ON ma.mat_id = pi.mat_id
     JOIN corso co ON co.cor_id = pi.cor_id
-    JOIN utente ut ON ut.ute_email = pi.ute_email".$where.";";
+    JOIN utente ut ON ut.ute_email = pi.ute_email ".$where.";";
     $result = $newDB->query($query);
     $queryEmail = "SELECT CONCAT(ute_cognome,' ',ute_nome) AS 'utente' FROM utente WHERE ute_email ='".$_SESSION['email']."';";
     $resultQuery = $newDB->query($queryEmail);
@@ -85,7 +83,7 @@
       function Header()
       {
           $date = time();
-          $date = date("Y-m-d h:i:s",$date);
+          $date = date("d/m/Y H:i",$date);
           // Arial bold 15
           $this->SetFont('Arial','',12);
           // utente
@@ -113,18 +111,18 @@
       array_push($title,$nome);
     }
     //cella di spazio laterale sinistro
-    $pdf->Cell(10,7,"",0,0,'L',0);
+  //  $pdf->Cell(10,7,"",0,0,'L',0);
     // set della grandezza a dipendenza di quale colonna stiamo parlando
     for ($i=0; $i < count($title); $i++) {
       switch ($title[$i]){
           case 'AIT':
           case 'durata':
-          case 'ore totali':
           case 'classe':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
+          case 'ore annuali':
               $width=30;
               break;
           default:
@@ -141,19 +139,19 @@
     // faccio un while riga per riga cosi da avere una select per ciclo
     while($row = $result->fetch_array()){
       //cella di spazio laterale sinistro
-      $pdf->Cell(10,7,"",0,0,'L',0);
+    //  $pdf->Cell(10,7,"",0,0,'L',0);
       // faccio un for colonna per colonna per avere la colonna a dipendeza della riga
       for ($j=0; $j < $result->field_count; $j++) {
         // setto la larghezza delle celle
         switch ($title[$j]){
           case 'AIT':
           case 'classe':
-          case 'ore totali':
           case 'durata':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
+          case 'ore annuali':
               $width=30;
               break;
           default:

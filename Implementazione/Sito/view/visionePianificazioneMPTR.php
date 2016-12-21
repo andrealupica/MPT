@@ -174,7 +174,7 @@ else{
         $(this).toggle(id.indexOf(value) !== -1);
       });
     });
-</script>
+    </script>
 </body>
 </html>
 <?php

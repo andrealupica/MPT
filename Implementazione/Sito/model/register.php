@@ -45,15 +45,14 @@
 								$password = implode(randomPassword());
 								$query2 = "update utente set ute_password='".md5($password)."', ute_temppassword=1 where ute_email='".$email."';";
 								if($newDB->query($query2)!= false){
-									//echo $query2;
 									// invio dell'email
 									$oggetto = " registrazione di ".$email. "";
-									// bisogna ricordarsi di cambiare questo percorso !!
-									$messaggio ="clicca questo link per accettare la registrazione: http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-13)."/confirmRegister.php?param=".$email."&password=".$password."";
+									// in questo modo il percorso cambia a dipendenza di dove si trova il sito.
+									$messaggio ="clicca questo link per accettare la registrazione:
+									http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-13)."/confirmRegister.php?param=".$email."&password=".$password."";
 									$mittente = 'From: registrazione MPT <'.$email.'>';
 									// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 									mail($destinatario,$oggetto,$messaggio,$mittente);
-									//echo  "<script>document.getElementById('errore').innerHTML='email inviata al responsabile'</script>";
 									echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
 								}
 								else{
