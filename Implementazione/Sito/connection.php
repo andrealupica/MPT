@@ -18,7 +18,7 @@
 			$this->start();
 		}
 
-		// titorna al connessione al DB
+		// ritorna la connessione al DB
 		public function getconnection(){
 			return $this->newDB;
 		}
