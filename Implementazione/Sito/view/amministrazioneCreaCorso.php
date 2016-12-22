@@ -1,3 +1,4 @@
+<!-- pagina per la creazione dei corsi -->
 <?php
   session_start();
   include "../connection.php";

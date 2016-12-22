@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- pagina che viene visualizzata nel momento in cui si cerca di accedere in una pagina dove non si hanno i permessi per accedervi -->
 <html lang="it">
 <head>
   <meta charset="utf-8">

@@ -48,7 +48,7 @@
 						else{
 						}
 					}
-					// creazione della query ed esequzione
+					// creazione della query ed esecuzione
 	        $queryModify = "update utente set ute_docente='".$isdocente."', ute_responsabile='".$isresponsabile."', ute_gestoreEmail='".$isgestore."' where ute_email='".$email['email']."';";
 					$newDB->query($queryModify);
 	      }

@@ -82,6 +82,7 @@
               $ris=$newDB->query($queryIdClasse);
               $dum= $ris->fetch_assoc();
               $idClasse =  $dum['id'];
+              // eseguo la query di insert
               $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values(?,?,?,?,?,?,?)");
               $queryPianifica->bind_param("siiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i]);
               // se non ci sono problemi nella query mostro un messaggio positivo

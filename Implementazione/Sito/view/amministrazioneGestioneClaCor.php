@@ -1,3 +1,4 @@
+<!-- pagina per la gestione dei select corsi-classi -->
 <?php
   session_start();
   include "../connection.php";
@@ -9,13 +10,11 @@
       $("#buttonAdd").click(function(){
         cor=$("#addCorso").val();
         cla=$("#addClasse").val();
-        //alert(cla+"  "+cor);
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
           data:{addCorso:cor,addClasse:cla},
           success: function(result){
-          //alert(result);
           $("#Gestione").load("view/amministrazioneGestioneClaCor.php");
           }
         });

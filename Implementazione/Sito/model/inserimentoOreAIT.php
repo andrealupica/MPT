@@ -20,7 +20,6 @@
         $idClasse = $row['id'];
         //prendo l'id della materia
         $query="select mat_id as 'id' from materia where mat_nome='".$materia[$i]."'";
-        //echo $query;
         $result = $newDB->query($query);
         $row = $result->fetch_assoc();
         $idMateria = $row['id'];

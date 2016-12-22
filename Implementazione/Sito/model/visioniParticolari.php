@@ -9,9 +9,7 @@
   $query="";
   $colonne="";
   $where="";
-  // funziona quando il bottone viene cliccato poiché nel momento in cui viene
-  //cliccato il bottone viene inviato un post del cerca (anche se è vuoto) al
-  //contrario dei checkbox che non vengono settati se non checkati
+  // faccio un controllo se sono stati inviati come post i checkbox, se sono checkati verranno inviati come post, altrimenti no
   if(isset($_POST["cerca"])){
     // se è checckato il docente allora seleziona il nome e il cognome del docente
     if(isset($_POST["docente"])){

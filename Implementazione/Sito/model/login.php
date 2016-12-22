@@ -22,7 +22,7 @@ $pass = "";
 					$row = $result->fetch_assoc();
 					$data = $row['data'];
 					$today_date = date("Y-m-d");
-					// se la data è superiore allora la scadenza è scaduta e viene eliminata la sua email
+					// se la data è superiore allora l'iscrizione è scaduta e viene eliminata la sua email
 					if ($data<$today_date && $data!=null){
 						$queryDeleteAccount = "delete from utente where ute_email='".$user."';";
 						$newDB->query($queryDeleteAccount);

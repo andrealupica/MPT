@@ -1,3 +1,4 @@
+<!-- pagina per la creazione delle classi -->
 <?php
   session_start();
   include "../connection.php";
