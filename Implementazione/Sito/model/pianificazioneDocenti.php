@@ -46,7 +46,7 @@
         }
         // se non ci sono stati errori sul nome del docente o se i dati sono stati riempiti
         if(in_array(1,$controllo)!=true){
-          for ($i=0; $i < count($cognome)-1; $i++) {
+          for ($i=0; $i <= count($cognome)-1; $i++) {
             if($i==3 && empty($cognome[$i]) && empty($nome[$i])){
 
             }
@@ -83,6 +83,7 @@
               $dum= $ris->fetch_assoc();
               $idClasse =  $dum['id'];
               // eseguo la query di insert
+              // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";
               $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values(?,?,?,?,?,?,?)");
               $queryPianifica->bind_param("siiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i]);
               // se non ci sono problemi nella query mostro un messaggio positivo

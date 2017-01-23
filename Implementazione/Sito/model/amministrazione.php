@@ -28,7 +28,7 @@
 	// rimozione della materia
 	if(isset($_POST["removeMat"])){
 		$materia = $_POST["removeMat"];
-		$query = "select * from pianifica p,materia m where p.mat_id=m.mat_id && m.mat_nome='".$materia."'";
+		$query = "select * from pianifica p,materia m where p.mat_id=m.mat_id && m.mat_id='".$materia."'";
 		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
 			// allora puoi eliminarla
@@ -99,7 +99,7 @@
 	// rimozione della classe
 	if(isset($_POST["removeCla"])){
 		$classe = $_POST["removeCla"];
-		$query = "select * from pianifica p,classe cl where p.mat_id=cl.cla_id && cl.cla_id='".$classe."'";
+		$query = "select * from pianifica p,classe cl where p.cla_id=cl.cla_id && cl.cla_id='".$classe."'";
 		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
 			// allora puoi eliminarla

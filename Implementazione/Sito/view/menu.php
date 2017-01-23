@@ -56,6 +56,7 @@
       }
      ?>
   </div>
+  <h8 style="margin-top:30px;position:fixed;bottom:5px;right:5px;">Realizzato da:Andrea Lupica</h8>
 </body>
 </html>
 <?php

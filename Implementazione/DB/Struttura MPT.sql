@@ -7,7 +7,7 @@ create table utente(
 	ute_cognome varchar(30),
 	ute_email varchar(50) primary key,
 	ute_password varchar(50),
-    ute_dataIscrizione datetime,
+    ute_dataIscrizione datetime default '0000-00-00 00:00:00',
     ute_gestoreEmail int default null,
 	ute_temppassword int default 1,
 	ute_docente int default 1,
@@ -53,6 +53,7 @@ create table cla_fre_cor(
 );
 
 create table pianifica(
+	pia_id int primary key auto_increment,
 	ute_email varchar(50),
 	cla_id int,
 	mat_id int,
@@ -61,7 +62,7 @@ create table pianifica(
 	pia_fin_anno int,
 	pia_ore_tot int,
 	pia_ore_AIT int,
-	primary key(ute_email,cla_id,mat_id,pia_ini_anno,cor_id),
+	pia_sem int,
 	foreign key(ute_email) references utente(ute_email)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION,
