@@ -9,28 +9,39 @@
 			$email = $_POST["email"];
 			// se le due email combaciano
 			if($reemail == $email){
-				$query1 = "select ute_email from utente where ute_email='".$email."';";
-				if($newDB->query($query1) != false && mysqli_num_rows($newDB->query($query1)) == 1){
-					$pass = implode(randomPassword());
-					$query = "update utente set ute_password='".md5($pass)."', ute_temppassword=1 where ute_email='".$email."';";
-					echo $query;
-					if($newDB->query($query)!= false){
-						// creazione dell'email
-							$destinatario = $email;
-							$oggetto = " modifica della password di: ".$email. "";
-							$messaggio ="la tua nuova password è:".$pass;
-							$tipoMessaggio = "Content-Type: text/html";
-							$mittente =  'From: "sito MPT" <'.$_SERVER["SERVER_NAME"].'>';
-							// dopo l'invio dell'email reindirizza alla pagina di login
-							mail($destinatario,$oggetto,$messaggio,$mittente);
-							header("Location: index.php");
+				try{
+					$query1 = $newDB->getConnection()->prepare("SELECT ute_email as 'email' from utente where ute_email=?");
+					$query1->bind_param("s", $email);
+					$query1->execute();
+					$query1->close();
+					$query1 = "select ute_email from utente where ute_email='".$email."';";
+					if($newDB->query($query1) != false && mysqli_num_rows($newDB->query($query1)) == 1){
+						$pass = implode(randomPassword());
+						$query = "update utente set ute_password='".md5($pass)."', ute_temppassword=1 where ute_email='".$email."';";
+						echo $query;
+						if($newDB->query($query)!= false){
+							// creazione dell'email
+								$destinatario = $email;
+								$oggetto = " modifica della password di: ".$email. "";
+								$messaggio ="la tua nuova password è:".$pass;
+								$tipoMessaggio = "Content-Type: text/html";
+								$mittente =  'From: "sito MPT" <'.$_SERVER["SERVER_NAME"].'>';
+								// dopo l'invio dell'email reindirizza alla pagina di login
+								mail($destinatario,$oggetto,$messaggio,$mittente);
+								header("Location: index.php");
+						}
+						else{
+							echo  "<script>document.getElementById('messaggio').innerHTML='errore'</script>";
+						}
 					}
-					else{
-						echo  "<script>document.getElementById('messaggio').innerHTML=errore</script>";
+					else
+					{
+						echo  "<script>document.getElementById('messaggio').innerHTML='errore, l email potrebbe non essere stata registrata'</script>";
 					}
 				}
-				else{
-					echo  "<script>document.getElementById('messaggio').innerHTML=errore, l email potrebbe non essere stata registrata</script>";
+				catch(PDOException $e)
+				{
+					echo  "<script>document.getElementById('messaggio').innerHTML='errore, l email potrebbe non essere stata registrata'</script>";
 				}
 			}
 			else{

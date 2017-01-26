@@ -72,7 +72,9 @@
               $idMateria = $dum['id'];
 
               $oreTotali = $ore[$i];
-
+              if($oreTotali<0){
+                $oreTotali=0;
+              }
               $queryIdCorso = "select cor_id as 'id' from corso where cor_nome='$corso'";
               $ris=$newDB->query($queryIdCorso);
               $dum= $ris->fetch_assoc();

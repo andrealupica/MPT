@@ -54,7 +54,7 @@
 								<span class="glyphicon glyphicon-question-sign"></span> Password Dimenticata
 							</a>
 						</div>
-						<div class="col-xs-0 col-sm-2"></div>
+						<div class="col-xs-0 col-sm-1"></div>
 						<div>
 							<label class="cols-sm-3 control-label" id="errore"></label>
 						</div>

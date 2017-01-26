@@ -1,0 +1,52 @@
+
+.body {
+	margin-top: 10px;
+ 	margin-bottom: 50px;
+}
+
+.contenitore {
+		min-width: 525px;
+}
+
+.bottone{
+	margin-top:10px;
+}
+
+.header{
+	margin-bottom:50px;
+}
+
+#search{
+	max-width: 400px;
+}
+
+.opzione{
+	float:right;
+	display: inline;
+}
+
+.salva{
+  margin-top:15px;
+}
+
+.riga{
+	margin-top:20px;
+}
+
+.input-group-addon{
+	top:0px;
+}
+span{
+	margin-top:20px;
+}
+.button{
+	margin-top:-1px;
+}
+.dettaglio{
+	text-align: center;
+}
+
+.col-md-1,.col-md-2{
+	padding-left: 7px;
+	padding-right: 7px;
+}

@@ -103,7 +103,7 @@ else{
               Ciclo Formativo
               <table>
                 <tr>
-                  <td class="col-xs-5">
+                  <td class="col-xs-5" style="padding-left:0px;">
                     <span>
                       <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $Ianno;?>" ></input>
                     </span>

@@ -157,7 +157,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
             Ciclo Formativo
             <table>
               <tr>
-                <td class="col-xs-5">
+                <td class="col-xs-5" style="padding-left:0px;">
                   <span>
                     <select name="ciclo" id="ciclo" class="form-control">
                       <?php

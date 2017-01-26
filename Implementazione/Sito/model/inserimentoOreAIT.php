@@ -30,6 +30,9 @@
         $idCorso = $row['id'];
 				// prendo le ore
         $nOre=$ore[$i];
+				if($nOre<0){
+					$nOre=0;
+				}
 				// prendo solamente i primi 4 caratteri dle post inizio
 				$inizio[$i]=substr($inizio[$i],0,4);
 				// faccio un prepared statement

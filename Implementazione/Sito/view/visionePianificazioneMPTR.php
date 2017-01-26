@@ -27,7 +27,7 @@ else{
     <script src="script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/inserimentoOreAIT.css" rel="stylesheet">
+    <link href="css/visionePianificazioneMPTR.css" rel="stylesheet">
   </head>
   <script>
   $(document).ready(function(){
@@ -53,7 +53,8 @@ else{
   });
   </script>
   <body class="body">
-    <div class="container contenitore">
+    <div class="col-xs-0 col-md-1"></div>
+    <div class="col-xs-12 col-lg-10">
       <div class="header">
         <span class="opzione">
           <a class="btn btn-primary" href="menu.php">
@@ -94,7 +95,7 @@ else{
                 Docente
                 <input type="text" name="docente[]" class="form-control" readonly="true"  title="<?php echo $row["cognome"]." ".$row["nome"];?>" value="<?php echo  $row["cognome"]." ".$row["nome"];?>" id="nome"/>
               </span>
-              <span class="col-md-2 col-xs-5">
+              <span class="col-md-1 col-xs-5">
                 Materia
                 <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="materia"/>
               </span>
@@ -102,13 +103,17 @@ else{
                 Classe
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
               </span>
-              <span class="col-md-2 col-xs-5">
+              <span class="col-md-2 col-xs-4">
                 Tipo MP
                 <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="corso"/>
               </span>
-              <span class="col-md-2 col-xs-5 ciclo">
+              <span class="col-md-2 col-xs-4 ciclo">
                 Ciclo Formativo
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="anno"/>
+              </span>
+              <span class="col-md-1 col-xs-2">
+                Sem
+                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 % AIT

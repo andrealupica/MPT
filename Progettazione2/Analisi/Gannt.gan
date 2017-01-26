@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-01-09" view-index="0" gantt-divider-location="674" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-01-02" view-index="0" gantt-divider-location="674" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
-    <view zooming-state="default:6" id="gantt-chart">
+    <view zooming-state="default:7" id="gantt-chart">
         <field id="tpd3" name="Nome" width="47" order="0"/>
         <field id="tpd4" name="Data d'inizio" width="25" order="1"/>
         <field id="tpd5" name="Data di fine" width="27" order="2"/>
     </view>
     <view id="resource-table">
-        <field id="0" name="Nome" width="56" order="0"/>
-        <field id="1" name="Ruolo predefinito" width="43" order="1"/>
+        <field id="0" name="Nome" width="50" order="0"/>
+        <field id="1" name="Ruolo predefinito" width="50" order="1"/>
     </view>
     <!-- -->
     <calendars>
@@ -47,29 +47,30 @@
         </task>
         <task id="6" name="Implementazione" meeting="false" start="2017-01-26" duration="54" complete="0" expand="true">
             <task id="21" name="Modifica del DB" meeting="false" start="2017-01-26" duration="3" complete="0" expand="true"/>
-            <task id="22" name="Sito web" meeting="false" start="2017-01-31" duration="28" complete="0" expand="true">
-                <task id="23" name="Modifica di tutte le pagine" meeting="false" start="2017-01-31" duration="5" complete="0" expand="true"/>
-                <task id="31" name="Pagina di proposte" meeting="false" start="2017-02-07" duration="5" complete="0" expand="true">
-                    <task id="32" name="creazione pagina" meeting="false" start="2017-02-07" duration="2" complete="0" expand="true"/>
-                    <task id="33" name="gestione dati" meeting="false" start="2017-02-09" duration="3" complete="0" expand="true"/>
+            <task id="22" name="Sito web" meeting="false" start="2017-01-30" duration="34" complete="0" expand="true">
+                <task id="23" name="Modifica di tutte le pagine" meeting="false" start="2017-01-30" duration="4" complete="0" expand="true"/>
+                <task id="31" name="Pagina di proposte" meeting="false" start="2017-02-06" duration="6" complete="0" expand="true">
+                    <task id="32" name="creazione pagina" meeting="false" start="2017-02-06" duration="2" complete="0" expand="true"/>
+                    <task id="33" name="gestione dati" meeting="false" start="2017-02-08" duration="4" complete="0" expand="true"/>
                 </task>
-                <task id="43" name="Pagina importa classe" meeting="false" start="2017-02-13" duration="7" complete="0" expand="true">
-                    <task id="44" name="creazione pagina" meeting="false" start="2017-02-13" duration="2" complete="0" expand="true"/>
-                    <task id="45" name="importazione classi" meeting="false" start="2017-02-14" duration="3" complete="0" expand="true"/>
+                <task id="43" name="Pagina importa classe" meeting="false" start="2017-02-14" duration="6" complete="0" expand="true">
+                    <task id="44" name="creazione pagina" meeting="false" start="2017-02-14" duration="2" complete="0" expand="true"/>
+                    <task id="45" name="importazione classi" meeting="false" start="2017-02-15" duration="2" complete="0" expand="true"/>
                     <task id="46" name="gestione dati" meeting="false" start="2017-02-20" duration="2" complete="0" expand="true"/>
                 </task>
-                <task id="50" name="Pagina Log" meeting="false" start="2017-02-22" duration="9" complete="0" expand="true">
-                    <task id="51" name="creazione pagina" meeting="false" start="2017-02-22" duration="1" complete="0" expand="true"/>
-                    <task id="52" name="gestione dei log" meeting="false" start="2017-02-23" duration="8" complete="0" expand="true"/>
+                <task id="50" name="Pagina Log" meeting="false" start="2017-02-22" duration="10" complete="0" expand="true">
+                    <task id="51" name="creazione pagina" meeting="false" start="2017-02-22" duration="2" complete="0" expand="true"/>
+                    <task id="52" name="gestione dei log" meeting="false" start="2017-02-23" duration="9" complete="0" expand="true"/>
                 </task>
-                <task id="56" name="Sicurezza Sito" meeting="false" start="2017-03-07" duration="3" complete="0" expand="true"/>
+                <task id="56" name="Sicurezza Sito" meeting="false" start="2017-03-08" duration="2" complete="0" expand="true"/>
+                <task id="63" name="Pagina visioni particolari" meeting="false" start="2017-03-14" duration="2" complete="0" expand="true"/>
+                <task id="70" name="Design" meeting="false" start="2017-03-15" duration="2" complete="0" expand="true"/>
             </task>
-            <task id="59" name="Manuale" meeting="false" start="2017-03-13" duration="4" complete="0" expand="true"/>
-            <task id="60" name="Tabella A4" meeting="false" start="2017-03-20" duration="3" complete="0" expand="true"/>
-            <task id="61" name="Progetto Bellinzona" meeting="false" start="2017-03-23" duration="6" complete="0" expand="true"/>
+            <task id="59" name="Manuale" meeting="false" start="2017-03-16" duration="6" complete="0" expand="true"/>
+            <task id="60" name="Tabella A4" meeting="false" start="2017-03-27" duration="4" complete="0" expand="true"/>
             <task id="7" name="Test" meeting="false" start="2017-04-03" duration="7" complete="0" expand="true"/>
         </task>
-        <task id="8" name="Consegna" meeting="false" start="2017-04-11" duration="1" complete="0" expand="true"/>
+        <task id="8" name="Consegna" meeting="false" start="2017-04-13" duration="1" complete="0" expand="true"/>
     </tasks>
     <resources/>
     <allocations/>
