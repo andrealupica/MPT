@@ -4,7 +4,8 @@ session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsabile"]==1 OR $_SESSION["amministratore"]==1)){ // da riguardare
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
-  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null AND ute_temppassword is null order by ute_email;";
+  $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',
+  ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null AND ute_temppassword is null AND ute_flag=1 order by ute_email;";
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>
@@ -129,7 +130,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
                 <h4 class="modal-title">Eliminazione account</h4>
               </div>
               <div class="modal-body">
-                <p>sei sicuro di voler eliminare l'account?</p>
+                <div class="alert alert-danger">
+                  Sei sicuro di voler eliminare l'account?
+                </div>
               </div>
               <div class="modal-footer">
                 <form method="post" action="">
@@ -145,10 +148,26 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
     <script>
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();
+      var words = value.split(' ');
       $("#table").find("tr").each(function(index) {
         if (index === 0) return;
-        var id = $(this).find("td").text().toLowerCase();
-        $(this).toggle(id.indexOf(value) !== -1);
+        var ris = $(this).find("td").text().toLowerCase();
+        var flag=0;
+        // controllo se l'array di parole splittate è contenuto nella riga
+        for (i = 0; i < words.length; i++) {
+          if(ris.indexOf(words[i])!=-1){
+          }
+          else{
+            flag=1;
+          }
+        }
+        if(flag==0){
+          $(this).show();
+        }
+        else{
+          $(this).hide();
+        }
+        flag=0;
       });
     });
     </script>

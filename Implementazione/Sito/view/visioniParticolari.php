@@ -57,12 +57,12 @@ else{
       </div>
       <?php
       $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', co.cor_durata AS 'durata', pi.pia_ini_anno AS  'inizio anno',
-      pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT',ut.ute_nome AS 'nome',ut.ute_cognome AS 'cognome'
+      pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT',ut.ute_nome AS 'nome',ut.ute_cognome AS 'cognome', pi.pia_sem as 'sem'
       FROM pianifica pi
       JOIN classe cl ON cl.cla_id = pi.cla_id
       JOIN materia ma ON ma.mat_id = pi.mat_id
       JOIN corso co ON co.cor_id = pi.cor_id
-      JOIN utente ut ON ut.ute_email = pi.ute_email;";
+      JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1;";
       $result = $newDB->query($query);
       ?>
       <div id="visione" class="col-xs-12">
@@ -74,8 +74,9 @@ else{
               <th> Tipo MP</th>
               <th> Classe</th>
               <th> Durata</th>
-              <th> Ore</th>
               <th> Ciclo</th>
+              <th> Semestre </th>
+              <th> Ore</th>
               <th> % AIT</th>
             </tr>
 
@@ -88,9 +89,10 @@ else{
               <td ><?php echo $row['corso'] ?></td>
               <td ><?php echo $row['classe'] ?></td>
               <td ><?php echo $row['durata'] ?></td>
-              <td ><?php echo $row['ore totali'] ?></td>
               <td ><?php echo $row['inizio anno']." -- ".$row["fine anno"] ?></td>
-              <td ><?php echo $row['AIT']/$row['ore totali']*100 ?></td>
+              <td ><?php echo $row['sem'] ?></td>
+              <td ><?php echo $row['ore totali'] ?></td>
+              <td ><?php echo number_format($row["AIT"]/$row["ore totali"]*100,2) ?></td>
             </tr>
             <?php } ?>
           </table>

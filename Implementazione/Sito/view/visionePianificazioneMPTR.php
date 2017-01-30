@@ -7,13 +7,13 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null){
 else{
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
-  $query = "SELECT ut.ute_nome AS 'nome', ut.ute_cognome AS 'cognome', cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
+  $query = "SELECT ut.ute_nome AS 'nome', ut.ute_cognome AS 'cognome', cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso',pi.pia_sem AS 'sem', pi.pia_ini_anno AS  'inizio anno', pi.pia_id as 'ID',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
   FROM pianifica pi
   JOIN classe cl ON cl.cla_id = pi.cla_id
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
-  JOIN utente ut ON ut.ute_email = pi.ute_email";
+  JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1";
   //echo $query;
   $result = $newDB->query($query);
   ?>
@@ -32,17 +32,12 @@ else{
   <script>
   $(document).ready(function(){
     $("#buttonRemove").click(function(){
-      n=$("#removeId").val();
-      //alert(n);
-      docente = $(".riga:nth-child("+n+")").find("span:nth-child(2)").find("input").val();
-      classe  = $(".riga:nth-child("+n+")").find("span:nth-child(4)").find("input").val();
-      corso  = $(".riga:nth-child("+n+")").find("span:nth-child(5)").find("input").val();
-      anno  = $(".riga:nth-child("+n+")").find("span:nth-child(6)").find("input").val();
-      materia  = $(".riga:nth-child("+n+")").find("span:nth-child(3)").find("input").val();
+      id=$("#removeId").val();
+      //alert(id);
       $.ajax({
         type:"POST",
         url: "model/visionePianificazioneMPTR.php",
-        data:{docente:docente,classe:classe,corso:corso,anno:anno,materia:materia},
+        data:{id:id},
         success: function(result){
           //alert(result);
           location.reload();
@@ -53,7 +48,7 @@ else{
   });
   </script>
   <body class="body">
-    <div class="col-xs-0 col-md-1"></div>
+    <div class="col-xs-0 col-sm-1"></div>
     <div class="col-xs-12 col-lg-10">
       <div class="header">
         <span class="opzione">
@@ -83,7 +78,6 @@ else{
             </span>
           </div>
           <?php
-          $cnt=2;
           while($row = $result->fetch_assoc()){
             ?>
             <div class="col-xs-12 riga">
@@ -112,34 +106,34 @@ else{
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="anno"/>
               </span>
               <span class="col-md-1 col-xs-2">
-                Sem
-                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
+                Semestre
+                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["sem"];?>" value="<?php echo $row["sem"];?>" id="sem"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 % AIT
-                <input type="text" class="form-control"  readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" title="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
+                <input type="text" class="form-control"  readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>" title="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
-                <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
-                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
+                <a href="visionePianificazioneCompleta.php?ID=<?php echo $row["ID"];?>"
+                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["ID"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
+                </a>
               </span>
               <span class="col-md-1 col-xs-2">
                 Elimina
-                <button class="form-control dettaglio" id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $cnt;?>';" >
-                  <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"/>
+                <button class="form-control dettaglio" id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
+                  <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["ID"];?>"/>
                   <div class="glyphicon glyphicon-remove"></div>
                 </button>
               </span>
             </div>
             <?php
-            $cnt++;
           }
 
           ?>
         </div>
         <div>
-          <label class="col-sm-4 control-label" id="messaggio"></label>
+          <label class="col-sm-4 control-label" id="errore"></label>
         </div>
 
       <div class="container">
@@ -174,9 +168,25 @@ else{
     // funzione per la barra di ricerca
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();
+      var words = value.split(' ');
       $("#docente").find(".riga").each(function(index) {
-        var id = $(this).find("span").find("input").val().toLowerCase();
-        $(this).toggle(id.indexOf(value) !== -1);
+        var ris = $(this).find("span").find("input").val().toLowerCase();
+        var flag=0;
+        // controllo se l'array di parole splittate è contenuto nella riga
+        for (i = 0; i < words.length; i++) {
+          if(ris.indexOf(words[i])!=-1){
+          }
+          else{
+            flag=1;
+          }
+        }
+        if(flag==0){
+          $(this).show();
+        }
+        else{
+          $(this).hide();
+        }
+        flag=0;
       });
     });
     </script>

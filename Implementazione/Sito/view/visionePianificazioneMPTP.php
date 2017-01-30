@@ -7,13 +7,13 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null){
 else{
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
-  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
+  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',pi.pia_id as 'ID',pi.pia_sem as 'sem',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
   FROM pianifica pi
   JOIN classe cl ON cl.cla_id = pi.cla_id
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
-  WHERE pi.ute_email='".$_SESSION['email']."'";
+  WHERE pi.ute_email='".$_SESSION['email']."' AND pi.pia_flag=1";
   //  echo $query;
   $result = $newDB->query($query);
   ?>
@@ -77,22 +77,27 @@ else{
                 Classe
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"/>
               </span>
-              <span class="col-md-3 col-xs-5">
+              <span class="col-md-2 col-xs-5">
                 Tipo MP
                 <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="<?php echo $row["corso"];?>"/>
               </span>
-              <span class="col-md-2 col-xs-4 ciclo">
+              <span class="col-md-2 col-xs-5 ciclo">
                 Ciclo Formativo
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="<?php echo $row["inizio anno"];?>"/>
               </span>
+              <span class="col-md-1 col-xs-2">
+                Semestre
+                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["sem"];?>" value="<?php echo $row["sem"];?>" id="sem"/>
+              </span>
               <span class="col-md-2 col-xs-2">
                 % AIT
-                <input type="text" class="form-control"  readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
+                <input type="text" class="form-control"  readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
-                <a href="visionePianificazioneCompleta.php?classe=<?php echo $row["classe"];?>&tipo=<?php echo $row["corso"];?>&anno=<?php echo $row["inizio anno"];?>"
-                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo 'dettaglio'.$i;?>"><div class="glyphicon glyphicon-option-horizontal"></div></a>
+                <a href="visionePianificazioneCompleta.php?ID=<?php echo $row["ID"];?>"
+                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["ID"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
+                </a>
               </span>
             </div>
             <?php
@@ -106,11 +111,28 @@ else{
     </div>
     <script>
     // funzione per la barra di ricerca
+
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();
+      var words = value.split(' ');
       $("#docente").find(".riga").each(function(index) {
-        var id = $(this).find("span").find("input").val().toLowerCase();
-        $(this).toggle(id.indexOf(value) !== -1);
+        var ris = $(this).find("span").find("input").val().toLowerCase();
+        var flag=0;
+        // controllo se l'array di parole splittate è contenuto nella riga
+        for (i = 0; i < words.length; i++) {
+          if(ris.indexOf(words[i])!=-1){
+          }
+          else{
+            flag=1;
+          }
+        }
+        if(flag==0){
+          $(this).show();
+        }
+        else{
+          $(this).hide();
+        }
+        flag=0;
       });
     });
 </script>

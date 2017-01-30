@@ -18,18 +18,21 @@ create table utente(
 
 create table materia(
 	mat_id int primary key auto_increment,
-	mat_nome varchar(30) unique	
+	mat_nome varchar(30) unique,
+	mat_flag int default 1
 );
 
 create table corso(
 	cor_id int primary key auto_increment,
 	cor_nome varchar(30) unique,
-	cor_durata int
+	cor_durata int,
+	cor_flag int default 1
 );
 
 create table classe(
 	cla_id int primary key auto_increment,
-	cla_nome varchar(30) unique
+	cla_nome varchar(30) unique,
+	cla_flag int default 1
 );
 
 
@@ -55,7 +58,8 @@ create table pianifica(
 	pia_fin_anno int,
 	pia_ore_tot int,
 	pia_ore_AIT int,
-	pia_sem int,
+	pia_sem int default 0,
+	pia_flag int default 1,
 	foreign key(ute_email) references utente(ute_email)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION,
@@ -102,13 +106,13 @@ create table tema(
 	tem_id int primary key auto_increment,
 	tem_titolo varchar(50),
 	tem_descrizione text,
-	tem_valutazione text,
-	tem_flag int default 1
+	tem_valutazione text
 );
 
 create table propone(
 	tem_id int,
 	mat_id int,
+	pro_flag int default 1,
 	primary key(tem_id,mat_id),
 	foreign key(tem_id) references tena(tem_id)
 	ON UPDATE CASCADE

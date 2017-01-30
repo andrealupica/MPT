@@ -84,10 +84,18 @@
               $ris=$newDB->query($queryIdClasse);
               $dum= $ris->fetch_assoc();
               $idClasse =  $dum['id'];
+
+              $sem=$_POST["sem"];
+              if($sem<=1){
+                $sem=1;
+              }
+              else if($sem>=2){
+                $sem=2;
+              }
               // eseguo la query di insert
               // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";
-              $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values(?,?,?,?,?,?,?)");
-              $queryPianifica->bind_param("siiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i]);
+              $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot,pia_sem) values(?,?,?,?,?,?,?,?)");
+              $queryPianifica->bind_param("siiiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i],$sem);
               // se non ci sono problemi nella query mostro un messaggio positivo
               if($queryPianifica->execute()!=false){
                   echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!';document.getElementById('messaggio').setAttribute('class','control-label alert alert-success')</script>";

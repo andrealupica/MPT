@@ -6,17 +6,38 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null){
 }
 else{
   include_once "connection.php";
-  $classe=$_GET["classe"];
-  $corso=$_GET["tipo"];
-  $anno=$_GET["anno"];
-  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno',
+  $corso;
+  $classe;
+  $anno;
+  $sem;
+  try{
+    $id=$_GET["ID"];
+    $query1 = $newDB->getConnection()->prepare("SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=?");
+    $query1->bind_param("i", $id);
+    $query1->execute();
+    $query1->close();
+    $query="SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=$id";
+    //echo $query."<br>";
+    $result = $newDB->query($query);
+    while($row = $result->fetch_assoc()){
+      $corso=$row["corso"];
+      $classe=$row["classe"];
+      $anno=$row["anno"];
+      $sem=$row["sem"];
+    }
+  }
+  catch(PDOException $e)
+  {
+  }
+  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno', pi.pia_sem AS 'sem',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT', ut.ute_cognome as 'cognome', ut.ute_nome as 'nome'
   FROM pianifica pi
   JOIN classe cl ON cl.cla_id = pi.cla_id
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
   JOIN utente ut ON ut.ute_email = pi.ute_email
-  WHERE cl.cla_nome='".$classe."' AND co.cor_nome='".$corso."' AND pi.pia_ini_anno='".$anno."'";
+  WHERE pi.cor_id='".$corso."' AND pi.cla_id='".$classe."' AND pi.pia_ini_anno='".$anno."' AND pi.pia_sem='".$sem."' AND pi.pia_flag=1";
+  //echo $query;
   if($newDB->query($query)!=false && mysqli_num_rows($newDB->query($query)) !=0){
     $result = $newDB->query($query);
     ?>
@@ -56,6 +77,8 @@ else{
         <form method="post">
           <?php
           while($row = $result->fetch_assoc()){
+            $sem1=$row["sem"];
+            $sem1=$sem[0];
             $Ianno=$row["inizio anno"];
             $Fanno=$row["fine anno"];
             $classe=$row["classe"];
@@ -80,7 +103,7 @@ else{
               </span>
               <span class="col-md-2 col-xs-3">
                 % ore AIT
-                <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>"/>
+                <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>"/>
               </span>
             </div>
             <?php
@@ -120,6 +143,10 @@ else{
                   </td>
                 </tr>
               </table>
+            </span>
+            <span class="col-md-1 col-xs-4">
+              Semestre
+              <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $sem; ?>" ></input>
             </span>
           </div>
           <div>

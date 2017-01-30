@@ -13,12 +13,17 @@
 			// se le due password combaciano, altrimenti segnala
 			if($repass ==$pass){
 				// modifico la password e setto a null la password momentanea così da non rientrare più in questa pagina al prossimo login
-				$query = "update utente set ute_password='".md5($pass)."', ute_temppassword=null where ute_email='".$_SESSION['email']."';";
-				// se la query ha successo reindirizza alla pagina di login
-				if($newDB->query($query)!= false){
+				try{
+					$query1 = $newDB->getConnection()->prepare("update utente set ute_password=?, ute_temppassword=null where ute_email=?;");
+					$pass1="";
+					$pass1=md5($pass);
+					$user=$_SESSION['email'];
+					$query1->bind_param("ss", $user, $pass1);
+					$query1->execute();
+					$query1->close();
+					// se la query ha successo reindirizza alla pagina di login
 					header("Location: index.php");
-				}
-				else{
+				catch(PDOException $e){
 					echo  "<script>document.getElementById('errore').innerHTML='errore'</script>";
 				}
 			}
