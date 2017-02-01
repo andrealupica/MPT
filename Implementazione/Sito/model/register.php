@@ -35,22 +35,28 @@
 							$email = strtolower($email);
 							if(strstr($email,'@')=='@edu.ti.ch'){
 								// inserimento tramite statement
-								$connect=$newDB->getConnection();
-								$query = $connect->prepare("insert into utente(ute_nome,ute_cognome,ute_email) values (?,?,?);");
-								$query->bind_param("sss",$nome,$cognome,$email);
-								$query->execute();
-								if($query != false && $query->affected_rows==1){
-									// prende l'email del gestore email
+								$query = "select ute_email as 'email' from utente where ute_email='$email' AND ute_flag=1;";
+								//echo $query."<br>";
+								// esegue la query e controlla che l'email non sia già registrata
+								if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
+									echo  "<script>document.getElementById('errore').innerHTML='Errore durante la registrazione, l\'email potrebbe essere già stata registrata' </script>";
+								}
+								// se l'email non è presente nel DB
+								else{
+										// prende l'email del gestore email
 									$query1 = "select ute_email as 'email' from utente where ute_gestoreEmail='1' limit 1;";
 									if($newDB->query($query1)!= false  && mysqli_num_rows($newDB->query($query1)) == 1){
 										$result = $newDB->query($query1);
 										$row = $result->fetch_assoc();
 										$destinatario = $row['email'];
 									}
-									//setta password momentanea
+									$connect=$newDB->getConnection();
 									$password = implode(randomPassword());
-									$query2 = "update utente set ute_password='".md5($password)."', ute_temppassword=1 where ute_email='".$email."';";
-									if($newDB->query($query2)!= false){
+									$pass=md5($password);
+									$query = $connect->prepare("insert into utente(ute_nome,ute_cognome,ute_email,ute_password,ute_dataIscrizione,ute_flag) values (?,?,?,?,1,1);");
+									$query->bind_param("ssss",$nome,$cognome,$email,$pass);
+									if($query->execute() != false && $query->affected_rows==1){
+										$query->close();
 										// invio dell'email
 										$oggetto = " registrazione di ".$email. "";
 										// in questo modo il percorso cambia a dipendenza di dove si trova il sito.
@@ -62,11 +68,21 @@
 										echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
 									}
 									else{
-										echo "error";
+										$query="update utente set ute_flag=1,ute_dataIscrizione='0000-00-00 00:00:00',ute_temppassword=1,
+										ute_password='".$pass."',ute_nome='".$nome."',ute_cognome='".$cognome."' where ute_email='".$email."'";
+										//echo $query;
+										if($newDB->query($query) != false){
+											// invio dell'email
+											$oggetto = " registrazione di ".$email. "";
+											// in questo modo il percorso cambia a dipendenza di dove si trova il sito.
+											$messaggio ="clicca questo link per accettare la registrazione (l'utente era già stato accettato in precedenza):
+											http://".$_SERVER["SERVER_NAME"].substr($_SERVER["PHP_SELF"],0,strlen($_SERVER["PHP_SELF"])-13)."/confirmRegister.php?param=".$email."&password=".$password."";
+											$mittente = 'From: registrazione MPT <'.$email.'>';
+											// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
+											mail($destinatario,$oggetto,$messaggio,$mittente);
+											echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
+										}
 									}
-								}
-								else{
-									echo  "<script>document.getElementById('errore').innerHTML='Errore durante la registrazione, l\'email potrebbe essere già stata registrata' </script>";
 								}
 							}
 							else{

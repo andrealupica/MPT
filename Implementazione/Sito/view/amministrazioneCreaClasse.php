@@ -9,6 +9,7 @@
     $(document).ready(function(){
       $("#buttonAdd").click(function(){
         valore=$("#addClasse").val();
+        //alert(valore);
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
@@ -83,7 +84,7 @@
       <table id="table" class="table col-xs-12">
         <tr><th>nome della classe</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select cla_nome AS 'nome',cla_id from classe order by cla_nome";
+        $query="select cla_nome AS 'nome',cla_id from classe where cla_flag=1 order by cla_nome";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>

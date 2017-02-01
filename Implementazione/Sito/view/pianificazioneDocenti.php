@@ -120,7 +120,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
             </select>
           </span>
           <span class="col-md-3 col-xs-6">
-            Ore Annuale Materia
+            Ore Semestrali Materia
             <input type="number" class="form-control" name="ore[]" id="ore" step="1" min="0"/>
           </span>
         </div>
@@ -206,7 +206,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
         <div class="col-md-6">
           <div class="col-md-9"></div>
           <div class="col-xs-6 col-md-3">
-            <button type="submit" class="btn btn-secondary">
+            <button type="submit" class="btn btn-secondary btn-lg">
               <span class="glyphicon glyphicon-floppy-disk"></span>Salva
             </button>
           </div>

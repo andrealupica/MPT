@@ -54,7 +54,7 @@
               <select name="addCorso" id="addCorso" class="form-control">
                 <option>-- corso --</option>
                 <?php
-                $corso = "select cor_nome as 'corso' from corso;";
+                $corso = "select cor_nome as 'corso' from corso where cor_flag=1;";
                 $result1 = $newDB->query($corso);
                 while($row = $result1->fetch_assoc()){
                   ?>
@@ -68,7 +68,7 @@
               <select name="addClasse" id="addClasse" class="form-control">
                 <option>-- classe --</option>
                 <?php
-                $corso = "select cla_nome as 'classe' from classe;";
+                $corso = "select cla_nome as 'classe' from classe where cla_flag=1;";
                 $result1 = $newDB->query($corso);
                 while($row = $result1->fetch_assoc()){
                   ?>
@@ -97,7 +97,7 @@
       <table id="table" class="table col-xs-12">
         <tr><th>nome del corso</th><th>nome della classe</th><th>elimina</th></th>
         <?php
-        $query="select cl.cla_nome as 'classe',co.cor_nome as 'corso' from cla_fre_cor f,classe cl, corso co where co.cor_id=f.cor_id AND cl.cla_id=f.cla_id order by co.cor_nome,cl.cla_nome;";
+        $query="select cl.cla_nome as 'classe',co.cor_nome as 'corso' from cla_fre_cor f,classe cl, corso co where co.cor_id=f.cor_id AND cl.cla_id=f.cla_id && cla_flag=1 && cor_flag=1 order by co.cor_nome,cl.cla_nome ;";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>

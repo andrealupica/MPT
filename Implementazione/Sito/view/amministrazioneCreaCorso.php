@@ -9,6 +9,7 @@
     $(document).ready(function(){
       $("#buttonAdd").click(function(){
         valore=$("#addCorso").val();
+        //alert(valore);
         durata=$("#addCorsoDurata").val();
         $.ajax({
           type:"POST",
@@ -96,13 +97,13 @@
       <table id="table" class="table col-xs-12">
         <tr><th>nome del corso</th><th>durata del corso</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select cor_nome AS 'nome',cor_durata AS 'durata',cor_id from corso order by cor_nome";
+        $query="select cor_nome AS 'nome',cor_durata AS 'durata',cor_id from corso where cor_flag=1 order by cor_nome";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
           <tr>
             <td class="col-xs-6"><input type="text" class="form-control" id="<?php echo "n".$row['cor_id'];?>" value="<?php echo $row['nome'];?>"></td>
-            <td class="col-xs-3"><input type="number" class="form-control" id="<?php echo "d".$row['cor_id'];?>" value="<?php echo $row['durata'];?>"></td>
+            <td class="col-xs-3"><input type="number" min=0 max=4 class="form-control" id="<?php echo "d".$row['cor_id'];?>" value="<?php echo $row['durata'];?>"></td>
             <td class="col-xs-2">
               <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyCorso').value='<?php echo $row['cor_id'];?>';">
                 <span class="glyphicon glyphicon-ok"></span>

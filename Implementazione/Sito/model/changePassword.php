@@ -23,6 +23,7 @@
 					$query1->close();
 					// se la query ha successo reindirizza alla pagina di login
 					header("Location: index.php");
+				}
 				catch(PDOException $e){
 					echo  "<script>document.getElementById('errore').innerHTML='errore'</script>";
 				}

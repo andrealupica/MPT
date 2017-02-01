@@ -10,11 +10,14 @@
 	if(isset($_POST["addMat"]) && !empty($_POST["addMat"])){
 		$materia=$_POST["addMat"];
 		$query ="insert into materia(mat_nome) values('".$materia."')";
-		if($newDB->query($query) != false){
+		if($newDB->query($query) == false){
+			$query = "update materia set mat_flag=1 where mat_nome='".$materia."'";
+			if($newDB->query($query) != false){
+			}
 		}
 	}
 
-	// modifica della classe
+	// modifica della materia
 	if(isset($_POST["modifyNomeMateria"]) && !empty($_POST["modifyNomeMateria"]) && isset($_POST["modifyMateriaId"]) && !empty($_POST["modifyMateriaId"])){
 		$materia = $_POST["modifyNomeMateria"];
 		$id = $_POST["modifyMateriaId"];
@@ -28,14 +31,12 @@
 	// rimozione della materia
 	if(isset($_POST["removeMat"])){
 		$materia = $_POST["removeMat"];
-		$query = "select * from pianifica p,materia m where p.mat_id=m.mat_id && m.mat_id='".$materia."'";
+		$query = "select * from pianifica p,materia m where p.mat_id=m.mat_id && m.mat_id='".$materia."' AND p.pia_flag=1";
 		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
 			// allora puoi eliminarla
-			$query = "delete from materia where mat_id='".$materia."'";
+			$query = "update materia set mat_flag=0 where mat_id='".$materia."'";
 			if($newDB->query($query) != false){
-			}
-			else{
 			}
 		}
 	}
@@ -46,7 +47,11 @@
 		$corso = $_POST["addCorso"];
 		$durata = $_POST["addCorsoDurata"];
 		$query ="insert into corso(cor_nome,cor_durata) values('".$corso."','".$durata."')";
-		if($newDB->query($query) != false){
+		// se da errore vuol dire che esiste già
+		if($newDB->query($query) == false){
+			$query = "update corso set cor_flag=1 where cor_nome='".$corso."'";
+			if($newDB->query($query) != false){
+			}
 		}
 	}
 
@@ -65,14 +70,12 @@
 	// rimozione del corso
 	if(isset($_POST["removeCor"])){
 		$corso = $_POST["removeCor"];
-		$query = "select * from pianifica p,corso c where p.cor_id=c.cor_id && c.cor_id='".$corso."'";
+		$query = "select * from pianifica p,corso c where p.cor_id=c.cor_id && c.cor_id='".$corso."'  AND p.pia_flag=1";
 		// se non è presente in nessuna prianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
 			// allora puoi eliminarlo
-			$query = "delete from corso where cor_id='".$corso."'";
+			$query = "update corso set cor_flag=0 where cor_id='".$corso."'";
 			if($newDB->query($query) != false){
-			}
-			else{
 			}
 		}
 	}
@@ -81,15 +84,18 @@
 	if(isset($_POST["addCla"]) && !empty($_POST["addCla"])){
 		$classe=$_POST["addCla"];
 		$query ="insert into classe(cla_nome) values('".$classe."')";
-		if($newDB->query($query) != false){
+		if($newDB->query($query) == false){
+			$query = "update classe set cla_flag=1 where cla_nome='".$classe."'";
+			if($newDB->query($query) != false){
+			}
 		}
 	}
 
 	// modifica della classe
 	if(isset($_POST["modifyNomeClasse"]) && !empty($_POST["modifyNomeClasse"]) && isset($_POST["modifyClasseId"]) && !empty($_POST["modifyClasseId"])){
-		$corso = $_POST["modifyNomeClasse"];
+		$classe = $_POST["modifyNomeClasse"];
 		$id = $_POST["modifyClasseId"];
-		$query = "update classe set cla_nome='".$corso."' where cla_id='".$id."'";
+		$query = "update classe set cla_nome='".$classe."' where cla_id='".$id."'";
 		if($newDB->query($query) != false){
 		}
 		else{
@@ -99,14 +105,12 @@
 	// rimozione della classe
 	if(isset($_POST["removeCla"])){
 		$classe = $_POST["removeCla"];
-		$query = "select * from pianifica p,classe cl where p.cla_id=cl.cla_id && cl.cla_id='".$classe."'";
+		$query = "select * from pianifica p,classe cl where p.cla_id=cl.cla_id && cl.cla_id='".$classe."' AND p.pia_flag=1";
 		// se non è presente in nessuna pianificazione
 		if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 0){
-			// allora puoi eliminarla
-			$query = "delete from classe where cla_id='".$classe."'";
+			// allora puoi nasconderla
+			$query = "update classe set cla_flag=0 where cla_id='".$classe."'";
 			if($newDB->query($query) != false){
-			}
-			else{
 			}
 		}
 	}

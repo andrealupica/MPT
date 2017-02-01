@@ -9,6 +9,7 @@
     $(document).ready(function(){
       $("#buttonAdd").click(function(){
         valore=$("#addMateria").val();
+        //alert(valore);
         $.ajax({
           type:"POST",
           url: "model/amministrazione.php",
@@ -36,9 +37,8 @@
       });
 
       $("#buttonModify").click(function(){
-        id = $("#modifyMateria").val();;
+        id = $("#modifyMateria").val();
         nome = $("#"+id).val();
-        //alert(nome+" "+id);
         $("#myModalM").modal("hide");
         $("body").removeClass("modal-open");
         $(".modal-backdrop").remove();
@@ -82,7 +82,7 @@
       <table id="table" class="table col-xs-12">
         <tr><th>nome della materia</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select mat_nome AS 'nome',mat_id from materia order by mat_nome";
+        $query="select mat_nome AS 'nome',mat_id from materia where mat_flag=1 order by mat_nome ";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
