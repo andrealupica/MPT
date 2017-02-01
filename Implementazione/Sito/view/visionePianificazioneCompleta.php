@@ -122,7 +122,7 @@ else{
               Durata Ciclo
               <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $Fanno-$Ianno;?>" ></input>
             </span>
-            <span class="col-md-4 col-xs-12">
+            <span class="col-md-4 col-xs-8">
               Ciclo Formativo
               <table>
                 <tr>

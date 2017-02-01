@@ -40,6 +40,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
       </div>
       <h1>Inserimento ore AIT </h1>
       <br>
+      <?php
+        if(mysqli_num_rows($result) != 0){
+      ?>
       <div class="form-group">
         <label class="col-xs-2 control-label">Ricerca:</label>
         <div class="col-xs-10">
@@ -117,6 +120,18 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
             </div>
           </div>
         </form>
+        <?php
+          }
+          else{
+            ?>
+            <div class="col-xs-12" >
+              <h3>
+              <label class="col-xs-12 alert lbl-lg alert-info">Non sono presenti delle pianificazioni</label>
+            </h3>
+            </div>
+            <?php
+          }
+        ?>
       </div>
       <script>
       $("#search").keyup(function() {

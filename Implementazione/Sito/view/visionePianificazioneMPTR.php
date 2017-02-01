@@ -62,6 +62,9 @@ else{
       </div>
       <h1>Visione Pianificazione Docenti MP </h1>
       <br>
+      <?php
+      if(mysqli_num_rows($result) != 0){
+      ?>
       <div class="form-group">
         <label class="col-xs-2 control-label">Ricerca:</label>
         <div class="col-xs-10">
@@ -132,6 +135,18 @@ else{
 
           ?>
         </div>
+        <?php
+          }
+          else{
+            ?>
+            <div class="col-xs-12" >
+              <h3>
+              <label class="col-xs-12 alert lbl-lg alert-info">Non sono presenti delle pianificazioni</label>
+            </h3>
+            </div>
+            <?php
+          }
+        ?>
         <div>
           <label class="col-sm-4 control-label" id="errore"></label>
         </div>

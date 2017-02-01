@@ -34,14 +34,13 @@
 							$email = $_POST["email"];
 							$email = strtolower($email);
 							if(strstr($email,'@')=='@edu.ti.ch'){
-								// inserimento tramite statement
 								$query = "select ute_email as 'email' from utente where ute_email='$email' AND ute_flag=1;";
 								//echo $query."<br>";
 								// esegue la query e controlla che l'email non sia già registrata
 								if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
 									echo  "<script>document.getElementById('errore').innerHTML='Errore durante la registrazione, l\'email potrebbe essere già stata registrata' </script>";
 								}
-								// se l'email non è presente nel DB
+								// se l'email non è presente nel DB (attiva)
 								else{
 										// prende l'email del gestore email
 									$query1 = "select ute_email as 'email' from utente where ute_gestoreEmail='1' limit 1;";

@@ -23,6 +23,16 @@ else{
   <script>
   </script>
   <body>
+    <?php
+      $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', co.cor_durata AS 'durata', pi.pia_ini_anno AS  'inizio anno',
+      pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT',ut.ute_nome AS 'nome',ut.ute_cognome AS 'cognome', pi.pia_sem as 'sem'
+      FROM pianifica pi
+      JOIN classe cl ON cl.cla_id = pi.cla_id
+      JOIN materia ma ON ma.mat_id = pi.mat_id
+      JOIN corso co ON co.cor_id = pi.cor_id
+      JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1;";
+      $result = $newDB->query($query);
+    ?>
     <div class="container contenitore">
       <div class="header class="col-xs-12"">
         <span class="opzione">
@@ -36,6 +46,9 @@ else{
       </div>
       <form method="post" action="model/visioniParticolari.php" target="_blank">
       <h1>Visioni Particolari</h1>
+      <?php
+      if(mysqli_num_rows($result) != 0){
+      ?>
       <div class="form-group col-xs-12">
         <label class="col-xs-2 control-label">Ricerca:</label>
         <div class="col-xs-10">
@@ -46,25 +59,16 @@ else{
         </div>
       </div>
       <div class="col-xs-12" id="checkbox">
-        <label class="col-xs-3">Docente: <input type="checkbox" name="docente" value="1" checked="true" id="docente"></label>
-        <label class="col-xs-3">Materia: <input type="checkbox" name="materia" value="2" checked="true" id="materia"></label>
-        <label class="col-xs-3">Classe: <input type="checkbox" name="classe" value="3" checked="true" id="classe"></label>
-        <label class="col-xs-3">Tipo MP: <input type="checkbox" name="tipo" value="4" checked="true" id="tipo"></label>
-        <label class="col-xs-3">Durata Ciclo: <input  type="checkbox" name="durata" value="5" checked="true" id="durata"></label>
-        <label class="col-xs-3">Ore Annuali Materia: <input  type="checkbox" name="ore" value="6" checked="true" id="ore"></label>
-        <label class="col-xs-3">Ciclo Formativo: <input  type="checkbox" name="ciclo" value="7" checked="true" id="ciclo"></label>
-        <label class="col-xs-3">% AIT: <input  type="checkbox" name="AIT" value="8" checked="true" id="AIT"></label>
+        <label class="col-xs-4">Docente: <input type="checkbox" name="docente" value="1" checked="true" id="docente"></label>
+        <label class="col-xs-4">Materia: <input type="checkbox" name="materia" value="2" checked="true" id="materia"></label>
+        <label class="col-xs-4">Tipo MP: <input type="checkbox" name="tipo" value="3" checked="true" id="tipo"></label>
+        <label class="col-xs-4">Classe: <input type="checkbox" name="classe" value="4" checked="true" id="classe"></label>
+        <label class="col-xs-4">Durata Ciclo: <input  type="checkbox" name="durata" value="5" checked="true" id="durata"></label>
+        <label class="col-xs-4">Ciclo Formativo: <input  type="checkbox" name="ciclo" value="6" checked="true" id="ciclo"></label>
+        <label class="col-xs-4">Semestre: <input  type="checkbox" name="Sem" value="7" checked="true" id="Sem"></label>
+        <label class="col-xs-4">Ore Semestrali Materia: <input  type="checkbox" name="ore" value="8" checked="true" id="ore"></label>
+        <label class="col-xs-4">% AIT: <input  type="checkbox" name="AIT" value="9" checked="true" id="AIT"></label>
       </div>
-      <?php
-      $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', co.cor_durata AS 'durata', pi.pia_ini_anno AS  'inizio anno',
-      pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT',ut.ute_nome AS 'nome',ut.ute_cognome AS 'cognome', pi.pia_sem as 'sem'
-      FROM pianifica pi
-      JOIN classe cl ON cl.cla_id = pi.cla_id
-      JOIN materia ma ON ma.mat_id = pi.mat_id
-      JOIN corso co ON co.cor_id = pi.cor_id
-      JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1;";
-      $result = $newDB->query($query);
-      ?>
       <div id="visione" class="col-xs-12">
         Risultato:
         <table data-role="table" data-mode="columntoggle" class="ui-responsive table table-striped table-bordered" id="table">
@@ -105,6 +109,18 @@ else{
               </button>
             </div>
           </div>
+          <?php
+            }
+            else{
+              ?>
+              <div class="col-xs-12" >
+                <h3>
+                <label class="col-xs-12 alert lbl-lg alert-info">Non sono presenti delle pianificazioni</label>
+              </h3>
+              </div>
+              <?php
+            }
+          ?>
       </form>
       </div>
     <?php } ?>
@@ -138,6 +154,7 @@ else{
     // funzione per la visibilità delle colonne
     $("label input").change(function(){
       var valore=this.value;
+        //alert(valore);
         $("#table").find("tr").each(function(index) {
           $(this).find("td:nth-child("+valore+")").toggle();
           $(this).find("th:nth-child("+valore+")").toggle();

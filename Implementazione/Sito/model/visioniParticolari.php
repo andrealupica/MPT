@@ -33,7 +33,7 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ore"])){
-      $colonne.="pi.pia_ore_tot AS 'ore annuali',";
+      $colonne.="pi.pia_ore_tot AS 'ore semest.',";
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ciclo"])){
@@ -41,7 +41,7 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["AIT"])){
-      $colonne.="CONCAT(ROUND(if(pi.pia_ore_AIT is null,0,pi.pia_ore_AIT)/pia_ore_tot*100,2),'%') as 'AIT',";
+      $colonne.="CONCAT(ROUND(if(pi.pia_ore_AIT is null,0,pi.pia_ore_AIT)/pia_ore_tot*100,2),'%') as '% AIT',";
     }
     // cancella l'ultima virgola della SELECT
     $colonne=substr($colonne,0,count($colonne)-2);
@@ -64,7 +64,7 @@
     JOIN classe cl ON cl.cla_id = pi.cla_id
     JOIN materia ma ON ma.mat_id = pi.mat_id
     JOIN corso co ON co.cor_id = pi.cor_id
-    JOIN utente ut ON ut.ute_email = pi.ute_email ".$where.";";
+    JOIN utente ut ON ut.ute_email = pi.ute_email ".$where." AND pi.pia_flag=1;";
     $result = $newDB->query($query);
     $queryEmail = "SELECT CONCAT(ute_cognome,' ',ute_nome) AS 'utente' FROM utente WHERE ute_email ='".$_SESSION['email']."';";
     $resultQuery = $newDB->query($queryEmail);
@@ -113,14 +113,14 @@
     // set della grandezza a dipendenza di quale colonna stiamo parlando
     for ($i=0; $i < count($title); $i++) {
       switch ($title[$i]){
-          case 'AIT':
+          case '% AIT':
           case 'durata':
           case 'classe':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
-          case 'ore annuali':
+          case 'ore semest.':
               $width=30;
               break;
           default:
@@ -142,14 +142,14 @@
       for ($j=0; $j < $result->field_count; $j++) {
         // setto la larghezza delle celle
         switch ($title[$j]){
-          case 'AIT':
+          case '% AIT':
           case 'classe':
           case 'durata':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
-          case 'ore annuali':
+          case 'ore semest.':
               $width=30;
               break;
           default:
