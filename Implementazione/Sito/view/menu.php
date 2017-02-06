@@ -22,13 +22,13 @@
 </head>
 <body>
   <div class="container contenitore">
-    <div class="header">
+    <div class="header col-xs-12 margin-bottom:0px">
       <span class="opzione">
         <a href="logout.php" class="btn btn-primary  button">
           <span class="glyphicon glyphicon-log-out"></span> exit
         </a>
       </span>
-            <h1>Menu Principale AIT</h1>
+      <h1>Menu Principale AIT</h1>
     </div>
     <!--responsabile-->
     <?php

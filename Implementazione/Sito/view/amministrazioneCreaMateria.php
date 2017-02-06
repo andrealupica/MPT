@@ -94,7 +94,7 @@
               </button>
             </td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeMateria').value='<?php echo $row['mat_id'];?>';">
+              <button type="button" name='button' id="" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeMateria').value='<?php echo $row['mat_id'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>

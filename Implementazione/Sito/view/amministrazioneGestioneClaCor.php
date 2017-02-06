@@ -32,7 +32,7 @@
           url: "model/amministrazione.php",
           data:{removeGestione:valore},
           success: function(result){
-                      alert(result);
+                      //alert(result);
           $("#Gestione").load("view/amministrazioneGestioneClaCor.php");
           }
         });
@@ -51,7 +51,7 @@
               <button style="top:0px;" id="buttonAdd"  class="btn glyphicon glyphicon-plus" type="submit" onclick="return false"></button>
             </span>
             <span class="col-xs-5" style="padding:0px">
-              <select name="addCorso" id="addCorso" class="form-control">
+              <select name="addCorso" id="addCorso" value='-- corso --' class="form-control">
                 <option>-- corso --</option>
                 <?php
                 $corso = "select cor_nome as 'corso' from corso where cor_flag=1;";
@@ -65,7 +65,7 @@
               </select>
             </span>
             <span class="col-xs-3" style="padding:0px">
-              <select name="addClasse" id="addClasse" class="form-control">
+              <select name="addClasse" id="addClasse" value='-- classe --' class="form-control">
                 <option>-- classe --</option>
                 <?php
                 $corso = "select cla_nome as 'classe' from classe where cla_flag=1;";
@@ -105,7 +105,7 @@
             <td class="col-xs-6"><?php echo $row["corso"];?></td>
             <td class="col-xs-5"><?php echo $row["classe"];?></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeCorCla').value='<?php echo $row['classe']."+".$row['corso'];?>';">
+              <button type="button" name='button' id="" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeCorCla').value='<?php echo $row['classe']."+".$row['corso'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
               </button>
             </td>

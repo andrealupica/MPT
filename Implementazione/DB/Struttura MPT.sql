@@ -104,7 +104,7 @@ create table allievo(
 
 create table tema(
 	tem_id int primary key auto_increment,
-	tem_titolo varchar(50),
+	tem_titolo varchar(50) unique,
 	tem_descrizione text,
 	tem_valutazione text
 );

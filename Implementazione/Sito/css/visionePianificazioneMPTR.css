@@ -20,6 +20,7 @@
 .opzione{
 	float:right;
 	display: inline;
+	margin-top:20px;
 }
 
 .salva{
@@ -33,9 +34,7 @@
 .input-group-addon{
 	top:0px;
 }
-span{
-	margin-top:20px;
-}
+
 .button{
 	margin-top:-1px;
 }

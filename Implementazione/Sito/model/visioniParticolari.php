@@ -33,7 +33,11 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ore"])){
-      $colonne.="pi.pia_ore_tot AS 'ore semest.',";
+      $colonne.="pi.pia_ore_tot AS 'ore sem.',";
+    }
+    // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
+    if(isset($_POST["ore"])){
+      $colonne.="pi.pia_sem AS 'sem',";
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ciclo"])){
@@ -116,15 +120,16 @@
           case '% AIT':
           case 'durata':
           case 'classe':
+          case 'sem':
+          case 'ore sem.':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
-          case 'ore semest.':
               $width=30;
               break;
           default:
-              $width=55;
+              $width=50;
               break;
       }
       // stampo nella cella il nome della colonna
@@ -145,15 +150,16 @@
           case '% AIT':
           case 'classe':
           case 'durata':
+          case 'sem':
+          case 'ore sem.':
               $width=20;
               break;
           case 'ciclo':
           case 'materia':
-          case 'ore semest.':
               $width=30;
               break;
           default:
-              $width=55;
+              $width=50;
               break;
         }
         //stampo il dato
