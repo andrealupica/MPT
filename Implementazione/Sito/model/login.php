@@ -41,23 +41,25 @@ $pass = "";
 								$today_date = date("Y-m-d");
 								// se la data è superiore allora l'iscrizione è scaduta e viene eliminata la sua email
 								if ($data<$today_date && $data!=null){
-									$queryDeleteAccount = "delete from utente where ute_email='".$user."';";
+									$queryDeleteAccount = "update utente set ute_flag=0 where ute_email='".$user."';";
 									$newDB->query($queryDeleteAccount);
 									echo  "<script>document.getElementById('errore').innerHTML='l account è stato eliminato poiché non è stato effettuato il login entro il tempo limite'</script>";
 								}
-								$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
-								$newDB->query($query1);
+								else{
+									$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
+									$newDB->query($query1);
+								}
 							}
 
 							// inserisco l'email del docente che ha fatto il login come email di sessione
-							$queryEmail ="select ute_email as 'email' from utente where ute_email='$user';";
+							$queryEmail ="select ute_email as 'email' from utente where ute_flag=1 AND ute_email='$user';";
 							if($newDB->query($queryEmail)!= false && mysqli_num_rows($newDB->query($queryEmail)) == 1){
 								$result = $newDB->query($queryEmail);
 								$row = $result->fetch_assoc();
 								$_SESSION['email'] = $row['email'];
 							}
 							// location a pagina del menu o del cambia password nel caso si abbia una password momentanea
-							$queryPasswordTemp = "select ute_temppassword as 'tpassword' from utente where ute_email='$user'";
+							$queryPasswordTemp = "select ute_temppassword as 'tpassword' from utente where  ute_flag=1 AND ute_email='$user'";
 							if($newDB->query($queryPasswordTemp)!= false && mysqli_num_rows($newDB->query($queryPasswordTemp)) == 1){
 								echo "pass mom";
 								$result = $newDB->query($queryPasswordTemp);

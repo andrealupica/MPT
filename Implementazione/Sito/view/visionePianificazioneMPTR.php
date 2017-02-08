@@ -124,7 +124,7 @@ else{
               </span>
               <span class="col-md-1 col-xs-2">
                 Elimina
-                <button class="btn btn-danger dettaglio " id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
+                <button class="form-control dettaglio " style="background-color:#d9534f;border-color:#d43f3a" id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
                   <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["ID"];?>"/>
                   <div class="glyphicon glyphicon-remove btn-danger"></div>
                 </button>
