@@ -31,25 +31,68 @@
 							valore=$("#addTitolo").val();
 							$("#addModalTitolo").val(valore);
 						});
-						// invio dei dati quando si clicca sul tasto salva del modal modifica
+						$("#buttonSave").click(function(){
+							tito=$("#addModalTitolo").val();
+							valu=$("#valutazioneM").val();
+							desc=$("#descrizioneM").val();
+							id=0;
+							materia="";
+							materia +=$("#materiaM1").val();
+							if($("#materiaM2").val()!=undefined){
+								materia+="/"+$("#materiaM2").val();
+							}
+							if($("#materiaM3").val()!=undefined){
+								materia+="/"+$("#materiaM3").val();
+							}
+							$.ajax({
+								type:"POST",
+								url: "model/proposte2.php",
+								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
+								success: function(result){
+									alert(result+"c");
+									location.reload();
+							}});
+						});
+						// invio dei dati quando si clicca sul	 tasto salva del modal modifica
 						$("#buttonModify").click(function(){
 							valu=$("#valutazioneM").val();
 							desc=$("#descrizioneM").val();
+							tito=$("#modifyTitolo").val();
+							id=$("#modifyProposte").val();
 							materia="";
-							materia +=$("#materiaM1").val()+"/"+$("#materiaM2").val()+"/"+$("#materiaM3").val()+"/";
-							alert(materia);
+							materia +=$("#materiaM1").val();
+							if($("#materiaM2").val()!=undefined){
+								materia+="/"+$("#materiaM2").val();
+							}
+							if($("#materiaM3").val()!=undefined){
+								materia+="/"+$("#materiaM3").val();
+							}
+							//alert(materia);
+							$.ajax({
+								type:"POST",
+								url: "model/proposte2.php",
+								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
+								success: function(result){
+									//$('#ciclo2').val(result);
+									// result=JSON.parse(result);
+									alert(result);
+									location.reload();
+							}});
 						});
 				});
+				// chiamata quando viene cliccato un bottone di modifica
 				function selectID(obj){
 					iM=0;
+					cntM=-1;
 					valore=$(obj).val();
 					$.ajax({
 						type:"POST",
 						url: "model/proposte2.php",
-						data:{id:valore},
+						data:{idTitolo:valore},
 						success: function(result){
 							//$('#ciclo2').val(result);
 							result=JSON.parse(result);
+							//alert(result);
 							$("#modifyTitolo").val(result[0]);
 							$("#descrizioneM").val(result[1]);
 							$("#valutazioneM").val(result[2]);
@@ -57,10 +100,11 @@
 					$.ajax({
 						type:"POST",
 						url: "model/proposte2.php",
-						data:{materia:"ok"},
+						data:{select:"ok"},
 						success: function(result2){ // ritorna in una variabile tutti le materie disponibili
 							//alert("materie:"+result2);
 							result2=JSON.parse(result2);
+							//alert(result2);
 							$.ajax({
 								type:"POST",
 								url: "model/proposte2.php",
@@ -103,6 +147,7 @@
 				}
 				function addMat(){
 					if(cnt<2){
+
 						i++;
 						var sel = document.createElement('select');
 						sel.className = "form-control";
@@ -183,7 +228,7 @@
       <table id="table" class="table col-xs-12">
         <tr><th>Tema</th><th>Materie</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from propone p,tema t where p.pro_flag=1 AND t.tem_id=p.tem_id  group by t.tem_titolo order by t.tem_titolo";
+        $query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from propone p,tema t where p.pro_flag=1 AND t.tem_id=p.tem_id group by t.tem_titolo order by t.tem_titolo";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
@@ -199,7 +244,7 @@
 						/>
 					</td>
 						<td class="col-xs-1">
-              <button type="button" name='buttonM' id="buttonM" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="selectID(this)" value="<?php echo $row['id'] ?>">
+              <button type="button" name='buttonM' id="buttonM" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="selectID(this);document.getElementById('modifyProposte').value='<?php echo $row['id'];?>'" value="<?php echo $row['id'] ?>">
                 <span class="glyphicon glyphicon-edit"></span>
               </button>
             </td>
@@ -259,7 +304,7 @@
             <div class="modal-footer">
               <form method="post" action="">
                 <button type="submit" onclick="return false" class="btn btn-success" id="buttonSave">Salva</button>
-                <!--<input type="hidden" id="modifyProposte" name="modifyProposte" required="required"/>-->
+                <input type="hidden" id="modifyProposte" name="modifyProposte" required="required"/>
               </form>
             </div>
           </div>

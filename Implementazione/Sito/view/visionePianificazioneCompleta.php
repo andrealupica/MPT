@@ -1,5 +1,5 @@
 <!-- pagina per la visione della pianificazione completa dei docenti (simile alla pianificazione docenti)-->
-<?
+<?php
 session_start();
 if($_SESSION['email']=="" OR $_SESSION['email']==null){
   echo "non hai i permessi per visualizzare questa pagina";

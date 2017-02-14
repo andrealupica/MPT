@@ -97,7 +97,7 @@ create table allievo(
 	foreign key(cla_id) references classe(cla_id)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION,
-	foreign key(cor_id) references classe(cor_id)
+	foreign key(cor_id) references corso(cor_id)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION
 );
@@ -114,7 +114,7 @@ create table propone(
 	mat_id int,
 	pro_flag int default 1,
 	primary key(tem_id,mat_id),
-	foreign key(tem_id) references tena(tem_id)
+	foreign key(tem_id) references tema(tem_id)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION,
 	foreign key(mat_id) references materia(mat_id)

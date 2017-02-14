@@ -1,5 +1,5 @@
 <!-- pagina per l'inserimento delle ore AIT da parte dei docenti-->
-<?
+<?php
 session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1 OR $_SESSION["amministratore"]==1)){// da riguardare
   include_once "connection.php";
