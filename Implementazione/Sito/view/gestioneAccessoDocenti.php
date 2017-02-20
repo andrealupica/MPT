@@ -31,7 +31,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
           </a>
         </span>
       </div>
-      <h1>Gestione Accessi Docenti</h1>
+      <h1 class="col-xs-12">Gestione Accessi Docenti</h1>
       <br>
       <div class="form-group">
         <label class="col-sm-2 control-label">Ricerca con Cognome/Nome:</label>

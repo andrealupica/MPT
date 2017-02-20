@@ -91,7 +91,7 @@
           <tr>
             <td class="col-xs-8"><input type="text" class="form-control" id="<?php echo $row['cla_id'];?>" value="<?php echo $row['nome'];?>"></input></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyClasse').value='<?php echo $row['cla_id'];?>';">
+              <button type="button" name='button' id="" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyClasse').value='<?php echo $row['cla_id'];?>';">
                 <span class="glyphicon glyphicon-ok"></span>
               </button>
             </td>

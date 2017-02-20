@@ -22,7 +22,6 @@
 
       $("#buttonRemove").click(function(){
         valore=$("#removeCorCla").val();
-
         //aggiunte queste righe per far funzionare la rimozione della parte nera
         $("#myModal").modal("hide");
         $("body").removeClass("modal-open");
@@ -37,7 +36,20 @@
           }
         });
       });
+
     });
+    function sendID(obj){
+      valore=$(obj).val();
+      //alert(valore);
+      $.ajax({
+        type:"POST",
+        url: "model/importClasse.php",
+        data:{importaClasse:valore},
+        success: function(result){
+          location.href="importClasse.php";
+        }
+      });
+    }
     </script>
   <div></div>
   <div clas="contenitore">
@@ -95,15 +107,20 @@
     </div>
     <div>
       <table id="table" class="table col-xs-12">
-        <tr><th>nome del corso</th><th>nome della classe</th><th>elimina</th></th>
+        <tr><th>nome del corso</th><th>nome della classe</th><th>aggiungi allievi</th><th>elimina</th></th>
         <?php
-        $query="select cl.cla_nome as 'classe',co.cor_nome as 'corso' from cla_fre_cor f,classe cl, corso co where co.cor_id=f.cor_id AND cl.cla_id=f.cla_id && cla_flag=1 && cor_flag=1 order by co.cor_nome,cl.cla_nome ;";
+        $query="select cl.cla_nome as 'classe',cl.cla_id as 'idClasse',co.cor_nome as 'corso',co.cor_id as 'idCorso' from cla_fre_cor f,classe cl, corso co where co.cor_id=f.cor_id AND cl.cla_id=f.cla_id && cla_flag=1 && cor_flag=1 order by co.cor_nome,cl.cla_nome ;";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
           <tr>
-            <td class="col-xs-6"><?php echo $row["corso"];?></td>
-            <td class="col-xs-5"><?php echo $row["classe"];?></td>
+            <td class="col-xs-4"><?php echo $row["corso"];?></td>
+            <td class="col-xs-4"><?php echo $row["classe"];?></td>
+            <td class="col-xs-2">
+              <button type="button" name='button' id="inputEdit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalM" onclick="sendID(this);" value='<?php echo $row['idClasse']."+".$row['idCorso']."+".$row['classe']."+".$row['corso'];?>'>
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </td>
             <td class="col-xs-2">
               <button type="button" name='button' id="" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeCorCla').value='<?php echo $row['classe']."+".$row['corso'];?>';">
                 <span class="glyphicon glyphicon-remove"></span>
@@ -128,6 +145,9 @@
               <p>sei sicuro di voler eliminare il collegamento corso-classe?</p>
               <div class="alert alert-info">
                 <strong>Info!</strong> L'eliminazione comporterà modifiche nella pagina Pianificazione Docenti
+              </div>
+              <div class="alert alert-alert">
+                <strong>Attenzione!</strong> L'eliminazione comporterà l'eliminazione di tutti gli allievi
               </div>
             </div>
             <div class="modal-footer">

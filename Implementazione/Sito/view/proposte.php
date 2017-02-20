@@ -33,23 +33,24 @@
 						});
 						$("#buttonSave").click(function(){
 							tito=$("#addModalTitolo").val();
-							valu=$("#valutazioneM").val();
-							desc=$("#descrizioneM").val();
+							valu=$("#valutazione").val();
+							desc=$("#descrizione").val();
 							id=0;
 							materia="";
-							materia +=$("#materiaM1").val();
-							if($("#materiaM2").val()!=undefined){
-								materia+="/"+$("#materiaM2").val();
+							materia +=$("#materiaA1").val();
+							if($("#materiaA2").val()!=undefined){
+								materia+="/"+$("#materiaA2").val();
 							}
-							if($("#materiaM3").val()!=undefined){
-								materia+="/"+$("#materiaM3").val();
+							if($("#materiaA3").val()!=undefined){
+								materia+="/"+$("#materiaA3").val();
 							}
+							//alert(materia);
 							$.ajax({
 								type:"POST",
 								url: "model/proposte2.php",
 								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
 								success: function(result){
-									alert(result+"c");
+									//alert(result);
 									location.reload();
 							}});
 						});
@@ -75,7 +76,18 @@
 								success: function(result){
 									//$('#ciclo2').val(result);
 									// result=JSON.parse(result);
-									alert(result);
+									location.reload();
+							}});
+						});
+						$("#buttonRemove").click(function(){
+							id=$('#removeProposte').val();
+							$.ajax({
+								type:"POST",
+								url: "model/proposte2.php",
+								data:{removeId:id},
+								success: function(result){
+									//$('#ciclo2').val(result);
+									// result=JSON.parse(result);
 									location.reload();
 							}});
 						});
@@ -152,9 +164,9 @@
 						var sel = document.createElement('select');
 						sel.className = "form-control";
 						sel.name = "materia[]";
-						sel.id = "materia"+i;
+						sel.id = "materiaA"+i;
 						sel.style ="margin-bottom:10px";
-						sel.innerHTML = "<?php $sql = 'select mat_nome,mat_id from materia where mat_flag=1' ; $result = $newDB->query($sql); echo '<option value='."-- seleziona --".'>'.'-- seleziona --'.'</option>'; while ($row = $result->fetch_assoc()) {echo '<option value='.$row['mat_id'].'>'.$row['mat_nome'].'</option>' ;}?>"
+						sel.innerHTML = "<?php $sql = 'select mat_nome,mat_id from materia where mat_flag=1' ; $result = $newDB->query($sql); echo '<option value='."-- seleziona --".'>'.'-- seleziona --'.'</option>'; while ($row = $result->fetch_assoc()) {echo '<option value='.$row['mat_nome'].'>'.$row['mat_nome'].'</option>' ;}?>"
 						document.getElementById("selectAdd").appendChild(sel);
 						cnt++;
 					}
@@ -228,7 +240,7 @@
       <table id="table" class="table col-xs-12">
         <tr><th>Tema</th><th>Materie</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from propone p,tema t where p.pro_flag=1 AND t.tem_id=p.tem_id group by t.tem_titolo order by t.tem_titolo";
+        $query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from tema t,propone p where p.pro_flag=1 AND t.tem_id=p.tem_id group by t.tem_titolo order by t.tem_titolo";
         $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
@@ -236,15 +248,15 @@
             <td class="col-xs-5"><input type="text" readonly="true" class="form-control tema"  value="<?php echo $row['titolo'];?>"></input></td>
 						<td class="col-xs-5"><input type="text" readonly="true" class="form-control materia"  value="<?php
 						$id=$row['id'];
-						$query1="select m.mat_nome as 'nome' from materia m,propone p where p.pro_flag=1 AND m.mat_id=p.mat_id AND p.tem_id=$id";
-						//echo $query1.",";
+						$query1="select m.mat_nome as 'nome' from materia m,propone p where m.mat_id=p.mat_id AND p.tem_id=$id";
+						//echo $id."/".$query1.",";
 						$result1 = $newDB->query($query1);
 						while($row1 = $result1->fetch_assoc()){	echo $row1['nome'].",";}
 							?>"
 						/>
 					</td>
 						<td class="col-xs-1">
-              <button type="button" name='buttonM' id="buttonM" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="selectID(this);document.getElementById('modifyProposte').value='<?php echo $row['id'];?>'" value="<?php echo $row['id'] ?>">
+              <button type="button" name='buttonM' id="buttonM" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalM" onclick="selectID(this);document.getElementById('modifyProposte').value='<?php echo $row['id'];?>'" value="<?php echo $row['id'] ?>">
                 <span class="glyphicon glyphicon-edit"></span>
               </button>
             </td>
@@ -278,7 +290,7 @@
 									<span class="glyphicon glyphicon-minus-sign" id="meno" onclick="removeMat()"></span>
 								</p>
 								<div class="form-group" id="selectAdd">
-									<select class="form-control" name="materia[]" id="materia1" style="margin-bottom:10px">
+									<select class="form-control" name="materia[]" id="materiaA1" style="margin-bottom:10px">
 										<option selected="true" value="">-- seleziona --</option>
 										<?php
 										$materia = "select mat_nome as 'materia' from materia where mat_flag=1;";
@@ -353,7 +365,7 @@
 							</div>
 						</div>
 						<div class="modal-footer">
-							<button type="submit" onclick="return false" class="btn btn-success" id="buttonModify">Salva</button>
+							<button type="submit" class="btn btn-success" id="buttonModify">Salva</button>
 						</div>
 					</div>
 				</div>
@@ -368,17 +380,17 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Eliminazione Classe</h4>
+              <h4 class="modal-title">Eliminazione della proposta</h4>
             </div>
             <div class="modal-body">
               <p>sei sicuro di voler eliminare la classe?</p>
               <div class="alert alert-warning">
-                <strong>Attenzione!</strong> Se l'eliminazione sarà irreversibile
+                <strong>Attenzione!</strong>l'eliminazione sarà irreversibile
               </div>
             </div>
             <div class="modal-footer">
               <form method="post" action="">
-                <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
+                <button type="submit" class="btn btn-default" id="buttonRemove">ok</button>
                 <input type="hidden" id="removeProposte" name="removeProposte" required="required"/>
               </form>
             </div>
@@ -386,7 +398,13 @@
         </div>
       </div>
     </div>
-
+		<div>
+			<span class="col-xs-12">
+				<div class="alert alert-info col-xs-12 control-label">
+					<strong>Info!</strong> Questa pagina non è completamente funzionale su Internet Explorer e Microsoft Edge
+				</div>
+			</span>
+		</div>
   </div>
 
   <script>

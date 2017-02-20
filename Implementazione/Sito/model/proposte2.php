@@ -2,6 +2,7 @@
 ### pagina per la gestione delle proposte
 include_once "../connection.php";
 
+// apertura modal di modifica con l'inserimento dei dati
 if(isset($_POST['idTitolo']) AND !empty($_POST['idTitolo'])){
   $id = $_POST['idTitolo'];
   try{
@@ -82,25 +83,24 @@ if(isset($_POST['select']) AND !empty($_POST['select'])){
   //echo json_encode($materie,SON_HEX_TAG);
 }
 
-// creazione o modifica delle proposte
+// creazione o modifica delle proposte quando si preme il pulsante salva
 if(isset($_POST["materia"]) AND isset($_POST["valu"]) && isset($_POST["desc"])  && isset($_POST["tito"]) && isset($_POST["id"])){
   $id=$_POST["id"];
   $tit=$_POST["tito"];
-  echo "ciao";
-  // se id null vuol dire che il tema non esiste
-  if($id==0){
-    $query = $newDB->getConnection()->prepare("INSERT into tema(tem_titolo) values (?)");
-    echo "INSERT into tema(tem_titolo) values ($tit)";
-    $query->bind_param("s",$tit );
-    $query->execute();
-    $query->close();
-    $sql = "SELECT tem_id AS 'id' from tema where tem_titolo='".$_POST["tito"]."'";
-    $result = $newDB->query($sql);
-    while($dum = $result->fetch_assoc()){
-      $id=$dum['id'];
-    }
-  }
+  // se id 0 vuol dire che il tema non esiste
   try{
+    if($id==0){
+      $query = $newDB->getConnection()->prepare("INSERT into tema(tem_titolo) values (?)");
+      $query->bind_param("s",$tit);
+      $query->execute();
+      $query->close();
+      $sql = "SELECT max(tem_id) AS 'id' from tema";
+      $result = $newDB->query($sql);
+      while($dum = $result->fetch_assoc()){
+        $id=$dum['id'];
+      }
+      echo $id;
+    }
     $materie=$_POST['materia'];
     $dum = explode('/',$materie);
     $materia=array();
@@ -131,4 +131,12 @@ if(isset($_POST["materia"]) AND isset($_POST["valu"]) && isset($_POST["desc"])  
     //echo  "<script>document.getElementById('errore').innerHTML='errore'</script>";
   }
 }
- ?>
+
+if(isset($_POST["removeId"])){
+  $id=$_POST["removeId"];
+    $sql = "UPDATE propone set pro_flag='0' where tem_id='".$id."'";
+    $result = $newDB->query($sql);
+    echo $sql;
+}
+
+?>

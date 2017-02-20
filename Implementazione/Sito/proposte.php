@@ -5,5 +5,6 @@
 	}
 	else{
 		include 'view/proposte.php';
+		include 'model/proposte.php';
 	}
 ?>

@@ -89,7 +89,7 @@
           <tr>
             <td class="col-xs-8"><input type="text" class="form-control" id="<?php echo $row['mat_id'];?>" value="<?php echo $row['nome'];?>"></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyMateria').value='<?php echo $row['mat_id'];?>';">
+              <button type="button" name='button' id="" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyMateria').value='<?php echo $row['mat_id'];?>';">
                 <span class="glyphicon glyphicon-ok"></span>
               </button>
             </td>

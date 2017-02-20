@@ -105,7 +105,7 @@
             <td class="col-xs-6"><input type="text" class="form-control" id="<?php echo "n".$row['cor_id'];?>" value="<?php echo $row['nome'];?>"></td>
             <td class="col-xs-3"><input type="number" min=0 max=4 class="form-control" id="<?php echo "d".$row['cor_id'];?>" value="<?php echo $row['durata'];?>"></td>
             <td class="col-xs-2">
-              <button type="button" name='button' id="" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyCorso').value='<?php echo $row['cor_id'];?>';">
+              <button type="button" name='button' id="" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('modifyCorso').value='<?php echo $row['cor_id'];?>';">
                 <span class="glyphicon glyphicon-ok"></span>
               </button>
             </td>

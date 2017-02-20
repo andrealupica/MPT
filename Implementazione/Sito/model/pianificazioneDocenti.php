@@ -23,11 +23,9 @@
         for ($j=0; $j < count($cognome)-1; $j++) {
           // se il 4 campo fosse vuoto allora fa niente
           if($j==3 && empty($cognome[$j]) && empty($nome[$j]) && empty($ore[$j]) ){
-
           }
           // se il 3 campo fosse vuoto
           if($j==2 && empty($cognome[$j]) && empty($nome[$j]) && empty($ore[$j]) ){
-
           }
           // controllo se il docente inserito esiste
           else{
@@ -49,13 +47,13 @@
         // se non ci sono stati errori sul nome del docente o se i dati sono stati riempiti
         if(in_array(1,$controllo)!=true){
           for ($i=0; $i <= $cnt; $i++) {
-            echo "<script>console.log('".count($cognome)."')</script>";
-            echo "<script>console.log('".$i.$cognome[$i].",".$nome[$i]."')</script>";
+            //echo "<script>console.log('".count($cognome)."')</script>";
+            //echo "<script>console.log('".$i.$cognome[$i].",".$nome[$i]."')</script>";
             if($i==3 && empty($cognome[$i]) && empty($nome[$i])){
-              echo "<script>console.log('4 campo vuoto')</script>";
+              //echo "<script>console.log('4 campo vuoto')</script>";
             }
             if($i==2 && empty($cognome[$i]) && empty($nome[$i])){
-echo "<script>console.log('3 campo vuoto')</script>";
+//echo "<script>console.log('3 campo vuoto')</script>";
             }
             else{
               //creo la query
