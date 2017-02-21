@@ -55,7 +55,6 @@
       });
     });
     </script>
-  <div></div>
   <div clas="contenitore">
     <h4>Creazione Classe</h4>
     <div class="form-group col-xs-12">

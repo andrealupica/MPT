@@ -35,6 +35,18 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
         });
       });
 
+      $("#buttonClear").click(function(){
+        //aggiunte queste righe per far funzionare la rimozione della parte nera
+        id="";
+        $.ajax({
+          type:"POST",
+          url: "model/importClasse.php",
+          data:{clearClasse:id},
+          success: function(result){
+          }
+        });
+      });
+
       $("#buttonModify").click(function(){
         valore = $("#modifyAllievo").val();
         //alert(nome+" "+id);
@@ -87,7 +99,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
                             <input name="idCSV" type="file" id="idCSV" accept=".csv" />
                             <input type="text" hidden="true" name="corso" readonly="true" value="<?php echo $idCorso;?>"/>
                             <input type="text" hidden="true" name="classe" readonly="true" value="<?php echo $idClasse;?>"/>
-                            <input type="submit" name="Import" value="Submit" class="btn btn-primary" />
+                            <input type="submit" name="Import" value="Importa " class="btn btn-primary" />
                         </fieldset>
                      </form>
                    </div>
@@ -97,21 +109,29 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
         </div>
       <br>
       <div class="form-group">
-        <label class="col-sm-2 control-label">Ricerca: </label>
-        <div class="col-sm-10">
+        <label class="col-xs-2 control-label">Ricerca: </label>
+        <div class="col-xs-8">
           <div class="input-group">
             <span class="input-group-addon glyphicon glyphicon-search"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
             <input type="text" class="form-control" id="search"></input>
           </div>
         </div>
+        <td class="col-xs-1">
+          <button type="button" name='buttonM' id="buttonClear" class="btn btn-danger btn-lg" data-toggle="modal" data-target="#myModalClear">
+            <h5>svuota</h5>
+          </button>
+        </td>
       </div>
       <label class="col-sm-12 col-xs-12 control-label titolo"></label>
-      <table id="table" class="table col-xs-12">
-        <tr><th class="col-xs-4">Allievo</th><th class="col-xs-3">Data di nascita</th><th class="col-xs-3">Altre info</th><th class="col-xs-1">Modifica</th><th class="col-xs-1">Elimina</th></tr>
-        <?php
+      <?php
         $query="SELECT all_id AS 'id', all_nome AS 'nome', all_birthday AS 'born', all_info AS 'info' FROM allievo where all_flag=1 AND cor_id=".$_SESSION["idCorso"]." AND cla_id=".$_SESSION["idClasse"];
         //echo $query;
         $result = $newDB->query($query);
+        if(mysqli_num_rows($newDB->query($query)) !=0 ){
+       ?>
+      <table id="table" class="table col-xs-12">
+        <tr><th class="col-xs-4">Allievo</th><th class="col-xs-3">Data di nascita</th><th class="col-xs-3">Altre info</th><th class="col-xs-1">Modifica</th><th class="col-xs-1">Elimina</th></tr>
+        <?php
         while($row = $result->fetch_assoc()){
           ?>
           <tr id="riga">
@@ -132,6 +152,18 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
           </tr>
           <?php } ?>
       </table>
+      <?php
+      }
+      else{
+        ?>
+        <div class="col-xs-12">
+          <h3>
+          <label class="col-xs-12 alert lbl-lg alert-info">Non sono presenti allievi</label>
+        </h3>
+        </div>
+        <?php
+      }
+    ?>
     </div>
     <div class="container">
       <!-- Modal -->
@@ -181,6 +213,33 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
               <form method="post" action="">
                 <button type="submit"  class="btn btn-default" id="buttonModify">ok</button>
                 <input type="hidden" id="modifyAllievo" name="modifyAllievo" required="required"/>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="myModalClear" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Eliminazione di tutti gli allievi</h4>
+            </div>
+            <div class="modal-body">
+              <p>sei sicuro di voler svuotare l'intera classe?</p>
+              <div class="alert alert-danger">
+                <strong>Attenzione!</strong> L'eliminazione è irreversibile
+              </div>
+            </div>
+            <div class="modal-footer">
+              <form method="post" action="">
+                <button type="submit" class="btn btn-default" id="buttonClear">ok</button>
+                <input type="hidden" id="clearClasse" name="clearClasse" required="required"/>
               </form>
             </div>
           </div>

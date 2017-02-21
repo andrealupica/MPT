@@ -46,15 +46,20 @@
     <a class="btn btn-primary col-md-5 col-xs-12" href="visionePianificazioneMPTP.php"><span>Visione Pianificazione Personale MP</span></a>
     <?php } ?>
     <!--altro-->
-    <a class="btn btn-primary col-md-5 col-xs-12 " href="visioniParticolari.php"><span>Visioni Particolari</span></a>
-    <?php
-      if($_SESSION['amministratore']==1){
-    ?>
-    <!-- amministratore -->
-    <a class="btn btn-primary col-md-5 col-xs-12" href="amministrazione.php"><span>Amministrazione</span></a>
-    <?php
-      }
+     <?php
+       if($_SESSION['docente']==1 OR $_SESSION['responsabile']==1 OR $_SESSION['amministratore']==1){
      ?>
+       <a class="btn btn-primary col-md-5 col-xs-12 " href="visioniParticolari.php"><span>Visioni Particolari</span></a>
+       <!-- <a class="btn btn-primary col-md-5 col-xs-12" href="proposte.php"><span>proposte</span></a> -->
+     <?php } ?>
+     <?php
+       if($_SESSION['amministratore']==1){
+     ?>
+     <!-- amministratore -->
+     <a class="btn btn-primary col-md-5 col-xs-12" href="amministrazione.php"><span>Amministrazione</span></a>
+     <?php
+       }
+      ?>
   </div>
   <h8 style="margin-top:30px;position:fixed;bottom:5px;right:5px;">Realizzato da:Andrea Lupica (I4AC)</h8>
 </body>

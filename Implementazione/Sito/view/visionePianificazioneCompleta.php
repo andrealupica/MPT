@@ -4,14 +4,14 @@ session_start();
 if($_SESSION['email']=="" OR $_SESSION['email']==null){
   echo "non hai i permessi per visualizzare questa pagina";
 }
-else{
+else if(isset($_GET["id"])){
   include_once "connection.php";
   $corso;
   $classe;
   $anno;
   $sem;
   try{
-    $id=$_GET["ID"];
+    $id=$_GET["id"];
     $query1 = $newDB->getConnection()->prepare("SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=?");
     $query1->bind_param("i", $id);
     $query1->execute();
@@ -29,7 +29,7 @@ else{
   catch(PDOException $e)
   {
   }
-  $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno', pi.pia_sem AS 'sem',
+  $query = "SELECT cl.cla_nome AS  'classe',cl.cla_id AS 'idClasse', ma.mat_nome AS  'materia', co.cor_nome AS  'corso',co.cor_id AS 'idCorso', pi.pia_ini_anno AS  'inizio anno', pi.pia_sem AS 'sem',
   pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT', ut.ute_cognome as 'cognome', ut.ute_nome as 'nome'
   FROM pianifica pi
   JOIN classe cl ON cl.cla_id = pi.cla_id
@@ -74,7 +74,6 @@ else{
         <h1>Visione Pianificazione Completa Docenti MP</h1>
         <br>
         <label class="col-sm-12 col-xs-12 control-label titolo">Docenti</label>
-        <form method="post">
           <?php
           while($row = $result->fetch_assoc()){
             $sem1=$row["sem"];
@@ -83,6 +82,8 @@ else{
             $Fanno=$row["fine anno"];
             $classe=$row["classe"];
             $corso=$row["corso"];
+            $idCorso=$row['idCorso'];
+            $idClasse=$row['idClasse'];
             ?>
             <div class="col-md-12" id="docente">
               <span class="col-md-3 col-xs-6">
@@ -112,23 +113,23 @@ else{
           <div class="col-xs-12 altro">
             <span class="col-md-3 col-xs-4">
               Tipo MP
-              <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $corso;?>" ></input>
+              <input type="text" name="tipo[]" class="form-control" readonly="true" value="<?php echo $corso;?>" ></input>
             </span>
             <span class="col-md-2 col-xs-4">
               Classe
-              <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $classe;?>" ></input>
+              <input type="text" name="classe[]" class="form-control" readonly="true" value="<?php echo $classe;?>" ></input>
             </span>
             <span class="col-md-2 col-xs-4">
               Durata Ciclo
-              <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $Fanno-$Ianno;?>" ></input>
+              <input type="text" name="durata[]" class="form-control" readonly="true" value="<?php echo $Fanno-$Ianno;?>" ></input>
             </span>
-            <span class="col-md-4 col-xs-8">
+            <span class="col-md-3 col-xs-8">
               Ciclo Formativo
               <table>
                 <tr>
                   <td class="col-xs-5" style="padding-left:0px;">
                     <span>
-                      <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $Ianno;?>" ></input>
+                      <input type="text" name="inizio[]" class="form-control" readonly="true" value="<?php echo $Ianno;?>" />
                     </span>
                   </td>
                   <td class="col-xs-2">
@@ -138,22 +139,33 @@ else{
                   </td>
                   <td class="col-xs -5">
                     <span>
-                      <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $Fanno;?>" ></input>
+                      <input type="text" name="fine[]" class="form-control" readonly="true" value="<?php echo $Fanno;?>" />
                     </span>
                   </td>
                 </tr>
               </table>
             </span>
-            <span class="col-md-1 col-xs-4">
+            <span class="col-md-1 col-xs-1">
               Semestre
-              <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $sem; ?>" ></input>
+              <input type="text" name="semestre" class="form-control" readonly="true" value="<?php echo $sem; ?>"/>
             </span>
+            <?php
+              $query="SELECT * FROM allievo where all_flag=1 AND cor_id=".$idCorso." AND cla_id=".$idClasse;
+      				if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) != 0){
+             ?>
+            <span class="col-md-1 col-xs-1">
+              allievo
+              <form method="post" action="visioneAllievi.php">
+                <input type="hidden" name="allievi" readonly="true" value="<?php echo $idCorso."+".$idClasse?>" />
+                <input type="submit" value="vedi" class="form-control btn btn-primary" />
+              </form>
+            </span>
+            <?php } ?>
           </div>
           <div>
             <label class="col-xs-4 control-label" id="messaggio"></label>
           </div>
         </div>
-      </form>
     </div>
   </body>
   </html>

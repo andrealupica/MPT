@@ -98,7 +98,7 @@ else{
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
-                <a href="visionePianificazioneCompleta.php?ID=<?php echo $row["ID"];?>"
+                <a href="visionePianificazioneCompleta.php?id=<?php echo $row["ID"];?>"
                   class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["ID"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
                 </a>
               </span>

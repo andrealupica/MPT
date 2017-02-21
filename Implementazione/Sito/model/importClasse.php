@@ -30,10 +30,11 @@
           $info=$getData[3]."   ".$getData[4];
           $data = explode('.', $getData[1]);
           $born = $data[2].'-'.$data[1].'-'.$data[0];
+          $nome=utf8_encode($getData[0]);
           try{
             $allievi = $newDB->getConnection()->prepare("SELECT * from allievo where all_nome=? AND all_birthday=?");
           //  echo "<br>SELECT all_flag from allievo where all_nome='$getData[0]' AND all_birthday='$born'";
-            $allievi->bind_param("ss",$getData[0],$born);
+            $allievi->bind_param("ss",$nome,$born);
             $allievi->execute();
             $allievi->store_result();
             // se non ci sono risultati lo aggiungo
@@ -42,17 +43,17 @@
               //echo "<br> inserisci:";
               $query = $newDB->getConnection()->prepare("INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values (?,?,?,?,?)");
               $info=$getData[3].",".$getData[4];
-              echo "<br>inserisci i dati: ".$getData[0]." ".$getData[1]."=> ".$born." ".$info." idclasse:".$classe." idcorso:".$corso;
-              echo "<br>errore:".$query->error."questo qui!!";
-              echo "INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values ($getData[0],$born,$info,$corso,$classe)";
-              $query->bind_param("sssii",$getData[0],$born,$info,$corso,$classe);
+              //echo "<br>inserisci i dati: ".$getData[0]." ".$getData[1]."=> ".$born." ".$info." idclasse:".$classe." idcorso:".$corso;
+              //echo "<br>errore:".$query->error."questo qui!!";
+              echo "INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values ($nome,$born,$info,$corso,$classe)";
+              $query->bind_param("sssii",$nome,$born,$info,$corso,$classe);
               $query->execute();
               $query->close();
             } else {
               //echo "<br>aggiorna: ";
               // se ci sono risultati controllo il valore del flag
               $aggiorna = $newDB->getConnection()->prepare("UPDATE allievo set all_flag=1,cor_id=?,cla_id=?,all_info=? where all_nome=? AND all_birthday=?");
-              $aggiorna->bind_param("sssss",$corso,$classe,$info,$getData[0],$born);
+              $aggiorna->bind_param("sssss",$corso,$classe,$info,$nome,$born);
               $aggiorna->execute();
               $aggiorna->close();
             }
@@ -67,7 +68,7 @@
   	fclose($handle);
     }
     //unset($_POST); con unset è nullo ma ricarica comunque
-    echo "<script>alert('".$_POST["Import"]."')</script>";
+    //echo "<script>alert('".$_POST["Import"]."')</script>";
     //unset($_REQUEST);
   //  header('http://www.samtinfo.ch/web/'.$_SERVER["REQUEST_URI"]);
    echo "<script>location.href='importClasse.php'</script>";
@@ -100,5 +101,12 @@
     $sql ="UPDATE allievo set all_flag=0 where all_id=".$_POST["removeAllievo"];
     $newDB->query($sql);
      echo "<script>location.href='importClasse.php'</script>";
+  }
+
+  if(isset($_POST["clearClasse"])){
+    $sql = "UPDATE allievo set all_flag=0 where cla_id=".$_SESSION['idClasse']." and cor_id=".$_SESSION['idCorso'];
+    //echo $sql;
+    $newDB->query($sql);
+    echo "<script>location.href='importClasse.php'</script>";
   }
 ?>
