@@ -248,7 +248,7 @@
             <td class="col-xs-5"><input type="text" readonly="true" class="form-control tema"  value="<?php echo $row['titolo'];?>"></input></td>
 						<td class="col-xs-5"><input type="text" readonly="true" class="form-control materia"  value="<?php
 						$id=$row['id'];
-						$query1="select m.mat_nome as 'nome' from materia m,propone p where m.mat_id=p.mat_id AND p.tem_id=$id";
+						$query1="select m.mat_nome as 'nome' from materia m,propone p where  p.pro_flag=1 and m.mat_id=p.mat_id AND p.tem_id=$id";
 						//echo $id."/".$query1.",";
 						$result1 = $newDB->query($query1);
 						while($row1 = $result1->fetch_assoc()){	echo $row1['nome'].",";}

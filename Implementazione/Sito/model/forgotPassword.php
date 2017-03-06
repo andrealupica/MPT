@@ -28,6 +28,8 @@
 								$mittente =  'From: "sito MPT" <'.$_SERVER["SERVER_NAME"].'>';
 								// dopo l'invio dell'email reindirizza alla pagina di login
 								mail($destinatario,$oggetto,$messaggio,$mittente);
+								// creazione del log
+								$newDB->createLog($email,"informazione","l utente ha modificato la password");
 								header("Location: index.php");
 						}
 						else{
@@ -36,6 +38,8 @@
 					}
 					else
 					{
+						// creazione del log
+						$newDB->createLog($email,"attenzione","email non registrata");
 						echo  "<script>document.getElementById('messaggio').innerHTML='errore, l email potrebbe non essere stata registrata'</script>";
 					}
 				}
@@ -45,6 +49,8 @@
 				}
 			}
 			else{
+				// creazione del log
+				$newDB->createLog($email,"informazione","l email non combaciano");
 				echo  "<script>document.getElementById('messaggio').innerHTML='le email non combaciano'</script>";
 			}
 		}

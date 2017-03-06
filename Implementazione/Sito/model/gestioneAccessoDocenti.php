@@ -3,16 +3,18 @@
 	  include_once "connection.php";
 
     // se si vuole eliminare l'email
-    if(isset($_POST["emailCancellata"])){
+    if(isset($_POST["emailCancellata"]) AND isset($_SESSION['email'])){
       $email1 = $_POST['emailCancellata'];
       $query ="update utente set ute_flag=0 where ute_email='".$email1."';";
       if($newDB->query($query)!=false){
+				// creazione del log
+				$newDB->createLog($_SESSION['email'],"eliminazione","eliminazione dell email: ".$email['email']);
 				header("Location: gestioneAccessoDocenti.php");
         echo  "<script>document.getElementById('messaggio').innerHTML='email cancellata con successo'</script>";
       }
     }
 		// se si vuole gestire i docenti
-		if(isset($_POST['docente']) && isset($_POST['responsabile'])){
+		if(isset($_POST['docente']) && isset($_POST['responsabile']) AND isset($_SESSION['email'])){
 	    $queryEmail = "select ute_email as 'email' from utente";
 	    if($newDB->query($queryEmail)!=false){
 	      $result = $newDB->query($queryEmail);
@@ -50,7 +52,10 @@
 					}
 					// creazione della query ed esecuzione
 	        $queryModify = "update utente set ute_docente='".$isdocente."', ute_responsabile='".$isresponsabile."', ute_gestoreEmail='".$isgestore."' where ute_email='".$email['email']."';";
-					$newDB->query($queryModify);
+					if($newDB->query($queryModify)!=false){
+						// creazione del log
+						$newDB->createLog($_SESSION['email'],"informazione","modifica permessi dell email: ".$email['email']);
+					}
 	      }
 	    }
 			// ricarico la pagina

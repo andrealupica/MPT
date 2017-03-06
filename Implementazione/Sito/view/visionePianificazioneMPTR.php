@@ -13,7 +13,7 @@ else{
   JOIN classe cl ON cl.cla_id = pi.cla_id
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
-  JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1";
+  JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1 order by ut.ute_cognome";
   //echo $query;
   $result = $newDB->query($query);
   ?>
@@ -37,15 +37,32 @@ else{
       $.ajax({
         type:"POST",
         url: "model/visionePianificazioneMPTR.php",
-        data:{id:id},
+        data:{removeId:id},
         success: function(result){
           //alert(result);
           location.reload();
         }
       });
     });
-
+    $("#buttonModify").click(function(){
+      id=$("#modifyId").val();
+      ore=$("#modifyHour").val();
+      //alert(id+ore);
+      $.ajax({
+        type:"POST",
+        url: "model/visionePianificazioneMPTR.php",
+        data:{modifyId:id,ore:ore},
+        success: function(result){
+          //alert(result);
+          location.reload();
+        }
+      });
+    });
   });
+  function getOre(obj){
+    val=$(obj).parent().parent().find("#ore").val();
+    $("#modifyHour").val(val);
+  }
   </script>
   <body class="body">
     <div class="col-xs-0 col-sm-1"></div>
@@ -83,10 +100,9 @@ else{
           <?php
           while($row = $result->fetch_assoc()){
             ?>
-            <div class="col-xs-12 riga">
+            <div class="col-xs-12 riga" id="riga">
               <span class="col-md-0 col-xs-0">
-                <input type="text" readonly="true" hidden="true"
-                value="<?php echo $row["nome"].$row["cognome"].$row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
+                <input type="text" readonly="true" hidden="true" value="<?php echo $row["nome"]." ".$row["cognome"]." ".$row["materia"]." ".$row["classe"]." ".$row["corso"]." ".$row["inizio anno"]." ".$row["fine anno"]." ".$row["sem"]." ".$row["AIT"]." ".$row["AIT"]/$row["ore totali"]*100 ?>"/>
               </span>
               <span class="col-md-2 col-xs-5">
                 Docente
@@ -98,11 +114,7 @@ else{
               </span>
               <span class="col-md-1 col-xs-2">
                 Classe
-                <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
-              </span>
-              <span class="col-md-2 col-xs-4">
-                Tipo MP
-                <input type="text" name="corso[]" class="form-control" readonly="true" title="<?php echo $row["corso"];?>" value="<?php echo $row["corso"];?>" id="corso"/>
+                <input type="text" name="classe[]" class="form-control" readonly="true"  title="<?php echo $row["corso"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
               </span>
               <span class="col-md-2 col-xs-4 ciclo">
                 Ciclo Formativo
@@ -114,7 +126,11 @@ else{
               </span>
               <span class="col-md-1 col-xs-2">
                 % AIT
-                <input type="text" class="form-control"  readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>" title="<?php $ris=$row["AIT"]/$row["ore totali"]*100; echo $ris ?>" id="<?php echo 'AIT'.$i;?>"/>
+                <input type="text" class="form-control"  id="<?php echo 'AIT';?>" readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>" title="<?php $ris=number_format($row['AIT']/$row['ore totali']*100,2); echo $ris ?>"/>
+              </span>
+              <span class="col-md-1 col-xs-2">
+                Ore Totali
+                <input type="number" class="form-control"  id="ore" value="<?php echo $row["ore totali"] ?>" title="<?php echo $row["ore totali"] ?>"/>
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
@@ -123,8 +139,15 @@ else{
                 </a>
               </span>
               <span class="col-md-1 col-xs-2">
+                Modifica
+                <button class="form-control dettaglio "  style="background-color:#337ab7;border-color:##2e6da4" value="buttonModify" id="modify" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="getOre(this);document.getElementById('modifyId').value='<?php echo $row["ID"];?>';" >
+                  <input class="col-xs-0" type="hidden" name="modify" value"<?php echo $row["ID"];?>"/>
+                  <div class="glyphicon glyphicon-edit btn-primary"></div>
+                </button>
+              </span>
+              <span class="col-md-1 col-xs-2">
                 Elimina
-                <button class="form-control dettaglio " style="background-color:#d9534f;border-color:#d43f3a" id="elimina" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
+                <button class="form-control dettaglio " style="background-color:#d9534f;border-color:#d43f3a" id="elimina" readonly="true" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
                   <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["ID"];?>"/>
                   <div class="glyphicon glyphicon-remove btn-danger"></div>
                 </button>
@@ -153,7 +176,7 @@ else{
 
       <div class="container">
         <!-- Modal -->
-        <div class="modal fade" id="myModalM" role="dialog">
+        <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
 
             <!-- Modal content-->
@@ -172,6 +195,34 @@ else{
                 <form method="post" action="">
                   <button type="submit" onclick="return false" class="btn btn-default" id="buttonRemove">ok</button>
                   <input type="hidden" id="removeId" name="remove" required="required"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModalM" role="dialog">
+          <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">modifica pianificazione</h4>
+              </div>
+              <div class="modal-body">
+                <p>sei sicuro di voler modificare l'ora totale del docente?</p>
+                <div class="alert alert-info">
+                  <strong>Info!</strong> La modifica comporterà cambiamenti anche in altre pagine
+                </div>
+              </div>
+              <div class="modal-footer">
+                <form method="post" action="">
+                  <button type="submit" onclick="return false" class="btn btn-default" id="buttonModify">ok</button>
+                  <input type="hidden" id="modifyId" name="modifyId" required="required"/>
+                  <input type="hidden" id="modifyHour" name="modifyHour" required="required"/>
                 </form>
               </div>
             </div>

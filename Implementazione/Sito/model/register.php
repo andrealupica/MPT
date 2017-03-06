@@ -64,6 +64,8 @@
 										$mittente = 'From: registrazione MPT <'.$email.'>';
 										// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 										mail($destinatario,$oggetto,$messaggio,$mittente);
+										// creazione del log
+										$newDB->createLog($email,"informazione","l utente si è registrato al sito");
 										echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
 									}
 									else{
@@ -79,12 +81,16 @@
 											$mittente = 'From: registrazione MPT <'.$email.'>';
 											// viene inviata un'email al gestore delle email e viene avvisato colui che ha fatto la richiesta
 											mail($destinatario,$oggetto,$messaggio,$mittente);
+											// creazione del log
+											$newDB->createLog($email,"informazione","l utente si è registrato al sito");
 											echo "<script type='text/javascript'> $(document).ready(function(){ $('#myModal').modal('show'); }); </script>";
 										}
 									}
 								}
 							}
 							else{
+								// creazione del log
+								$newDB->createLog($_POST['email'],"attenzione","email non corretta");
 								echo  "<script>document.getElementById('errore').innerHTML='email non corretta : nome.cognome@edu.ti.ch'</script>";
 							}
 				}

@@ -51,10 +51,23 @@
 			$this->res = mysqli_query($this->newDB, $query);
 			return $this->res;
 		}
+
+		public function createLog($email,$azione,$descrizione){
+			$time=$_SERVER['REQUEST_TIME'];
+			$link = $_SERVER['PHP_SELF'];
+			$exp = explode("/",$link);
+			$pagina = $exp[count($exp)-1];
+			$time = date("Y-m-d H:i:s",$time);
+			$sql="INSERT INTO log_(ute_email,log_pagina,log_azione,log_descrizione,log_data) values ('$email','$pagina','$azione','$descrizione','$time')";
+			//echo "<br>".$sql;
+			echo "<script>alert(".$sql.")</script>";
+			$this->query($sql);
+		}
 	}
 
 	// se la connessione al DB non è stata stabilita allora prova a connetterti
 	if($newDB==null){
 		$newDB = new DB("h2mysql19", "efof_i13lupand", "lupand1", "efof_samtinfoch17");
 	}
+
 ?>

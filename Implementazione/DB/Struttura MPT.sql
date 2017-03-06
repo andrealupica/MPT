@@ -58,7 +58,7 @@ create table pianifica(
 	pia_fin_anno int,
 	pia_ore_tot int,
 	pia_ore_AIT int,
-	pia_sem int default 0,
+	pia_sem varchar(3) default 0,
 	pia_flag int default 1,
 	foreign key(ute_email) references utente(ute_email)
 	ON UPDATE CASCADE

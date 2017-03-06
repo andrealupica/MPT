@@ -21,6 +21,8 @@
 					$query1->bind_param("ss", $user, $pass1);
 					$query1->execute();
 					$query1->close();
+					// creazione del log
+					$newDB->createLog($_SESSION['email'],"informazione","l utente ha cambiato la password");
 					// se la query ha successo reindirizza alla pagina di login
 					header("Location: index.php");
 				}
@@ -29,6 +31,8 @@
 				}
 			}
 			else{
+				// creazione del log
+				$newDB->createLog($_SESSION['email'],"attenzione","l utente ha inserito password non uguali");
 				echo  "<script>document.getElementById('errore').innerHTML='le password non sono uguali'</script>";
 			}
 		}

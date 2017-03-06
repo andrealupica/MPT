@@ -24,6 +24,8 @@
 		if($newDB->query($query)!= false){
 			mail($destinatario,$oggetto,$messaggio,$mittente);
 			echo "email inviata al docente";
+			// creazione del log
+			$newDB->createLog($emailMittente,"informazione","utente accettato al sito");
 		}
 	}
 	else{

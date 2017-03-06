@@ -153,7 +153,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
             Durata Ciclo
             <input name="durataCiclo" id="durataCiclo" tyte="text" readonly="true" class="form-control"></input>
           </span>
-          <span class="col-md-4 col-xs-10">
+          <span class="col-md-3 col-xs-10">
             Ciclo Formativo
             <table>
               <tr>
@@ -184,9 +184,10 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
               </tr>
             </table>
           </span>
-          <span class="col-md-1 col-xs-2">
+          <span class="col-md-2 col-xs-2">
             Semestre
             <select name="sem" id="sem" class="form-control">
+              <option>1-2</option>
               <?php
                 for ($i=1; $i <=2; $i++) {
               ?>

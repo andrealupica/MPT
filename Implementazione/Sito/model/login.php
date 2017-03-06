@@ -44,6 +44,8 @@ $pass = "";
 									$queryDeleteAccount = "update utente set ute_flag=0 where ute_email='".$user."';";
 									$newDB->query($queryDeleteAccount);
 									echo  "<script>document.getElementById('errore').innerHTML='l account è stato eliminato poiché non è stato effettuato il login entro il tempo limite'</script>";
+									// creazione del log
+									$newDB->createLog($user,"informazione","l utente ha fatto il login dopo il tempo limite");
 								}
 								else{
 									$query1 = "update utente set ute_dataIscrizione=null where ute_email='$user';";
@@ -66,20 +68,29 @@ $pass = "";
 								$row = $result->fetch_assoc();
 								echo $queryPasswordTemp;
 								echo $row['tpassword'];
+
+								// creazione del log
+								$newDB->createLog($_SESSION['email'],"informazione","l utente ha effettuato il login");
 								if($row['tpassword']==null){
 									header("Location: menu.php");
 								}
 								else{
 									header("Location: changePassword.php");
 								}
+								//echo $_SESSION['email']."informazione".$_SERVER["PHP_SELF"]."l'utente ha effettuato il login";
+								//echo "INSERT INTO log_(ute_email,log_pagina,log_azione,log_descrizione,log_data) values ($_SESSION['email'],$_SERVER['PHP_SELF'],'ok','descrizione',$time)";
 							}
 						}
 						else{
+								// creazione del log
+								$newDB->createLog($user,"informazione","l utente ha cercato di effettuare il login con l account disabilitato");
 								echo  "<script>document.getElementById('errore').innerHTML='errore durante il login, il tuo account potrebbe essere momentaneamente disabilitato'</script>";
 						}
 					}
 				}
 				else{
+					// creazione del log
+					$newDB->createLog($user,"attenzione","la password o l email non corrispondono");
 					echo  "<script>document.getElementById('errore').innerHTML='l email o la password non è corretta'</script>";
 				}
 			}

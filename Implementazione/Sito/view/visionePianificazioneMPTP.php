@@ -70,7 +70,7 @@ else{
             <div class="col-xs-12 riga">
               <span class="col-md-0 col-xs-0">
                 <input type="text" readonly="true" hidden="true"
-                value="<?php echo $row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
+                value="<?php echo $row["materia"].$row["classe"].$row["corso"].$row["inizio anno"].$row["sem"]." ".$row["fine anno"].$row["AIT"].$row["AIT"]/$row["ore totali"]*100 ?>"/>
               </span>
               <span class="col-md-2 col-xs-5">
                 Materia

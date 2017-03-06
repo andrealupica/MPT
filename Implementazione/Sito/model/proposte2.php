@@ -1,7 +1,7 @@
 <?php
 ### pagina per la gestione delle proposte
 include_once "../connection.php";
-
+session_start();
 // apertura modal di modifica con l'inserimento dei dati
 if(isset($_POST['idTitolo']) AND !empty($_POST['idTitolo'])){
   $id = $_POST['idTitolo'];
@@ -94,12 +94,14 @@ if(isset($_POST["materia"]) AND isset($_POST["valu"]) && isset($_POST["desc"])  
       $query->bind_param("s",$tit);
       $query->execute();
       $query->close();
+      // creazione del log
+      $newDB->createLog($_SESSION['email'],"inserimento","creato tema con il titolo ".$tit);
       $sql = "SELECT max(tem_id) AS 'id' from tema";
       $result = $newDB->query($sql);
       while($dum = $result->fetch_assoc()){
         $id=$dum['id'];
       }
-      echo $id;
+    //  echo $id;
     }
     $materie=$_POST['materia'];
     $dum = explode('/',$materie);
@@ -108,21 +110,27 @@ if(isset($_POST["materia"]) AND isset($_POST["valu"]) && isset($_POST["desc"])  
       if($dum[$i]!="--" && $dum[$i]!=null)
         $materia[]=$dum[$i];
     }
+    // inserimento dati in tema
     $query = $newDB->getConnection()->prepare("UPDATE tema set tem_titolo=?,tem_valutazione=?,tem_descrizione=? where tem_id=?");
     $query->bind_param("sssi", $_POST["tito"],$_POST["valu"],$_POST["desc"],$id);
     $query->execute();
     $query->close();
+    // rimozione di tutti i collegamenti propone
     $sql = "UPDATE  propone set pro_flag=0 where tem_id=".$id;
     $result = $newDB->query($sql);
     for ($i=0; $i < count($materia) ; $i++) {
+      // selezione della materia
       $sql = "SELECT mat_id AS 'id' from materia m where m.mat_nome='".$materia[$i]."'";
       $result = $newDB->query($sql);
       while($dum = $result->fetch_assoc()){
         $d=$dum["id"];
+        // aggiorno il propone se esiste e in seguito provo a crearlo ( se esiste già ritorna errore e non viene eseguito )
         $sql1 = "UPDATE  propone set pro_flag=1 where tem_id=".$id." AND mat_id=".$d;
         $result1 = $newDB->query($sql1);
         $sql1 = "INSERT into propone(tem_id,mat_id) values($id,$d)";
         $result1 = $newDB->query($sql1);
+        // creazione del log
+        $newDB->createLog($_SESSION['email'],"inserimento","creazione del tema con aggiunta della materia ".$materia[$i]);
       }
     }
   }
@@ -136,7 +144,10 @@ if(isset($_POST["removeId"])){
   $id=$_POST["removeId"];
     $sql = "UPDATE propone set pro_flag='0' where tem_id='".$id."'";
     $result = $newDB->query($sql);
-    echo $sql;
+    if($newDB->query($sql)!=false){
+      // creazione del log
+      $newDB->createLog($_SESSION['email'],"eliminazione","rimosso proposta numero ".$id);
+    }
 }
 
 ?>

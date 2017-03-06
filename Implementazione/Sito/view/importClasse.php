@@ -136,7 +136,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
           ?>
           <tr id="riga">
             <td class="col-xs-3"><input type="text" class="form-control "  id="<?php echo 'nome'.$row['id'];?>" value="<?php echo $row['nome'];?>"></input></td>
-            <td class="col-xs-2"><input type="date" class="form-control "  id="<?php echo 'nascita'.$row['id'];?>" value="<?php echo $row['born'] ?>"/>
+            <td class="col-xs-2"><input type="date" class="form-control " placeholder="yyyy-mm-dd"  id="<?php echo 'nascita'.$row['id'];?>" value="<?php echo $row['born'] ?>"/>
             <td class="col-xs-5"><input type="text" class="form-control "  id="<?php echo 'info'.$row['id'];?>" value="<?php echo $row['info'] ?>"/>
           </td>
             <td class="col-xs-1">

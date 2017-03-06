@@ -4,7 +4,7 @@
   session_start();
   //echo "<script>alert('pagina')</script>";
     // i dati inviati in post vengono salvati in sessione dalla pagina amministrazione
-    if(isset($_POST['importaClasse'])){
+    if(isset($_POST['importaClasse']) AND isset($_SESSION['email'])){
       $gest=explode("+",$_POST["importaClasse"]);
       $_SESSION["idCorso"]=$gest[1];
       $_SESSION["idClasse"]=$gest[0];
@@ -12,7 +12,7 @@
       $_SESSION["classe"]=$gest[2];
     }
     // nel momento in cui si clicca su import e le sessioni sono attivate
-    if(isset($_POST["Import"]) && !empty($_POST["Import"])){
+    if(isset($_POST["Import"]) && !empty($_POST["Import"]) AND isset($_SESSION['email'])){
       $classe=$_SESSION["idClasse"];
       $corso=$_SESSION["idCorso"];
     if ($_FILES["idCSV"]["size"] > 0) {
@@ -57,6 +57,8 @@
               $aggiorna->execute();
               $aggiorna->close();
             }
+  					// creazione del log
+  					$newDB->createLog($_SESSION["email"],"inserimento","aggiunti studenti a ".$corso." - ".$classe);
             $allievi->close();
           }
           catch(PDOException $e)
@@ -88,6 +90,8 @@
       $allievi->bind_param("sssi",$nome,$born,$info,$id);
       $allievi->execute();
       $allievi->close();
+      // creazione del log
+      $newDB->createLog($_SESSION["email"],"modifica","allievo ".$nome." modificato");
       echo "<script>location.href='importClasse.php'</script>";
     }
     catch(PDOException $e)
@@ -99,14 +103,20 @@
   // se si preme sul tasto di elimina allievo
   if(isset($_POST["removeAllievo"])){
     $sql ="UPDATE allievo set all_flag=0 where all_id=".$_POST["removeAllievo"];
-    $newDB->query($sql);
+    if($newDB->query($sql)!=false){
+      // creazione del log
+      $newDB->createLog($_SESSION["email"],"eliminazione","allievo eliminato da ".$_SESSION['corso']." - ".$_SESSION['classe']);
+    }
+
      echo "<script>location.href='importClasse.php'</script>";
   }
-
   if(isset($_POST["clearClasse"])){
     $sql = "UPDATE allievo set all_flag=0 where cla_id=".$_SESSION['idClasse']." and cor_id=".$_SESSION['idCorso'];
     //echo $sql;
-    $newDB->query($sql);
+    if($newDB->query($sql)!=false){
+      // creazione del log
+      $newDB->createLog($_SESSION["email"],"eliminazione","rimossi tutti gli allievi da ".$_SESSION['corso']." - ".$_SESSION['classe']);
+    }
     echo "<script>location.href='importClasse.php'</script>";
   }
 ?>

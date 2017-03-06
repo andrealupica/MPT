@@ -170,5 +170,7 @@
     }
     // stampo il file pdf
     $pdf->Output();
+    // creazione del log
+    $newDB->createLog($_SESSION['email'],"informazione","creazione di un file pdf");
   }
 ?>

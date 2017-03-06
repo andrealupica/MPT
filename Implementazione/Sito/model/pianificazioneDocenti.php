@@ -14,6 +14,7 @@
       $fineAnno = $_POST["ciclo2"];
       $classe = $_POST["classe"];
       $corso = $_POST["corso"];
+      $sem = $_POST["sem"];
       $cnt=-1;
       // se gli input delle prime righe non sono vuoti
     	if(!empty($nome[0]) && !empty($nome[1]) && !empty($cognome[0]) && !empty($cognome[1]) && $materia[0]!="" && $materia[1]!="" && !empty($ore[0]) && !empty($ore[1])  && !empty($_POST['ciclo']) &&  !empty($_POST['ciclo2']) && !empty($_POST['classe']) && !empty($_POST['corso']) ){
@@ -53,7 +54,7 @@
               //echo "<script>console.log('4 campo vuoto')</script>";
             }
             if($i==2 && empty($cognome[$i]) && empty($nome[$i])){
-//echo "<script>console.log('3 campo vuoto')</script>";
+              //echo "<script>console.log('3 campo vuoto')</script>";
             }
             else{
               //creo la query
@@ -88,27 +89,33 @@
               $idClasse =  $dum['id'];
 
               $sem=$_POST["sem"];
-              if($sem<=1){
-                $sem=1;
+              if($sem!="1" OR $sem!="2" OR $sem!="1-2"){
+                $sem="1-2";
               }
-              else if($sem>=2){
-                $sem=2;
-              }
+              echo $sem;
               // eseguo la query di insert
               // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";
               $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot,pia_sem) values(?,?,?,?,?,?,?,?)");
-              $queryPianifica->bind_param("siiiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$ore[$i],$sem);
+              $queryPianifica->bind_param("siiiiiis",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$oreTotali,$sem);
               // se non ci sono problemi nella query mostro un messaggio positivo
               if($queryPianifica->execute()!=false){
-                  echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!';document.getElementById('messaggio').setAttribute('class','control-label alert alert-success')</script>";
+                // creazione del log
+                $newDB->createLog($_SESSION['email'],"inserimento","creata pianificazione, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem);
+                echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!';document.getElementById('messaggio').setAttribute('class','control-label alert alert-success')</script>";
               }
               else{
+                // creazione del log
+                $newDB->createLog($_SESSION['email'],"attenzione","pianificazione non riuscita, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem);
                   echo  "<script>document.getElementById('messaggio').innerHTML='errore durante il salvataggio dei dati';document.getElementById('messaggio').setAttribute('class','control-label alert alert-danger')</script>";
               }
             }
           }
         }
         else{
+          // creazione del log
+          for ($i=0; $i < count($cognome)-1; $i++) {
+          $newDB->createLog($_SESSION['email'],"attenzione","pianificazione non riuscita, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$ore[$i].", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem);
+          }
           echo  "<script>document.getElementById('messaggio').innerHTML='errore, qualche docente non esiste o campo ore vuoto';document.getElementById('messaggio').setAttribute('class','control-label alert alert-danger')</script>";
         }
 
