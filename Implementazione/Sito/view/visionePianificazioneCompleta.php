@@ -6,25 +6,20 @@ if($_SESSION['email']=="" OR $_SESSION['email']==null){
 }
 else if(isset($_GET["id"])){
   include_once "connection.php";
-  $corso;
-  $classe;
-  $anno;
-  $sem;
   try{
-    $id=$_GET["id"];
-    $query1 = $newDB->getConnection()->prepare("SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=?");
-    $query1->bind_param("i", $id);
+    $idGruppo=$_GET["id"];
+    $query1 =  $newDB->getConnection()->prepare("SELECT cl.cla_nome AS  'classe',cl.cla_id AS 'idClasse', ma.mat_nome AS  'materia', co.cor_nome AS  'corso',co.cor_id AS 'idCorso', pi.pia_ini_anno AS  'inizio anno', pi.pia_sem AS 'sem',
+    pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT', ut.ute_cognome as 'cognome', ut.ute_nome as 'nome'
+    FROM pianifica pi
+    JOIN classe cl ON cl.cla_id = pi.cla_id
+    JOIN materia ma ON ma.mat_id = pi.mat_id
+    JOIN corso co ON co.cor_id = pi.cor_id
+    JOIN utente ut ON ut.ute_email = pi.ute_email
+    WHERE pi.pia_gruppo = ?");
+    $query1->bind_param("i", $idGruppo);
     $query1->execute();
     $query1->close();
-    $query="SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=$id";
-    //echo $query."<br>";
-    $result = $newDB->query($query);
-    while($row = $result->fetch_assoc()){
-      $corso=$row["corso"];
-      $classe=$row["classe"];
-      $anno=$row["anno"];
-      $sem=$row["sem"];
-    }
+    //$query1 = $newDB->getConnection()->prepare("SELECT cla_id as 'classe',cor_id as 'corso', pia_ini_anno as 'anno', pia_sem as 'sem' from pianifica where pia_id=?");
   }
   catch(PDOException $e)
   {
@@ -36,7 +31,7 @@ else if(isset($_GET["id"])){
   JOIN materia ma ON ma.mat_id = pi.mat_id
   JOIN corso co ON co.cor_id = pi.cor_id
   JOIN utente ut ON ut.ute_email = pi.ute_email
-  WHERE pi.cor_id='".$corso."' AND pi.cla_id='".$classe."' AND pi.pia_ini_anno='".$anno."' AND pi.pia_sem='".$sem."' AND pi.pia_flag=1";
+  WHERE pi.pia_gruppo = $idGruppo";
   //echo $query;
   if($newDB->query($query)!=false && mysqli_num_rows($newDB->query($query)) !=0){
     $result = $newDB->query($query);
@@ -48,7 +43,7 @@ else if(isset($_GET["id"])){
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Visione Pianificazione Docenti</title>
-      <script src="script.js"></script>
+      <script src="js/script.js"></script>
       <script src="bootstrap/js/bootstrap.min.js"></script>
       <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
       <link href="css/pianificazioneDocenti.css" rel="stylesheet">
@@ -76,8 +71,8 @@ else if(isset($_GET["id"])){
         <label class="col-sm-12 col-xs-12 control-label titolo">Docenti</label>
           <?php
           while($row = $result->fetch_assoc()){
-            $sem1=$row["sem"];
-            $sem1=$sem[0];
+            $sem=$row["sem"];
+            //$sem1=$sem[0];
             $Ianno=$row["inizio anno"];
             $Fanno=$row["fine anno"];
             $classe=$row["classe"];
@@ -145,7 +140,7 @@ else if(isset($_GET["id"])){
                 </tr>
               </table>
             </span>
-            <span class="col-md-1 col-xs-1">
+            <span class="col-md-1 col-xs-4">
               Semestre
               <input type="text" name="semestre" class="form-control" readonly="true" value="<?php echo $sem; ?>"/>
             </span>

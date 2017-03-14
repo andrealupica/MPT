@@ -13,7 +13,7 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <title>proposte</title>
-	    <script src="script.js"></script>
+	    <script src="js/script.js"></script>
 	    <script src="bootstrap/js/bootstrap.min.js"></script>
 	    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     	<link href="css/inserimentoOreAIT.css" rel="stylesheet">
@@ -47,7 +47,7 @@
 							//alert(materia);
 							$.ajax({
 								type:"POST",
-								url: "model/proposte2.php",
+								url: "model/proposte.php",
 								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
 								success: function(result){
 									//alert(result);
@@ -71,7 +71,7 @@
 							//alert(materia);
 							$.ajax({
 								type:"POST",
-								url: "model/proposte2.php",
+								url: "model/proposte.php",
 								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
 								success: function(result){
 									//$('#ciclo2').val(result);
@@ -83,7 +83,7 @@
 							id=$('#removeProposte').val();
 							$.ajax({
 								type:"POST",
-								url: "model/proposte2.php",
+								url: "model/proposte.php",
 								data:{removeId:id},
 								success: function(result){
 									//$('#ciclo2').val(result);
@@ -99,7 +99,7 @@
 					valore=$(obj).val();
 					$.ajax({
 						type:"POST",
-						url: "model/proposte2.php",
+						url: "model/proposte.php",
 						data:{idTitolo:valore},
 						success: function(result){
 							//$('#ciclo2').val(result);
@@ -111,7 +111,7 @@
 					}});
 					$.ajax({
 						type:"POST",
-						url: "model/proposte2.php",
+						url: "model/proposte.php",
 						data:{select:"ok"},
 						success: function(result2){ // ritorna in una variabile tutti le materie disponibili
 							//alert("materie:"+result2);
@@ -119,7 +119,7 @@
 							//alert(result2);
 							$.ajax({
 								type:"POST",
-								url: "model/proposte2.php",
+								url: "model/proposte.php",
 								data:{idMat:valore},
 								success: function(result){
 									result=JSON.parse(result); // materie separate presenti in propone
@@ -129,7 +129,7 @@
 										//alert("prima"+numero);
 										$.ajax({
 											type:"POST",
-											url: "model/proposte2.php",
+											url: "model/proposte.php",
 											data:{mat:result[numero]},
 											success: function(result1){ // ritorna i valori del selezionato 1 sel 0 non selezionato
 												result1=JSON.parse(result1);
@@ -227,6 +227,11 @@
           </div>
         </div>
     </div>
+		<?php
+		$query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from tema t,propone p where p.pro_flag=1 AND t.tem_id=p.tem_id group by t.tem_titolo order by t.tem_titolo";
+		$result = $newDB->query($query);
+		if(mysqli_num_rows($result) != 0){
+		?>
     <div class="form-group col-xs-12">
       <label class="col-xs-3 control-label">Ricerca:</label>
       <div class="col-xs-9">
@@ -240,8 +245,6 @@
       <table id="table" class="table col-xs-12">
         <tr><th>Tema</th><th>Materie</th><th>modifica</th><th>elimina</th></th>
         <?php
-        $query="select t.tem_titolo AS 'titolo',t.tem_id AS 'id' from tema t,propone p where p.pro_flag=1 AND t.tem_id=p.tem_id group by t.tem_titolo order by t.tem_titolo";
-        $result = $newDB->query($query);
         while($row = $result->fetch_assoc()){
           ?>
           <tr id="riga">
@@ -269,6 +272,7 @@
           <?php } ?>
       </table>
     </div>
+				<?php } ?>
 		<div class="container">
       <!-- Modal aggiungi -->
       <div class="modal fade" id="myModalA" role="dialog">
@@ -398,6 +402,7 @@
         </div>
       </div>
     </div>
+
 		<div>
 			<span class="col-xs-12">
 				<div class="alert alert-info col-xs-12 control-label">

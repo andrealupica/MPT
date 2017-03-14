@@ -43,7 +43,7 @@ $pass = "";
 								if ($data<$today_date && $data!=null){
 									$queryDeleteAccount = "update utente set ute_flag=0 where ute_email='".$user."';";
 									$newDB->query($queryDeleteAccount);
-									echo  "<script>document.getElementById('errore').innerHTML='l account è stato eliminato poiché non è stato effettuato il login entro il tempo limite'</script>";
+									echo  "<script>document.getElementById('errore').innerHTML='l account è stato eliminato poiché non è stato effettuato il login entro il tempo limite, rieffettuare la registrazione'</script>";
 									// creazione del log
 									$newDB->createLog($user,"informazione","l utente ha fatto il login dopo il tempo limite");
 								}

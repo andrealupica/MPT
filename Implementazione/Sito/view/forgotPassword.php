@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>password dimenticata</title>
 
-	<script src="script.js"></script>
+	<script src="js/script.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/index.css" rel="stylesheet">

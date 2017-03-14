@@ -15,22 +15,33 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>log sito web</title>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/visioniParticolari.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/jquery-latest.js"></script>
+    <script type="text/javascript" src="./js/jquery.tablesorter.js"></script>
   </head>
   <script>
+  $(document).ready(function()
+      {
+          $("#myTable").tablesorter();
+
+      }
+  );
   </script>
-  <body>
+  <body class="body">
     <?php
       $query = "SELECT l.ute_email AS 'email', l.log_data AS 'data',l.log_descrizione AS 'descrizione',l.log_pagina AS 'pagina',l.log_azione AS 'azione'
-      FROM log_ l order by  l.log_data desc";
+      FROM log_ l order by  l.log_data desc limit 50";
       $result = $newDB->query($query);
     ?>
     <div class="container contenitore">
       <div class="header class="col-xs-12"">
         <span class="opzione">
+          <a href="javascript:history.go(-1)" class="btn btn-primary">
+            <span class=" glyphicon glyphicon-arrow-left button"></span> indietro
+          </a>
           <a class="btn btn-primary" href="menu.php">
             <span class="glyphicon glyphicon-arrow-left button"></span> menu
           </a>
@@ -54,7 +65,8 @@ else{
       </div>
       <div id="visione" class="col-xs-12">
         Log:
-        <table data-role="table" data-mode="columntoggle" class="ui-responsive table table-striped table-bordered" id="table">
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive table display table-striped table-bordered" id="myTable">
+          <thead>
             <tr>
               <th> Docente</th>
               <th> Azione</th>
@@ -62,7 +74,8 @@ else{
               <th> Descrizione</th>
               <th> Data</th>
             </tr>
-
+          </thead>
+          <tbody>
           <?php
           while($row = $result->fetch_assoc()){
             if($row['azione']=="informazione"){
@@ -91,6 +104,7 @@ else{
               <td ><?php echo $row['data'] ?></td>
             </tr>
             <?php } ?>
+          </tbody>
           </table>
         </div>
           <?php
@@ -113,7 +127,7 @@ else{
     $("#search").keyup(function() {
       var value = this.value.toLowerCase();
       var words = value.split(' ');
-      $("#table").find("tr").each(function(index) {
+      $("#myTable").find("tr").each(function(index) {
         if (index === 0) return;
         var ris = $(this).find("td").text().toLowerCase();
         var flag=0;
@@ -133,15 +147,6 @@ else{
         }
         flag=0;
       });
-    });
-    // funzione per la visibilità delle colonne
-    $("label input").change(function(){
-      var valore=this.value;
-        //alert(valore);
-        $("#table").find("tr").each(function(index) {
-          $(this).find("td:nth-child("+valore+")").toggle();
-          $(this).find("th:nth-child("+valore+")").toggle();
-        });
     });
   </script>
 </html>

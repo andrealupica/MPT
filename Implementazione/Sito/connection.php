@@ -68,6 +68,7 @@
 	// se la connessione al DB non è stata stabilita allora prova a connetterti
 	if($newDB==null){
 		$newDB = new DB("h2mysql19", "efof_i13lupand", "lupand1", "efof_samtinfoch17");
+		//$newDB = new DB("h2mysql19", "efof_gestitmpt", "GestItMpt_Admin", "efof_samtinfoch35");
 	}
 
 ?>

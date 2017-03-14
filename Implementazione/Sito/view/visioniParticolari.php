@@ -15,12 +15,41 @@ else{
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>visioni particolari</title>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/visioniParticolari.css" rel="stylesheet">
+    <script type="text/javascript" src="./js/jquery-latest.js"></script>
+    <script type="text/javascript" src="./js/jquery.tablesorter.js"></script>
   </head>
   <script>
+  $(document).ready(function()
+      {
+          $("table").tablesorter();
+          $("th").click(function(){
+            thSelected=$(this);
+            $("#indice").text($(this).text());
+            //alert($(this).attr('class'));
+            if($(this).attr('class')=="header" || $(this).attr('class')=="header headerSortUp"){
+              $("#ordine").text("crescente");
+            }
+            else if($(this).attr('class')=="header headerSortDown"){
+              $("#ordine").text("decrescente");
+            }
+
+          });
+          $("#button").click(function(){
+            if(thSelected!=null){
+
+              //alert(thSelected.attr('class'));
+              classe = thSelected.attr('class');
+              name = thSelected.text();
+              $("#orderTable").val(name+"/"+classe);
+              //alert($("#orderTable").val());
+            }
+
+          });
+      });
   </script>
   <body>
     <?php
@@ -30,7 +59,7 @@ else{
       JOIN classe cl ON cl.cla_id = pi.cla_id
       JOIN materia ma ON ma.mat_id = pi.mat_id
       JOIN corso co ON co.cor_id = pi.cor_id
-      JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1;";
+      JOIN utente ut ON ut.ute_email = pi.ute_email AND pi.pia_flag=1 order by ut.ute_cognome;";
       $result = $newDB->query($query);
     ?>
     <div class="container contenitore">
@@ -70,19 +99,28 @@ else{
         <label class="col-xs-4">% AIT: <input  type="checkbox" name="AIT" value="9" checked="true" id="AIT"></label>
       </div>
       <div id="visione" class="col-xs-12">
-        Risultato:
+        <div>
+        <span>la tabella è ordinata per: <b id="indice">Docente</b> </span>
+          <br>
+          <span>in ordine: <b id="ordine">crescente</b></span>
+          <br>
+          <span>clicca su un indice della tabella per cambiare l'ordinamento </span>
+        </div>
         <table data-role="table" data-mode="columntoggle" class="ui-responsive table table-striped table-bordered" id="table">
+          <thead>
             <tr>
-              <th> Docente</th>
-              <th> Materia</th>
-              <th> Tipo MP</th>
-              <th> Classe</th>
-              <th> Durata</th>
-              <th> Ciclo</th>
-              <th> Semestre </th>
-              <th> Ore</th>
-              <th> % AIT</th>
+              <th class="headerSortDown" >Docente</th>
+              <th>Materia</th>
+              <th>Tipo MP</th>
+              <th>Classe</th>
+              <th>Durata</th>
+              <th>Ciclo</th>
+              <th>Semestre</th>
+              <th>Ore</th>
+              <th>% AIT</th>
             </tr>
+          </thead>
+          <tbody>
 
           <?php
           while($row = $result->fetch_assoc()){
@@ -99,6 +137,7 @@ else{
               <td ><?php echo number_format($row["AIT"]/$row["ore totali"]*100,2) ?></td>
             </tr>
             <?php } ?>
+          </tbody>
           </table>
         </div>
           <div class="col-xs-12 salva">
@@ -121,6 +160,7 @@ else{
               <?php
             }
           ?>
+          <input type="hidden" id="orderTable" name="orderTable" value=""/>
       </form>
       </div>
     <?php } ?>
@@ -154,10 +194,17 @@ else{
     // funzione per la visibilità delle colonne
     $("label input").change(function(){
       var valore=this.value;
+      var checkbox = $(this);
         //alert(valore);
         $("#table").find("tr").each(function(index) {
-          $(this).find("td:nth-child("+valore+")").toggle();
-          $(this).find("th:nth-child("+valore+")").toggle();
+          if($(checkbox).attr('checked')){
+            $(this).find("td:nth-child("+valore+")").show();
+            $(this).find("th:nth-child("+valore+")").show();
+          }
+          else{
+            $(this).find("td:nth-child("+valore+")").hide();
+            $(this).find("th:nth-child("+valore+")").hide();
+          }
         });
     });
   </script>

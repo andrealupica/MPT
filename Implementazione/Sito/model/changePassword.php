@@ -18,9 +18,10 @@
 					$pass1="";
 					$pass1=md5($pass);
 					$user=$_SESSION['email'];
-					$query1->bind_param("ss", $user, $pass1);
+					$query1->bind_param("ss",$pass1,$user);
 					$query1->execute();
 					$query1->close();
+					echo $user;
 					// creazione del log
 					$newDB->createLog($_SESSION['email'],"informazione","l utente ha cambiato la password");
 					// se la query ha successo reindirizza alla pagina di login

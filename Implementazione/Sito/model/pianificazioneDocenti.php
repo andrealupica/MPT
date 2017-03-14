@@ -19,6 +19,10 @@
       // se gli input delle prime righe non sono vuoti
     	if(!empty($nome[0]) && !empty($nome[1]) && !empty($cognome[0]) && !empty($cognome[1]) && $materia[0]!="" && $materia[1]!="" && !empty($ore[0]) && !empty($ore[1])  && !empty($_POST['ciclo']) &&  !empty($_POST['ciclo2']) && !empty($_POST['classe']) && !empty($_POST['corso']) ){
         $queryEmail="";
+        $queryIdGruppo = "select max(pia_gruppo) as 'idGruppo' from pianifica";
+        $ris = $newDB->query($queryIdGruppo);
+        $dum = $ris->fetch_assoc();
+        $idGruppo = $dum['idGruppo']+1;
         $controllo=array();
         // check di errori
         for ($j=0; $j < count($cognome)-1; $j++) {
@@ -70,7 +74,7 @@
               // creo la query per l'id
 
               $queryIdMateria ="select mat_id as 'id' from materia where mat_nome='$materia[$i]'";
-              $ris =$newDB->query($queryIdMateria);
+              $ris = $newDB->query($queryIdMateria);
               $dum = $ris->fetch_assoc();
               $idMateria = $dum['id'];
 
@@ -79,33 +83,33 @@
                 $oreTotali=0;
               }
               $queryIdCorso = "select cor_id as 'id' from corso where cor_nome='$corso'";
-              $ris=$newDB->query($queryIdCorso);
-              $dum= $ris->fetch_assoc();
+              $ris = $newDB->query($queryIdCorso);
+              $dum = $ris->fetch_assoc();
               $idCorso =  $dum['id'];
 
               $queryIdClasse = "select cla_id as 'id' from classe where cla_nome='$classe'";
-              $ris=$newDB->query($queryIdClasse);
-              $dum= $ris->fetch_assoc();
+              $ris = $newDB->query($queryIdClasse);
+              $dum = $ris->fetch_assoc();
               $idClasse =  $dum['id'];
 
-              $sem=$_POST["sem"];
-              if($sem!="1" OR $sem!="2" OR $sem!="1-2"){
-                $sem="1-2";
+              $sem = $_POST["sem"];
+              if($sem != "1" OR $sem!="2" OR $sem!="1-2"){
+                $sem = "1-2";
               }
-              echo $sem;
+              //echo $sem;
               // eseguo la query di insert
               // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";
-              $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot,pia_sem) values(?,?,?,?,?,?,?,?)");
-              $queryPianifica->bind_param("siiiiiis",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$oreTotali,$sem);
+              $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot,pia_sem,pia_gruppo) values(?,?,?,?,?,?,?,?,?)");
+              $queryPianifica->bind_param("siiiiiisi",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$oreTotali,$sem,$idGruppo);
               // se non ci sono problemi nella query mostro un messaggio positivo
               if($queryPianifica->execute()!=false){
                 // creazione del log
-                $newDB->createLog($_SESSION['email'],"inserimento","creata pianificazione, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem);
+                $newDB->createLog($_SESSION['email'],"inserimento","creata pianificazione, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem.", gruppo: ".$idGruppo);
                 echo  "<script>document.getElementById('messaggio').innerHTML='pianificazione riuscita!';document.getElementById('messaggio').setAttribute('class','control-label alert alert-success')</script>";
               }
               else{
                 // creazione del log
-                $newDB->createLog($_SESSION['email'],"attenzione","pianificazione non riuscita, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem);
+                $newDB->createLog($_SESSION['email'],"attenzione","pianificazione non riuscita, utente: ".$nome[$i]." ".$cognome[$i].", materia: ".$materia[$i].", ore: ".$oreTotali.", corso: ".$corso." ,classe: ".$classe.", anno: ".$inizioAnno." -- ".$fineAnno.", semestre: ".$sem.", gruppo: ".$idGruppo);
                   echo  "<script>document.getElementById('messaggio').innerHTML='errore durante il salvataggio dei dati';document.getElementById('messaggio').setAttribute('class','control-label alert alert-danger')</script>";
               }
             }

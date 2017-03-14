@@ -40,3 +40,7 @@ h1{
 span{
 	font-size:15px;
 }
+.col-sm-6{
+	padding-left:2px;
+	padding-right:2px;
+}

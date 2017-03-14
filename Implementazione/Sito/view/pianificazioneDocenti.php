@@ -10,7 +10,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>pianificazione Docenti</title>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/pianificazioneDocenti.css" rel="stylesheet">
@@ -120,7 +120,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
             </select>
           </span>
           <span class="col-md-3 col-xs-6">
-            Ore Semestrali Materia
+            Ore Materia (ciclo form.)
             <input type="number" class="form-control" name="ore[]" id="ore" step="1" min="0"/>
           </span>
         </div>
