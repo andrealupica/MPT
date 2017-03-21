@@ -1,4 +1,8 @@
 <!-- pagina per la registrazione-->
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -15,6 +19,11 @@
 $(document).ready(function(){
   $("#OkRegister").click(function(){
     $(location).attr('href', 'index.php')
+  });
+  $("#registrati").click(function(){
+  //  alert("<?php echo 'vecchia sessione: '.$_SESSION['codice']?>. post:"+$("#captcha").val());
+    <?php $_SESSION['codice']=$_SESSION['captcha']['code'];?>
+  //  alert("<?php echo 'nuovo valore miaSessione: '.$_SESSION['codice']?>. post:"+$("#captcha").val());
   });
 });
 </script>
@@ -46,14 +55,14 @@ $(document).ready(function(){
             <p class="help-block">inserire il proprio cognome, non inserire numeri o spazi</p>
           </div>
           <div class="form-group">
-            <label for="captcha" class="cols-sm-2 control-label">Captcha:</label>
+            <label class="cols-sm-2 control-label">Captcha:</label>
             <div>
               <div class="input-group col-xs-12">
                 <span>
-                  <img src="captcha.php" width="180"  height="40" border="1" alt="CAPTCHA" class="col-xs-6">
+                  <img src="<?php echo $_SESSION['captcha']['image_src'];?>" width="180"  height="40" border="1" alt="CAPTCHA" class="col-xs-6">
                   <div class="input-group  col-xs-12">
                     <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                      <input type="text" size="6" maxlength="5" name="captcha" class="form-control col-xs-12" value="">
+                      <input type="text" size="6" maxlength="5" name="captcha" id="captcha" class="form-control col-xs-12" value="">
                   </div>
                 </span>
 
@@ -78,7 +87,7 @@ $(document).ready(function(){
           <div class="form-group btn-group btn-group-justified">
             <div class="col-xs-0 col-sm-2"></div>
             <div class="col-xs-6 col-sm-3">
-              <button class="btn btn-primary col-xs-12">
+              <button id="registrati" class="btn btn-primary col-xs-12">
                 <span></span> Registrati
               </button>
             </div>

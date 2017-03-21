@@ -1,4 +1,4 @@
-<!-- pagina per la creazione delle classi -->
+<!-- pagina per la creazione delle proposte -->
 <?php
 	session_start();
 	if($_SESSION['email']=="" OR $_SESSION['email']==null){

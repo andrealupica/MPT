@@ -3,10 +3,12 @@
 	// inclusione del per la connessione al DB
 	include_once "connection.php";
 	// file per il captcha
-	require_once "./captcha/include/fgcontactform.php";
-	require_once "./captcha/include/captcha-creator.php";
+	//require_once "./captcha/include/fgcontactform.php";
+	//require_once "./captcha/include/captcha-creator.php";
+	include_once("captcha/simple-php-captcha.php");
+	$_SESSION['captcha'] = simple_php_captcha();
 	// start della sessione
-	session_start();
+	//session_start();
 	$nome = "";
 	$cognome = "";
 	$email = "";
@@ -20,7 +22,10 @@
 			$query1->execute();
 			$query1->close();
 			// se il messaggio del captcha non corrsiponde al testo scritto
-			if($_POST["captcha"]!=$_SESSION['digit']){
+			//$_SESSION['codice']="ciao";
+			//echo $_SESSION['codice'];
+			if($_POST["captcha"]!=$_SESSION['codice']){
+				echo $_POST["captcha"]." code:".$_SESSION['codice']." captcha:".$_SESSION['captcha']['code'];
 				echo "<script>document.getElementById('errore').innerHTML='Captcha non corretto'</script>";
 			}
 			else{

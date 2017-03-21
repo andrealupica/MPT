@@ -1,4 +1,4 @@
-<!-- pagina per la pianificazione dei docenti-->
+<!-- pagina per la visione degli allievi-->
 <?php
 session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){ // da riguardare
