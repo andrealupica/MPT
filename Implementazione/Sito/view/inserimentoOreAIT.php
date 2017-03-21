@@ -4,7 +4,7 @@ session_start();
 if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"]==1 OR $_SESSION["amministratore"]==1)){// da riguardare
   include_once "connection.php";
   $query = "SELECT cl.cla_nome AS  'classe', ma.mat_nome AS  'materia', co.cor_nome AS  'corso', pi.pia_ini_anno AS  'inizio anno', pi.pia_sem AS 'sem', pi.pia_id as 'ID',
-  pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT'
+  pi.pia_fin_anno AS  'fine anno', pi.pia_ore_tot AS 'ore totali', pi.pia_ore_AIT as 'AIT', pia_gruppo as 'gruppo'
   FROM pianifica pi
   JOIN classe cl ON cl.cla_id = pi.cla_id
   JOIN materia ma ON ma.mat_id = pi.mat_id
@@ -99,8 +99,8 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
               </span>
               <span class="col-md-1 col-xs-2">
                 Dettaglio
-                <a href="visionePianificazioneCompleta.php?ID=<?php echo $row["ID"];?>"
-                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["ID"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
+                <a href="visionePianificazioneCompleta.php?id=<?php echo $row["gruppo"];?>"
+                  class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["gruppo"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
                 </a>
               </span>
             </div>

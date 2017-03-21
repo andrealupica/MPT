@@ -5,7 +5,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
   include_once "connection.php";
   // aggiungere: quando data creazione != nulla
   $query = "select ute_nome as 'nome',ute_cognome as 'cognome',ute_email as 'email',ute_docente as 'docente', ute_responsabile as 'responsabile',
-  ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null AND ute_temppassword is null AND ute_flag=1 order by ute_email;";
+  ute_amministratore as 'amministratore', ute_gestoreEmail as 'gestore' from utente where ute_dataIscrizione is null AND ute_temppassword is null AND ute_flag=1 order by ute_cognome;";
   $result = $newDB->query($query);
   ?>
   <!DOCTYPE html>

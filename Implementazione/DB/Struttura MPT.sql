@@ -60,6 +60,7 @@ create table pianifica(
 	pia_ore_AIT int,
 	pia_sem varchar(3) default 0,
 	pia_flag int default 1,
+	pia_gruppo int,
 	foreign key(ute_email) references utente(ute_email)
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION,

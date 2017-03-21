@@ -26,7 +26,6 @@ else{
   $(document).ready(function()
       {
           $("#myTable").tablesorter();
-
       }
   );
   </script>
@@ -65,7 +64,7 @@ else{
       </div>
       <div id="visione" class="col-xs-12">
         Log:
-        <table data-role="table" data-mode="columntoggle" class="ui-responsive table display table-striped table-bordered" id="myTable">
+        <table data-role="table" data-mode="columntoggle" class="ui-responsive table table-striped table-bordered" id="myTable">
           <thead>
             <tr>
               <th> Docente</th>

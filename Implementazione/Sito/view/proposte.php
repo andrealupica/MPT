@@ -157,21 +157,23 @@
 							}});
 					}});
 				}
+
 				function addMat(){
 					if(cnt<2){
-
 						i++;
 						var sel = document.createElement('select');
 						sel.className = "form-control";
 						sel.name = "materia[]";
 						sel.id = "materiaA"+i;
 						sel.style ="margin-bottom:10px";
-						sel.innerHTML = "<?php $sql = 'select mat_nome,mat_id from materia where mat_flag=1' ; $result = $newDB->query($sql); echo '<option value='."-- seleziona --".'>'.'-- seleziona --'.'</option>'; while ($row = $result->fetch_assoc()) {echo '<option value='.$row['mat_nome'].'>'.$row['mat_nome'].'</option>' ;}?>"
+						sel.innerHTML = "<?php $sql = 'select mat_nome,mat_id from materia where mat_flag=1' ;
+						 $result = $newDB->query($sql); echo '<option value='."-- seleziona --".'>'.'-- seleziona --'.'</option>';
+						 while ($row = $result->fetch_assoc()) {echo '<option value='.$row['mat_nome'].'>'.$row['mat_nome'].'</option>' ;}?>"
 						document.getElementById("selectAdd").appendChild(sel);
 						cnt++;
 					}
-
 				}
+
 				function removeMat(){
 					if(cnt>0){
 						var del = document.getElementById("selectAdd").lastChild.remove();
@@ -179,6 +181,7 @@
 						i--;
 					}
 				}
+
 				function addMatM(){
 					if(cntM<2){
 						iM++;

@@ -116,36 +116,36 @@ else{
                 Classe
                 <input type="text" name="classe[]" class="form-control" readonly="true"  title="<?php echo $row["corso"];?>" value="<?php echo $row["classe"];?>" id="classe"/>
               </span>
-              <span class="col-md-2 col-xs-4 ciclo">
+              <span class="col-md-2 col-xs-5 ciclo">
                 Ciclo Formativo
                 <input type="text" class="form-control col-md-1" name="ciclo1[]"  readonly="true"  value="<?php echo $row["inizio anno"]." -- ".$row["fine anno"];?>" id="anno"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 Semestre
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["sem"];?>" value="<?php echo $row["sem"];?>" id="sem"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 % AIT
                 <input type="text" class="form-control"  id="<?php echo 'AIT';?>" readonly="true" value="<?php $ris=number_format($row["AIT"]/$row["ore totali"]*100,2); echo $ris ?>" title="<?php $ris=number_format($row['AIT']/$row['ore totali']*100,2); echo $ris ?>"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 Ore Totali
                 <input type="number" class="form-control"  id="ore" value="<?php echo $row["ore totali"] ?>" title="<?php echo $row["ore totali"] ?>"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 Dettaglio
                 <a href="visionePianificazioneCompleta.php?id=<?php echo $row["IDGruppo"];?>"
                   class="form-control dettaglio" name="dettaglio[]" value"" readonly="true"  id="<?php echo $row["ID"]?>"><div class="glyphicon glyphicon-option-horizontal"></div>
                 </a>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 Modifica
                 <button class="form-control dettaglio "  style="background-color:#337ab7;border-color:##2e6da4" value="buttonModify" id="modify" readonly="true" data-toggle="modal" data-target="#myModalM" onclick="getOre(this);document.getElementById('modifyId').value='<?php echo $row["ID"];?>';" >
                   <input class="col-xs-0" type="hidden" name="modify" value"<?php echo $row["ID"];?>"/>
                   <div class="glyphicon glyphicon-edit btn-primary"></div>
                 </button>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-1 col-xs-3">
                 Elimina
                 <button class="form-control dettaglio " style="background-color:#d9534f;border-color:#d43f3a" id="elimina" readonly="true" data-toggle="modal" data-target="#myModal" onclick="document.getElementById('removeId').value='<?php echo $row["ID"];?>';" >
                   <input class="col-xs-0" type="hidden" name="delete" value"<?php echo $row["ID"];?>"/>

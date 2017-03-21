@@ -18,7 +18,7 @@ $pass = "";
 				$query1->execute();
 				$query1->close();
 				// si logga
-				$query = "select ute_email as 'email' from utente where ute_email='$user' && ute_password='" . md5($pass) . "' AND ute_flag=1;";
+				$query = "select ute_email as 'email' from utente where ute_email='$user' && ute_password='" . md5($pass) "'";
 				// esegue la query e funziona solo se ritorna un risultato (come è giusto che sia)
 				if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
 					// seleziono i tipi del docente che sta facendo il login e li salvo come sessioni

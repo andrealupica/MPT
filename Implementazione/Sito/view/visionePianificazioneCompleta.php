@@ -148,7 +148,7 @@ else if(isset($_GET["id"])){
               $query="SELECT * FROM allievo where all_flag=1 AND cor_id=".$idCorso." AND cla_id=".$idClasse;
       				if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) != 0){
              ?>
-            <span class="col-md-1 col-xs-1">
+            <span class="col-md-1 col-xs-4">
               allievo
               <form method="post" action="visioneAllievi.php">
                 <input type="hidden" name="allievi" readonly="true" value="<?php echo $idCorso."+".$idClasse?>" />
