@@ -66,7 +66,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
               </span>
             </div>
             <?php
-            echo "<h1>Classe ".$nomeCorso." ".$nomeClasse."</h1>";
+            echo "<h1>Classe ".$nomeCorso." - ".$nomeClasse."</h1>";
 
             ?>
 

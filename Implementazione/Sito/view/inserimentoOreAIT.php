@@ -114,7 +114,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
               <label class="col-xs-9 alert alert-warning" id="messaggio">le modifiche verranno apportate solo con il pulsante salva</label>
             </div>
             <div class="col-md-3">
-              <button type="submit" class="btn btn-secondary">
+              <button type="submit" class="btn btn-secondary btn-lg">
                 <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
               </button>
             </div>

@@ -76,6 +76,9 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
     <div class="container contenitore">
       <div class="header">
         <span class="opzione">
+          <a class="btn btn-primary" href="amministrazione.php">
+            <span class="glyphicon glyphicon-arrow-left button"></span> indietro
+          </a>
           <a class="btn btn-primary" href="menu.php">
             <span class="glyphicon glyphicon-arrow-left button"></span> menu
           </a>

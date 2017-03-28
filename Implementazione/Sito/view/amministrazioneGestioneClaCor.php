@@ -146,9 +146,6 @@
               <div class="alert alert-info">
                 <strong>Info!</strong> L'eliminazione comporterà modifiche nella pagina Pianificazione Docenti
               </div>
-              <div class="alert alert-alert">
-                <strong>Attenzione!</strong> L'eliminazione comporterà l'eliminazione di tutti gli allievi
-              </div>
             </div>
             <div class="modal-footer">
               <form method="post" action="">

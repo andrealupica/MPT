@@ -94,7 +94,7 @@ else if(isset($_GET["id"])){
                 <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php echo $row["materia"];?>" ></input>
               </span>
               <span class="col-md-2 col-xs-3">
-                Ore Annuale Materia
+                Ore Materia
                 <input type="number" class="form-control" name="ore[]" id="ore" <input type="text" name="nomeDocente[]" class="form-control" readonly="true" value="<?php $ris=$row["ore totali"]; echo $ris ?>"/>
               </span>
               <span class="col-md-2 col-xs-3">

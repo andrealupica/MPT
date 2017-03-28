@@ -187,7 +187,6 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["responsa
           <span class="col-md-2 col-xs-2">
             Semestre
             <select name="sem" id="sem" class="form-control">
-              <option>1-2</option>
               <?php
                 for ($i=1; $i <=2; $i++) {
               ?>

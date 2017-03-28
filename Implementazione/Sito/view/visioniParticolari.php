@@ -95,16 +95,20 @@ else{
         <label class="col-xs-4">Durata Ciclo: <input  type="checkbox" name="durata" value="5" checked="true" id="durata"></label>
         <label class="col-xs-4">Ciclo Formativo: <input  type="checkbox" name="ciclo" value="6" checked="true" id="ciclo"></label>
         <label class="col-xs-4">Semestre: <input  type="checkbox" name="Sem" value="7" checked="true" id="Sem"></label>
-        <label class="col-xs-4">Ore Semestrali Materia: <input  type="checkbox" name="ore" value="8" checked="true" id="ore"></label>
+        <label class="col-xs-4">Ore Materia: <input  type="checkbox" name="ore" value="8" checked="true" id="ore"></label>
         <label class="col-xs-4">% AIT: <input  type="checkbox" name="AIT" value="9" checked="true" id="AIT"></label>
       </div>
       <div id="visione" class="col-xs-12">
-        <div>
-        <span>la tabella è ordinata per: <b id="indice">Docente</b> </span>
-          <br>
-          <span>in ordine: <b id="ordine">crescente</b></span>
-          <br>
-          <span>clicca su un indice della tabella per cambiare l'ordinamento </span>
+        <div class="col-xs-9">
+          <span>la tabella è ordinata per: <b id="indice">Docente</b> </span>
+            <br>
+            <span>in ordine: <b id="ordine">crescente</b></span>
+            <br>
+            <span>clicca su un indice della tabella per cambiare l'ordinamento </span></div>
+        <div class="col-xs-3">
+          <button type="submit" class="btn btn-secondary btn-lg" id="button">
+            <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
+          </button>
         </div>
         <table data-role="table" data-mode="columntoggle" class="ui-responsive table table-striped table-bordered" id="table">
           <thead>
@@ -140,14 +144,6 @@ else{
           </tbody>
           </table>
         </div>
-          <div class="col-xs-12 salva">
-            <div class="col-xs-9"></div>
-            <div class="col-xs-3">
-              <button type="submit" class="btn btn-secondary" id="button">
-                <span class="glyphicon glyphicon-floppy-disk button"></span>Salva
-              </button>
-            </div>
-          </div>
           <?php
             }
             else{

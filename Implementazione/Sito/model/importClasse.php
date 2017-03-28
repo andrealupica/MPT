@@ -23,42 +23,37 @@
       }
       $data = null;
       fgets($handle);
+      // finché non finisce il file
       while (($getData = fgetcsv($handle,10000,";")) != FALSE){
+        // se il primo campo non è vuoto
         if(!empty($getData[0])){
-          // nome,data di nascita, classe, info, altre info
-          //echo "<script>alert('".$getData[0]."/".$getData[1]."/".$getData[2]."/".$getData[3]."/".$getData[4]."')</script>";
-          $info=$getData[3]."   ".$getData[4];
+          $info=$getData[3]." ".$getData[4];
           $data = explode('.', $getData[1]);
           $born = $data[2].'-'.$data[1].'-'.$data[0];
           $nome=utf8_encode($getData[0]);
           try{
             $allievi = $newDB->getConnection()->prepare("SELECT * from allievo where all_nome=? AND all_birthday=?");
-          //  echo "<br>SELECT all_flag from allievo where all_nome='$getData[0]' AND all_birthday='$born'";
+
             $allievi->bind_param("ss",$nome,$born);
             $allievi->execute();
             $allievi->store_result();
-            // se non ci sono risultati lo aggiungo
-            //echo "<br>row:".$allievi->num_rows;
+            // controlla se l'allievo è già presente nel db
             if($allievi->num_rows == 0) {
-              //echo "<br> inserisci:";
+              // in caso contrario
               $query = $newDB->getConnection()->prepare("INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values (?,?,?,?,?)");
-              $info=$getData[3].",".$getData[4];
-              //echo "<br>inserisci i dati: ".$getData[0]." ".$getData[1]."=> ".$born." ".$info." idclasse:".$classe." idcorso:".$corso;
-              //echo "<br>errore:".$query->error."questo qui!!";
-              echo "INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values ($nome,$born,$info,$corso,$classe)";
+              $info=$getData[3]." ".$getData[4];
+              //echo "INSERT INTO allievo(all_nome,all_birthday,all_info,cor_id,cla_id) values ($nome,$born,$info,$corso,$classe)";
               $query->bind_param("sssii",$nome,$born,$info,$corso,$classe);
               $query->execute();
               $query->close();
             } else {
-              //echo "<br>aggiorna: ";
-              // se ci sono risultati controllo il valore del flag
+              // in caso affermativo
               $aggiorna = $newDB->getConnection()->prepare("UPDATE allievo set all_flag=1,cor_id=?,cla_id=?,all_info=? where all_nome=? AND all_birthday=?");
               $aggiorna->bind_param("sssss",$corso,$classe,$info,$nome,$born);
               $aggiorna->execute();
               $aggiorna->close();
             }
   					// creazione del log
-  					$newDB->createLog($_SESSION["email"],"inserimento","aggiunti studenti a ".$corso." - ".$classe);
             $allievi->close();
           }
           catch(PDOException $e)
@@ -67,6 +62,9 @@
     			}
         }
       }
+      $nomeCorso=$_SESSION["corso"];
+      $nomeClasse=$_SESSION["classe"];
+      $newDB->createLog($_SESSION["email"],"inserimento","aggiunti studenti a ".$nomeCorso." - ".$nomeClasse);
   	fclose($handle);
     }
     //unset($_POST); con unset è nullo ma ricarica comunque
@@ -83,15 +81,24 @@
     $nome=$modify[1];
     $born=$modify[2];
     $info=$modify[3];
+          //  echo "<script>alert('".$nome." ".$born."')</script>";
     //echo "<script>alert($id.$nome.$born.$info)</script>";
     try{
-      $allievi = $newDB->getConnection()->prepare("UPDATE allievo set all_nome=?, all_birthday=?,all_info=? where all_id=?");
-    //  echo "<br>SELECT all_flag from allievo where all_nome='$getData[0]' AND all_birthday='$born'";
-      $allievi->bind_param("sssi",$nome,$born,$info,$id);
+      $allievi = $newDB->getConnection()->prepare("SELECT * from allievo where all_nome=? AND all_birthday=?");
+
+      $allievi->bind_param("ss",$nome,$born);
       $allievi->execute();
-      $allievi->close();
-      // creazione del log
-      $newDB->createLog($_SESSION["email"],"modifica","allievo ".$nome." modificato");
+      $allievi->store_result();
+      // controlla se l'allievo è già presente nel db
+      if($allievi->num_rows == 0) {
+        $allievi = $newDB->getConnection()->prepare("UPDATE allievo set all_nome=?, all_birthday=?,all_info=? where all_id=?");
+      //  echo "<br>SELECT all_flag from allievo where all_nome='$getData[0]' AND all_birthday='$born'";
+        $allievi->bind_param("sssi",$nome,$born,$info,$id);
+        $allievi->execute();
+        $allievi->close();
+        // creazione del log
+        $newDB->createLog($_SESSION["email"],"modifica","allievo ".$nome." modificato");
+      }
       echo "<script>location.href='importClasse.php'</script>";
     }
     catch(PDOException $e)

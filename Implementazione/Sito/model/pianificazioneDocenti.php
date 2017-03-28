@@ -100,7 +100,7 @@
               // eseguo la query di insert
               // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";
               $queryPianifica = $newDB->getConnection()->prepare("insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot,pia_sem,pia_gruppo) values(?,?,?,?,?,?,?,?,?)");
-              $queryPianifica->bind_param("siiiiiisi",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$oreTotali,$sem,$idGruppo);
+              $queryPianifica->bind_param("siiiiiiii",$email,$idClasse,$idMateria,$idCorso,$inizioAnno,$fineAnno,$oreTotali,$sem,$idGruppo);
               // se non ci sono problemi nella query mostro un messaggio positivo
               if($queryPianifica->execute()!=false){
                 // creazione del log

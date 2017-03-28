@@ -34,7 +34,7 @@
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ore"])){
-      $colonne.="pi.pia_ore_tot AS 'ore sem.',";
+      $colonne.="pi.pia_ore_tot AS 'ore',";
     }
     // se è checckato il ciclo, allora seleziona l'inizio e la fine del corso
     if(isset($_POST["ore"])){
@@ -169,7 +169,7 @@
               case 'durata':
               case 'classe':
               case 'sem':
-              case 'ore sem.':
+              case 'ore':
                   $width=20;
                   break;
               case 'ciclo':
@@ -199,7 +199,7 @@
               case 'classe':
               case 'durata':
               case 'sem':
-              case 'ore sem.':
+              case 'ore':
                   $width=20;
                   break;
               case 'ciclo':
