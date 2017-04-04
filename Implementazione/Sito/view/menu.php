@@ -24,6 +24,12 @@
   <div class="container contenitore">
     <div class="header col-xs-12 margin-bottom:0px">
       <span class="opzione">
+        <a href="extra/manuale.pdf" class="btn btn-primary  button">
+           manuale
+        </a>
+        <a href="extra/approcci.pdf" class="btn btn-primary  button">
+           foglio AIT
+        </a>
         <a href="logout.php" class="btn btn-primary  button">
           <span class="glyphicon glyphicon-log-out"></span> exit
         </a>

@@ -44,13 +44,11 @@
 							if($("#materiaA3").val()!=undefined){
 								materia+="/"+$("#materiaA3").val();
 							}
-							//alert(materia);
 							$.ajax({
 								type:"POST",
 								url: "model/proposte.php",
 								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
 								success: function(result){
-									//alert(result);
 									location.reload();
 							}});
 						});
@@ -68,14 +66,11 @@
 							if($("#materiaM3").val()!=undefined){
 								materia+="/"+$("#materiaM3").val();
 							}
-							//alert(materia);
 							$.ajax({
 								type:"POST",
 								url: "model/proposte.php",
 								data:{materia:materia,valu:valu,desc:desc,tito:tito,id:id},
 								success: function(result){
-									//$('#ciclo2').val(result);
-									// result=JSON.parse(result);
 									location.reload();
 							}});
 						});
@@ -86,8 +81,6 @@
 								url: "model/proposte.php",
 								data:{removeId:id},
 								success: function(result){
-									//$('#ciclo2').val(result);
-									// result=JSON.parse(result);
 									location.reload();
 							}});
 						});
@@ -102,9 +95,7 @@
 						url: "model/proposte.php",
 						data:{idTitolo:valore},
 						success: function(result){
-							//$('#ciclo2').val(result);
 							result=JSON.parse(result);
-							//alert(result);
 							$("#modifyTitolo").val(result[0]);
 							$("#descrizioneM").val(result[1]);
 							$("#valutazioneM").val(result[2]);
@@ -114,9 +105,7 @@
 						url: "model/proposte.php",
 						data:{select:"ok"},
 						success: function(result2){ // ritorna in una variabile tutti le materie disponibili
-							//alert("materie:"+result2);
 							result2=JSON.parse(result2);
-							//alert(result2);
 							$.ajax({
 								type:"POST",
 								url: "model/proposte.php",
@@ -126,7 +115,6 @@
 									$("#selectMod").empty();
 									for(numero=0;numero<result.length;numero++){
 										cntM++;
-										//alert("prima"+numero);
 										$.ajax({
 											type:"POST",
 											url: "model/proposte.php",
@@ -134,8 +122,6 @@
 											success: function(result1){ // ritorna i valori del selezionato 1 sel 0 non selezionato
 												result1=JSON.parse(result1);
 												iM++;
-
-												//alert("dopo"+numero);
 												var sel = document.createElement('select');
 												sel.className = "form-control";
 												sel.name = "materiaM"+iM;
@@ -143,7 +129,6 @@
 												sel.style ="margin-bottom:10px";
 												sel.innerHTML ="<option value='-- seleziona --'>-- seleziona --</option>";
 												for(j=0;j<result1.length;j++){
-													//alert(result1[j]);
 													if(result1[j]==1){
 														sel.innerHTML +="<option selected value='"+result2[j]+"'>"+result2[j]+"</option>";
 													}
@@ -158,6 +143,7 @@
 					}});
 				}
 
+				// funzione dell'aggiunta di materie nel modal di creazione
 				function addMat(){
 					if(cnt<2){
 						i++;
@@ -173,7 +159,7 @@
 						cnt++;
 					}
 				}
-
+				// funzione della rimozione di materie nel modal di creazione
 				function removeMat(){
 					if(cnt>0){
 						var del = document.getElementById("selectAdd").lastChild.remove();
@@ -182,6 +168,7 @@
 					}
 				}
 
+				// funzione dell'aggiunta di materie nel modal di modifica
 				function addMatM(){
 					if(cntM<2){
 						iM++;
@@ -194,8 +181,8 @@
 						document.getElementById("selectMod").appendChild(sel);
 						cntM++;
 					}
-
 				}
+				// funzione della rimozione di materie nel modal di creazione
 				function removeMatM(){
 					if(cntM>0){
 						var del = document.getElementById("selectMod").lastChild.remove();

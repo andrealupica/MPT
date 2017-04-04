@@ -139,7 +139,7 @@
               // utente
               $this->Cell(100,10,"Creato da: ".$this->ute,0,0,'L');
               // logo
-              $this->Image('../img/logo.png',130,6,30);
+              $this->Image('../extra/logo.png',130,6,30);
               // spazio per mettere la data all'angolo
               $this->Cell(120,10,"",0,0,'L');
               // data

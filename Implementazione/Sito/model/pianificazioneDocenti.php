@@ -93,9 +93,6 @@
               $idClasse =  $dum['id'];
 
               $sem = $_POST["sem"];
-              if($sem != "1" OR $sem!="2" OR $sem!="1-2"){
-                $sem = "1-2";
-              }
               //echo $sem;
               // eseguo la query di insert
               // echo "<br>insert into pianifica(ute_email,cla_id,mat_id,cor_id,pia_ini_anno,pia_fin_anno,pia_ore_tot) values('$email','$idClasse','$idMateria','$idCorso','$inizioAnno','$fineAnno','$ore[$i]')";

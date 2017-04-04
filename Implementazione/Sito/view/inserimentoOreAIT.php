@@ -73,7 +73,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
                 Materia
                 <input type="text" name="materia[]" class="form-control" readonly="true"  title="<?php echo $row["materia"];?>" value="<?php echo $row["materia"];?>" id="<?php echo 'materia'.$i;?>"/>
               </span>
-              <span class="col-md-1 col-xs-2">
+              <span class="col-md-2 col-xs-2">
                 Classe
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["classe"];?>" value="<?php echo $row["classe"];?>" id="<?php echo $row["classe"];?>"/>
               </span>
@@ -89,7 +89,7 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["docente"
                 Semestre
                 <input type="text" name="classe[]" class="form-control" readonly="true"   title="<?php echo $row["sem"];?>" value="<?php echo $row["sem"];?>" id="sem"/>
               </span>
-              <span class="col-md-2 col-xs-2">
+              <span class="col-md-1 col-xs-2">
                 Ore_AIT
                 <input type="number" class="form-control" name="ore[]"   min="0" value="<?php echo $row["AIT"]; ?>" id="ore"/>
               </span>

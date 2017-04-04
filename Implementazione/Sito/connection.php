@@ -52,15 +52,15 @@
 			return $this->res;
 		}
 
+		// funzione per la creazione dei log
 		public function createLog($email,$azione,$descrizione){
-			$time=$_SERVER['REQUEST_TIME'];
+			$time = $_SERVER['REQUEST_TIME'];
 			$link = $_SERVER['PHP_SELF'];
 			$exp = explode("/",$link);
 			$pagina = $exp[count($exp)-1];
 			$time = date("Y-m-d H:i:s",$time);
-			$sql="INSERT INTO log_(ute_email,log_pagina,log_azione,log_descrizione,log_data) values ('$email','$pagina','$azione','$descrizione','$time')";
-			//echo "<br>".$sql;
-			echo "<script>alert(".$sql.")</script>";
+			$sql = "INSERT INTO log_(ute_email,log_pagina,log_azione,log_descrizione,log_data)
+						values ('$email','$pagina','$azione','$descrizione','$time')";
 			$this->query($sql);
 		}
 	}

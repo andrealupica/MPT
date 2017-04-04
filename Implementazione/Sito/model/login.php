@@ -18,7 +18,7 @@ $pass = "";
 				$query1->execute();
 				$query1->close();
 				// si logga
-				$query = "select ute_email as 'email' from utente where ute_email='$user' && ute_password='" . md5($pass) "'";
+				$query = "select ute_email as 'email' from utente where ute_email='$user' && ute_password='" . md5($pass) . "' AND ute_flag=1;";
 				// esegue la query e funziona solo se ritorna un risultato (come è giusto che sia)
 				if($newDB->query($query) != false && mysqli_num_rows($newDB->query($query)) == 1){
 					// seleziono i tipi del docente che sta facendo il login e li salvo come sessioni
@@ -61,13 +61,10 @@ $pass = "";
 								$_SESSION['email'] = $row['email'];
 							}
 							// location a pagina del menu o del cambia password nel caso si abbia una password momentanea
-							$queryPasswordTemp = "select ute_temppassword as 'tpassword' from utente where  ute_flag=1 AND ute_email='$user'";
+							$queryPasswordTemp = "select ute_temppassword as 'tpassword' from utente where ute_flag=1 AND ute_email='$user'";
 							if($newDB->query($queryPasswordTemp)!= false && mysqli_num_rows($newDB->query($queryPasswordTemp)) == 1){
-								echo "pass mom";
 								$result = $newDB->query($queryPasswordTemp);
 								$row = $result->fetch_assoc();
-								echo $queryPasswordTemp;
-								echo $row['tpassword'];
 
 								// creazione del log
 								$newDB->createLog($_SESSION['email'],"informazione","l utente ha effettuato il login");

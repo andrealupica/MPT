@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-01-02" view-index="0" gantt-divider-location="674" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-01-16" view-index="0" gantt-divider-location="455" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
-    <view zooming-state="default:7" id="gantt-chart">
-        <field id="tpd3" name="Nome" width="47" order="0"/>
-        <field id="tpd4" name="Data d'inizio" width="25" order="1"/>
-        <field id="tpd5" name="Data di fine" width="27" order="2"/>
+    <view zooming-state="default:6" id="gantt-chart">
+        <field id="tpd3" name="Nome" width="61" order="0"/>
+        <field id="tpd4" name="Data d'inizio" width="19" order="1"/>
+        <field id="tpd5" name="Data di fine" width="18" order="2"/>
     </view>
     <view id="resource-table">
         <field id="0" name="Nome" width="50" order="0"/>
@@ -81,9 +81,9 @@
         <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd12" order="-1" width="75" visible="false"/>
-        <displaycolumn property-id="tpd3" order="0" width="316" visible="true"/>
-        <displaycolumn property-id="tpd4" order="1" width="173" visible="true"/>
-        <displaycolumn property-id="tpd5" order="2" width="181" visible="true"/>
+        <displaycolumn property-id="tpd3" order="0" width="279" visible="true"/>
+        <displaycolumn property-id="tpd4" order="1" width="88" visible="true"/>
+        <displaycolumn property-id="tpd5" order="2" width="84" visible="true"/>
         <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
         <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
