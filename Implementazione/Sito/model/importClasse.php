@@ -76,8 +76,6 @@
     $nome=$modify[1];
     $born=$modify[2];
     $info=$modify[3];
-          //  echo "<script>alert('".$nome." ".$born."')</script>";
-    //echo "<script>alert($id.$nome.$born.$info)</script>";
     try{
       $allievi = $newDB->getConnection()->prepare("SELECT * from allievo where all_nome=? AND all_birthday=?");
 
@@ -87,7 +85,6 @@
       // controlla se l'allievo è già presente nel db
       if($allievi->num_rows == 0) {
         $allievi = $newDB->getConnection()->prepare("UPDATE allievo set all_nome=?, all_birthday=?,all_info=? where all_id=?");
-      //  echo "<br>SELECT all_flag from allievo where all_nome='$getData[0]' AND all_birthday='$born'";
         $allievi->bind_param("sssi",$nome,$born,$info,$id);
         $allievi->execute();
         $allievi->close();
@@ -109,12 +106,10 @@
       // creazione del log
       $newDB->createLog($_SESSION["email"],"eliminazione","allievo eliminato da ".$_SESSION['corso']." - ".$_SESSION['classe']);
     }
-
      echo "<script>location.href='importClasse.php'</script>";
   }
   if(isset($_POST["clearClasse"])){
     $sql = "UPDATE allievo set all_flag=0 where cla_id=".$_SESSION['idClasse']." and cor_id=".$_SESSION['idCorso'];
-    //echo $sql;
     if($newDB->query($sql)!=false){
       // creazione del log
       $newDB->createLog($_SESSION["email"],"eliminazione","rimossi tutti gli allievi da ".$_SESSION['corso']." - ".$_SESSION['classe']);
