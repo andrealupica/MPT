@@ -8,13 +8,13 @@
       $query ="update utente set ute_flag=0 where ute_email='".$email1."';";
       if($newDB->query($query)!=false){
 				// creazione del log
-				$newDB->createLog($_SESSION['email'],"eliminazione","eliminazione dell email: ".$email['email']);
-				header("Location: gestioneAccessoDocenti.php");
+				$newDB->createLog($_SESSION['email'],"eliminazione","eliminazione dell email: ".$email1);
+				echo "<script> location.href='gestioneAccessoDocenti.php'</script>";
         echo  "<script>document.getElementById('messaggio').innerHTML='email cancellata con successo'</script>";
       }
     }
 		// se si vuole gestire i docenti
-		if(isset($_POST['docente']) && isset($_POST['responsabile']) AND isset($_SESSION['email'])){
+		if(isset($_POST['docente']) OR isset($_POST['responsabile']) OR isset($_POST['gestore'])  AND isset($_SESSION['email'])){
 	    $queryEmail = "select ute_email as 'email' from utente";
 	    if($newDB->query($queryEmail)!=false){
 	      $result = $newDB->query($queryEmail);

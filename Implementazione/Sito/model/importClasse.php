@@ -67,12 +67,7 @@
       $newDB->createLog($_SESSION["email"],"inserimento","aggiunti studenti a ".$nomeCorso." - ".$nomeClasse);
   	fclose($handle);
     }
-    //unset($_POST); con unset è nullo ma ricarica comunque
-    //echo "<script>alert('".$_POST["Import"]."')</script>";
-    //unset($_REQUEST);
-  //  header('http://www.samtinfo.ch/web/'.$_SERVER["REQUEST_URI"]);
    echo "<script>location.href='importClasse.php'</script>";
-    //echo "<script>location.reload()</script>";
   }
   // se si preme sul tasto di modifica allievo
   if(isset($_POST["modifyAllievo"])){

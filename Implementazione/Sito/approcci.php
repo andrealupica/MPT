@@ -1,4 +1,3 @@
-<!-- © 2016-2017 Andrea Lupica (I4AC) ALL RIGHTS RESERVED -->
 <?php
 	### pagina per la pagina di approcci
 	// inclusione del file per la connessione al DB
@@ -182,5 +181,8 @@
 		}
 		// stampo il tutto
 		$pdf->Output();
+	}
+	else{
+		include '404.php';
 	}
 ?>

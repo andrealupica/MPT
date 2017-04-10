@@ -1,10 +1,9 @@
 <!-- pagina per la pianificazione dei docenti-->
 <?php
 session_start();
-if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){ // da riguardare
+if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amministratore"]==1)){
   include_once "connection.php";
 
-  //echo "sessione:".$_POST['importaClasse'].$_SESSION["idClasse"].$_SESSION["idCorso"];
   // se è stato premuto il tasto nella pagina amministrazione o se si ricarica la pagina ( sessioni già attivate)
   if(isset($_POST['importaClasse']) OR isset($_SESSION["idClasse"]) AND isset($_SESSION["idCorso"])){
   ?>
@@ -127,8 +126,8 @@ if(($_SESSION['email']!="" OR $_SESSION['email']!=null) AND ($_SESSION["amminist
       </div>
       <label class="col-sm-12 col-xs-12 control-label titolo"></label>
       <?php
+        // query per la selezione delle informazione dell'allievo
         $query="SELECT all_id AS 'id', all_nome AS 'nome', all_birthday AS 'born', all_info AS 'info' FROM allievo where all_flag=1 AND cor_id=".$_SESSION["idCorso"]." AND cla_id=".$_SESSION["idClasse"];
-        //echo $query;
         $result = $newDB->query($query);
         if(mysqli_num_rows($newDB->query($query)) !=0 ){
        ?>

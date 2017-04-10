@@ -15,7 +15,6 @@
       $classe = $_POST["classe"];
       $corso = $_POST["corso"];
       $sem = $_POST["sem"];
-      $cnt=-1;
       // se gli input delle prime righe non sono vuoti
     	if(!empty($nome[0]) && !empty($nome[1]) && !empty($cognome[0]) && !empty($cognome[1]) && $materia[0]!="" && $materia[1]!="" && !empty($ore[0]) && !empty($ore[1])  && !empty($_POST['ciclo']) &&  !empty($_POST['ciclo2']) && !empty($_POST['classe']) && !empty($_POST['corso']) ){
         $queryEmail="";
@@ -41,7 +40,6 @@
             // eseguo la query e se funziona setto la posizione dell'array a 0
             if($newDB->query($queryEmail)!= false && mysqli_num_rows($newDB->query($queryEmail)) == 1){
               $controllo[$j]=0;
-              $cnt++;
             }
             // altrimenti se da errore inserisco nella posizione dell'array un 1
             else{
@@ -51,9 +49,7 @@
         }
         // se non ci sono stati errori sul nome del docente o se i dati sono stati riempiti
         if(in_array(1,$controllo)!=true){
-          for ($i=0; $i <= $cnt; $i++) {
-            //echo "<script>console.log('".count($cognome)."')</script>";
-            //echo "<script>console.log('".$i.$cognome[$i].",".$nome[$i]."')</script>";
+          for ($i=0; $i <= count($cognome)-1 ; $i++) {
             if($i==3 && empty($cognome[$i]) && empty($nome[$i])){
               //echo "<script>console.log('4 campo vuoto')</script>";
             }

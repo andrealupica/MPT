@@ -2,7 +2,7 @@
 <!-- pagina della visione dei particolari-->
 <?php
 session_start();
-if($_SESSION['email']=="" OR $_SESSION['email']==null){
+if($_SESSION['email']=="" OR $_SESSION['email']==null AND $_SESSION["amministratore"]==1){
   echo "non hai i permessi per visualizzare questa pagina";
   // reindirizzamento login
 }
