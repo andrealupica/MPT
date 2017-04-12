@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-02-20" view-index="0" gantt-divider-location="494" resource-divider-location="300" version="2.7.1" locale="it">
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2017-01-16" view-index="0" gantt-divider-location="494" resource-divider-location="300" version="2.7.1" locale="it">
     <description/>
     <view zooming-state="default:6" id="gantt-chart">
         <field id="tpd3" name="Nome" width="59" order="0"/>
@@ -33,10 +33,10 @@
             <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
             <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
         </taskproperties>
-        <task id="54" name="Vacanze carnevale" meeting="false" start="2017-02-27" duration="5" complete="0" expand="true"/>
         <task id="0" name="documentazione" meeting="false" start="2017-01-19" duration="59" complete="0" expand="true"/>
         <task id="1" name="modifica degli errori precedenti" meeting="false" start="2017-01-19" duration="59" complete="0" expand="true"/>
         <task id="72" name="gestione sito CPT" color="#8cb6ce" meeting="false" start="2017-01-19" duration="59" complete="0" expand="true"/>
+        <task id="54" name="Vacanze carnevale" meeting="false" start="2017-02-27" duration="5" complete="0" expand="true"/>
         <task id="73" name="porte aperte Bienne" meeting="false" start="2017-03-09" duration="1" complete="0" expand="true"/>
         <task id="3" name="Analisi" meeting="false" start="2017-01-23" duration="2" complete="0" expand="true">
             <task id="11" name="Gannt" meeting="false" start="2017-01-23" duration="1" complete="0" expand="true"/>
